@@ -1,0 +1,41 @@
+[gd_scene load_steps=2 format=3 uid="uid://bfwnhju0lpjof"]
+
+[ext_resource type="Script" path="res://Menus/main_menu.gd" id="1_tm4h6"]
+
+[node name="MainMenu" type="Node2D"]
+script = ExtResource("1_tm4h6")
+
+[node name="ShipBuilder" type="Button" parent="."]
+offset_left = 374.0
+offset_top = 161.0
+offset_right = 728.0
+offset_bottom = 266.0
+text = "Ship Builder
+"
+
+[node name="ExitGame" type="Button" parent="."]
+offset_left = 62.0
+offset_top = 58.0
+offset_right = 164.0
+offset_bottom = 144.0
+text = "Exit Game"
+
+[node name="MissionSelect" type="Button" parent="."]
+offset_left = 373.0
+offset_top = 332.0
+offset_right = 727.0
+offset_bottom = 437.0
+text = "Mission Select
+"
+
+[node name="Label" type="Label" parent="."]
+offset_left = 347.0
+offset_top = 23.0
+offset_right = 756.0
+offset_bottom = 92.0
+theme_override_font_sizes/font_size = 50
+text = "GAME_TITLE_TBD"
+
+[connection signal="pressed" from="ShipBuilder" to="." method="_on_ship_builder_pressed"]
+[connection signal="pressed" from="ExitGame" to="." method="_on_exit_game_pressed"]
+[connection signal="pressed" from="MissionSelect" to="." method="_on_mission_select_pressed"]
