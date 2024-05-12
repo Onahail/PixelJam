@@ -39,4 +39,5 @@ horizontal_alignment = 1
 vertical_alignment = 1
 
 [connection signal="pressed" from="Back" to="." method="_on_back_pressed"]
+[connection signal="pressed" from="DepthSelection" to="." method="_on_depth_selection_pressed"]
 [connection signal="pressed" from="MissionStart" to="." method="_on_mission_start_pressed"]
