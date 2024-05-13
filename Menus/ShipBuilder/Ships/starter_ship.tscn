@@ -1,0 +1,22 @@
+[gd_scene load_steps=2 format=3 uid="uid://dpfx0d6gtsk6b"]
+
+[ext_resource type="PackedScene" uid="uid://de4j5pomdu57n" path="res://Menus/ShipBuilder/ShipModules/BaseTile/base_tile.tscn" id="1_jpcx5"]
+
+[node name="BaseShip" type="Node2D" groups=["droppable"]]
+
+[node name="BaseTile" parent="." instance=ExtResource("1_jpcx5")]
+
+[node name="BaseTile2" parent="." instance=ExtResource("1_jpcx5")]
+position = Vector2(76, -32)
+
+[node name="BaseTile3" parent="." instance=ExtResource("1_jpcx5")]
+position = Vector2(0, -64)
+
+[node name="BaseTile4" parent="." instance=ExtResource("1_jpcx5")]
+position = Vector2(-76, -32)
+
+[node name="BaseTile5" parent="." instance=ExtResource("1_jpcx5")]
+position = Vector2(76, -96)
+
+[node name="BaseTile6" parent="." instance=ExtResource("1_jpcx5")]
+position = Vector2(152, -64)
