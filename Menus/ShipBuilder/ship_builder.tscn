@@ -24,11 +24,11 @@ theme_override_font_sizes/font_size = 50
 text = "Ship Builder
 "
 
-[node name="BaseShip" parent="." instance=ExtResource("2_fk37k")]
-position = Vector2(552, 331)
-
 [node name="GunModule" parent="." instance=ExtResource("3_oylgu")]
 position = Vector2(112, 527)
+
+[node name="BaseShip" parent="." instance=ExtResource("2_fk37k")]
+position = Vector2(552, 331)
 
 [node name="AudioStreamPlayer2D" type="AudioStreamPlayer2D" parent="."]
 stream = ExtResource("5_8upf1")

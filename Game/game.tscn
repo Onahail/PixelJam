@@ -1,6 +1,7 @@
-[gd_scene load_steps=5 format=3 uid="uid://l35y1g5j685o"]
+[gd_scene load_steps=6 format=3 uid="uid://l35y1g5j685o"]
 
 [ext_resource type="Script" path="res://Game/game.gd" id="1_ru1o3"]
+[ext_resource type="Texture2D" uid="uid://dnqn5fwhkb1w8" path="res://Game/Background_Level_1_Version_1.png" id="2_qwy0g"]
 [ext_resource type="Theme" uid="uid://cgkmqyuk7h3mi" path="res://ButtonThemes/disabled.tres" id="2_rdv2t"]
 [ext_resource type="AudioStream" uid="uid://dtmww5tol5oth" path="res://Music/Submarine_Rush.mp3" id="3_qn60e"]
 
@@ -10,10 +11,9 @@ bg_color = Color(0.063472, 0.716149, 0.375532, 1)
 [node name="Game" type="Node2D"]
 script = ExtResource("1_ru1o3")
 
-[node name="Background" type="ColorRect" parent="."]
-offset_right = 1153.0
-offset_bottom = 645.0
-color = Color(8.18223e-07, 0.478263, 0.478375, 1)
+[node name="BackgroundLevel1Version1" type="Sprite2D" parent="."]
+position = Vector2(574, 324)
+texture = ExtResource("2_qwy0g")
 
 [node name="ProgressBar" type="ProgressBar" parent="."]
 offset_left = 374.0
