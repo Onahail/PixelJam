@@ -1,0 +1,22 @@
+[gd_scene load_steps=4 format=3 uid="uid://17tuvycrf4wt"]
+
+[ext_resource type="Texture2D" uid="uid://c66uiqynvclkc" path="res://Placeholder Assets/Bullet_Placeholder.png" id="1_irk03"]
+[ext_resource type="Script" path="res://Menus/ShipBuilder/ShipModules/Gun/bullet.gd" id="1_rrsh4"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_lqvhi"]
+radius = 5.09902
+
+[node name="Bullet" type="Area2D"]
+top_level = true
+collision_layer = 0
+collision_mask = 2
+script = ExtResource("1_rrsh4")
+
+[node name="BulletPlaceholder" type="Sprite2D" parent="."]
+rotation = 0.785571
+texture = ExtResource("1_irk03")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("CircleShape2D_lqvhi")
+
+[connection signal="body_entered" from="." to="." method="_on_body_entered"]

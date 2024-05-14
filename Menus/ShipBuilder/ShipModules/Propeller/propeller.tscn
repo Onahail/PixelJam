@@ -1,0 +1,88 @@
+[gd_scene load_steps=10 format=3 uid="uid://yfxrvicpswcc"]
+
+[ext_resource type="Texture2D" uid="uid://o2q6rj2ijvok" path="res://Menus/ShipBuilder/ShipModules/Propeller/Propellor_Deck_Full_Spreadsheet_126x64.png" id="1_064bq"]
+[ext_resource type="Script" path="res://Menus/ShipBuilder/ShipModules/Propeller/propeller.gd" id="1_h5u48"]
+[ext_resource type="Texture2D" uid="uid://dv5kqq4cpev0t" path="res://UI_Elements/Power_bar_empty.PNG" id="3_4wt45"]
+[ext_resource type="Texture2D" uid="uid://bisvr7tt8gtyp" path="res://UI_Elements/Power_Bar_full_upsidedown.png" id="4_vhb5o"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_5mrw3"]
+atlas = ExtResource("1_064bq")
+region = Rect2(0, 0, 126, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_ns88d"]
+atlas = ExtResource("1_064bq")
+region = Rect2(126, 0, 126, 64)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_7tmck"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_5mrw3")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_ns88d")
+}],
+"loop": true,
+"name": &"propeller_spin",
+"speed": 16.0
+}]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_mly1c"]
+bg_color = Color(0.0862745, 1, 0, 1)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_gxggf"]
+bg_color = Color(0, 0, 0.847059, 1)
+
+[node name="Propeller" type="Node2D"]
+script = ExtResource("1_h5u48")
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+position = Vector2(-17, 0)
+sprite_frames = SubResource("SpriteFrames_7tmck")
+animation = &"propeller_spin"
+frame_progress = 0.605621
+
+[node name="Area2D" type="Area2D" parent="."]
+collision_layer = 3
+collision_mask = 3
+
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="Area2D"]
+position = Vector2(-1, -7)
+polygon = PackedVector2Array(-28, -23, 30, -23, 45, 7, 30, 37, -27, 37, -43, 7)
+
+[node name="TextureHealthBar" type="TextureProgressBar" parent="."]
+offset_left = 46.0
+offset_top = 32.0
+offset_right = 138.0
+offset_bottom = 96.0
+rotation = -3.14027
+fill_mode = 8
+texture_under = ExtResource("3_4wt45")
+texture_progress = ExtResource("4_vhb5o")
+
+[node name="HealthBar" type="ProgressBar" parent="."]
+visible = false
+offset_left = -30.0
+offset_top = -30.0
+offset_right = 30.0
+offset_bottom = -26.0
+theme_override_styles/fill = SubResource("StyleBoxFlat_mly1c")
+value = 100.0
+show_percentage = false
+
+[node name="Timer" type="Timer" parent="."]
+
+[node name="RepairTimer" type="ProgressBar" parent="."]
+offset_left = -36.0
+offset_top = -47.0
+offset_right = 35.0
+offset_bottom = -37.0
+theme_override_styles/fill = SubResource("StyleBoxFlat_gxggf")
+max_value = 5.0
+show_percentage = false
+
+[connection signal="body_entered" from="Area2D" to="." method="_on_area_2d_body_entered"]
+[connection signal="body_exited" from="Area2D" to="." method="_on_area_2d_body_exited"]
+[connection signal="mouse_entered" from="Area2D" to="." method="_on_area_2d_mouse_entered"]
+[connection signal="mouse_exited" from="Area2D" to="." method="_on_area_2d_mouse_exited"]
+[connection signal="timeout" from="Timer" to="." method="_on_timer_timeout"]

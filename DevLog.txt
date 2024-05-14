@@ -1,2 +1,4 @@
 5/11/2024: Game Design Document started. Mostly completed. Initial tasking: Create Main Menu, Ship Builder, Mission Select, Game, and Victory Screen scenes. 
 Add code to set up resources being gathered. Once resource bar is full, show victory screen.
+5/13/2024
+Added Save Functionality

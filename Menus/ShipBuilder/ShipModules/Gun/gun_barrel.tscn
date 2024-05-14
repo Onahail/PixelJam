@@ -1,0 +1,19 @@
+[gd_scene load_steps=3 format=3 uid="uid://dydspxhktcbcx"]
+
+[ext_resource type="Script" path="res://Menus/ShipBuilder/ShipModules/Gun/gun_barrel.gd" id="1_gjrub"]
+[ext_resource type="Texture2D" uid="uid://cd4me2rdqa2px" path="res://Menus/ShipBuilder/ShipModules/Gun/Gun.png" id="2_sa4ga"]
+
+[node name="GunBarrel" type="Node2D"]
+script = ExtResource("1_gjrub")
+
+[node name="PivotPoint" type="Marker2D" parent="."]
+rotation = 0.00586757
+
+[node name="Gun" type="Sprite2D" parent="."]
+position = Vector2(23, 1.90735e-06)
+rotation = 1.57362
+texture = ExtResource("2_sa4ga")
+
+[node name="ShootPoint" type="Marker2D" parent="Gun"]
+position = Vector2(-0.167662, -28.0002)
+rotation = -1.57424
