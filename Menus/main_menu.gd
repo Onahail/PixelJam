@@ -72,6 +72,7 @@ func _on_exit_game_pressed():
 	csvline = []
 	csvline.append("cash")
 	csvline.append(Globals.cash)
+	savefile.store_csv_line(csvline)
 	#Remove backup save if no errors
 	DirAccess.remove_absolute (Globals.backupsavelocation)
 	get_tree().quit()
