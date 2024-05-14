@@ -16,6 +16,7 @@ func _ready():
 	repairable.hp_depleted.connect(gunBarrel._on_hp_depleted)
 	repairable.repair_toggled.connect(gunBarrel._on_repair_toggled)
 	
+	$RepairTimer.visible = false
 	
 	if get_tree().current_scene.name == "ShipBuilder":
 		$TextureHealthBar.visible = false
@@ -27,7 +28,7 @@ func _ready():
 	repairable.currentHP = Globals.GUN_TURRET_HEALTH
 	repairable.maxHP = Globals.GUN_TURRET_HEALTH
 	
-	$RepairTimer.visible = false
+	
 	$RepairTimer.max_value = Globals.REPAIR_TIME
 	$RepairTimer.value = Globals.REPAIR_TIME
 	

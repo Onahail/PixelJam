@@ -4,7 +4,7 @@
 [ext_resource type="Texture2D" uid="uid://dnqn5fwhkb1w8" path="res://Game/Background_Level_1_Version_1.png" id="2_qwy0g"]
 [ext_resource type="Theme" uid="uid://cgkmqyuk7h3mi" path="res://ButtonThemes/disabled.tres" id="2_rdv2t"]
 [ext_resource type="AudioStream" uid="uid://dtmww5tol5oth" path="res://Music/Submarine_Rush.mp3" id="3_qn60e"]
-[ext_resource type="PackedScene" uid="uid://yfxrvicpswcc" path="res://Menus/ShipBuilder/ShipModules/Propeller/propeller.tscn" id="6_j8ouk"]
+[ext_resource type="PackedScene" uid="uid://dbvtepecg3dcm" path="res://Menus/ShipBuilder/ShipModules/Storage/storage_module.tscn" id="5_emrre"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_51ino"]
 bg_color = Color(0.063472, 0.716149, 0.375532, 1)
@@ -81,8 +81,8 @@ rotation = 0.00325467
 [node name="Timer" type="Timer" parent="."]
 autostart = true
 
-[node name="Propeller" parent="." instance=ExtResource("6_j8ouk")]
-position = Vector2(591, 326)
+[node name="StorageModule" parent="." instance=ExtResource("5_emrre")]
+position = Vector2(549, 308)
 
 [connection signal="pressed" from="Victory/ReturnToSurface" to="." method="_on_return_to_surface_pressed"]
 [connection signal="timeout" from="Timer" to="." method="_on_timer_timeout"]

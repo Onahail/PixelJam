@@ -1,0 +1,148 @@
+[gd_scene load_steps=20 format=3 uid="uid://dbvtepecg3dcm"]
+
+[ext_resource type="Texture2D" uid="uid://dmjit4apfuoei" path="res://Menus/ShipBuilder/ShipModules/Storage/Storage_1_spreadsheet.png" id="1_hkqto"]
+[ext_resource type="Script" path="res://Menus/ShipBuilder/ShipModules/Storage/storage_module.gd" id="1_vy5sq"]
+[ext_resource type="Texture2D" uid="uid://pfq6qy44t4qq" path="res://Menus/ShipBuilder/ShipModules/Storage/Storage_2_Spreadsheet_92x64.png" id="2_deqpo"]
+[ext_resource type="Texture2D" uid="uid://cjeatycgmtofm" path="res://Menus/ShipBuilder/ShipModules/Storage/Storage_3_Spreadsheet_92x64.png" id="3_1jk44"]
+[ext_resource type="Texture2D" uid="uid://c7krl5fqdgp06" path="res://Menus/ShipBuilder/ShipModules/Storage/Storage_4_92x64.png" id="4_x6hbq"]
+[ext_resource type="Texture2D" uid="uid://dv5kqq4cpev0t" path="res://UI_Elements/Power_bar_empty.PNG" id="5_nv8an"]
+[ext_resource type="Texture2D" uid="uid://bisvr7tt8gtyp" path="res://UI_Elements/Power_Bar_full_upsidedown.png" id="6_1s8u0"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_8jyit"]
+atlas = ExtResource("1_hkqto")
+region = Rect2(0, 0, 92, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_wk2nu"]
+atlas = ExtResource("1_hkqto")
+region = Rect2(92, 0, 92, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_6l3ey"]
+atlas = ExtResource("1_hkqto")
+region = Rect2(184, 0, 92, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_j03kx"]
+atlas = ExtResource("2_deqpo")
+region = Rect2(0, 0, 92, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_j7aps"]
+atlas = ExtResource("2_deqpo")
+region = Rect2(92, 0, 92, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_ek6nd"]
+atlas = ExtResource("2_deqpo")
+region = Rect2(184, 0, 92, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_8htia"]
+atlas = ExtResource("3_1jk44")
+region = Rect2(0, 0, 92, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_la1hm"]
+atlas = ExtResource("3_1jk44")
+region = Rect2(92, 0, 92, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_ixu0c"]
+atlas = ExtResource("3_1jk44")
+region = Rect2(184, 0, 92, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_4fx46"]
+atlas = ExtResource("4_x6hbq")
+region = Rect2(0, 0, 92, 64)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_tr4se"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_8jyit")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_wk2nu")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_6l3ey")
+}],
+"loop": true,
+"name": &"fill_stage_1",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_j03kx")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_j7aps")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_ek6nd")
+}],
+"loop": true,
+"name": &"fill_stage_2",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_8htia")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_la1hm")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_ixu0c")
+}],
+"loop": true,
+"name": &"fill_stage_3",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_4fx46")
+}],
+"loop": true,
+"name": &"fill_stage_4",
+"speed": 5.0
+}]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_lx6my"]
+bg_color = Color(0, 0, 0.847059, 1)
+
+[node name="StorageModule" type="Node2D"]
+script = ExtResource("1_vy5sq")
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+sprite_frames = SubResource("SpriteFrames_tr4se")
+animation = &"fill_stage_4"
+frame_progress = 0.502498
+
+[node name="Area2D" type="Area2D" parent="."]
+collision_layer = 3
+collision_mask = 3
+
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="Area2D"]
+position = Vector2(-1, -7)
+polygon = PackedVector2Array(-28, -23, 30, -23, 45, 7, 30, 37, -27, 37, -43, 7)
+
+[node name="TextureHealthBar" type="TextureProgressBar" parent="."]
+offset_left = 46.0
+offset_top = 32.0
+offset_right = 138.0
+offset_bottom = 96.0
+rotation = -3.14027
+fill_mode = 8
+texture_under = ExtResource("5_nv8an")
+texture_progress = ExtResource("6_1s8u0")
+
+[node name="RepairTimer" type="ProgressBar" parent="."]
+offset_left = -36.0
+offset_top = -47.0
+offset_right = 35.0
+offset_bottom = -37.0
+theme_override_styles/fill = SubResource("StyleBoxFlat_lx6my")
+max_value = 5.0
+show_percentage = false
+
+[node name="Timer" type="Timer" parent="."]
+
+[connection signal="body_entered" from="Area2D" to="." method="_on_area_2d_body_entered"]
+[connection signal="body_exited" from="Area2D" to="." method="_on_area_2d_body_exited"]
+[connection signal="mouse_entered" from="Area2D" to="." method="_on_area_2d_mouse_entered"]
+[connection signal="mouse_exited" from="Area2D" to="." method="_on_area_2d_mouse_exited"]
+[connection signal="timeout" from="Timer" to="." method="_on_timer_timeout"]

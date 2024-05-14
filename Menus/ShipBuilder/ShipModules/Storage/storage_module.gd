@@ -6,11 +6,11 @@ var mouseOverBody = true
 
 func _ready():
 	
-	repairable.currentHP = Globals.PROPELLER_HEALTH
+	repairable.currentHP = Globals.STORAGE_HEALTH
 	repairable.hp_depleted.connect(_on_hp_depleted)
 	repairable.repair_toggled.connect(_on_repair_toggled)
 	
-	$AnimatedSprite2D.play("propeller_spin")
+	$AnimatedSprite2D.play("fill_stage_1")
 	
 	$RepairTimer.visible = false
 	
@@ -19,11 +19,11 @@ func _ready():
 		initialPos = global_position
 		return
 		
-	$TextureHealthBar.max_value = Globals.PROPELLER_HEALTH
-	$TextureHealthBar.value = Globals.PROPELLER_HEALTH
+	$TextureHealthBar.max_value = Globals.STORAGE_HEALTH
+	$TextureHealthBar.value = Globals.STORAGE_HEALTH
 	
-	repairable.currentHP = Globals.PROPELLER_HEALTH
-	repairable.maxHP = Globals.PROPELLER_HEALTH	
+	repairable.currentHP = Globals.STORAGE_HEALTH
+	repairable.maxHP = Globals.STORAGE_HEALTH	
 	
 
 	$RepairTimer.max_value = Globals.REPAIR_TIME
@@ -92,10 +92,10 @@ func _on_hp_depleted():
 
 
 func _on_timer_timeout():
-	repairable.repairDamage(Globals.PROPELLER_HEALTH)
+	repairable.repairDamage(Globals.STORAGE_HEALTH)
 	$Timer.stop()
 	$RepairTimer.visible = false
-	$AnimatedSprite2D.play("propeller_spin")
+	$AnimatedSprite2D.play("fill_stage_1")
 	
 func _on_repair_toggled():
 	currentlyRepairing = true

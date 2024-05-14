@@ -1,8 +1,6 @@
 extends Node
 
 #SAVE FILES
-var testvar = 1000
-var is_dragging = false
 var cash = 0
 var ship_config = []
 var ship_max_width = 10
@@ -36,3 +34,4 @@ var REPAIR_TIME = 3
 #HEALTH
 var GUN_TURRET_HEALTH = 20
 var PROPELLER_HEALTH = 20
+var STORAGE_HEALTH = 20
