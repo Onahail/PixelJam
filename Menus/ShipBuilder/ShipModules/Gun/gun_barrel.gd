@@ -25,9 +25,12 @@ func shoot():
 	
 func _on_hp_depleted():
 	disabled = true
+	
+func _on_repair_cancelled():
+	disabled = false
 
 func _on_repair_toggled():
-	pass
+	disabled = true
 	
 func _on_repair_completed():
 	disabled = false

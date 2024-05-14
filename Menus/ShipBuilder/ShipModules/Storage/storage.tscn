@@ -1,7 +1,7 @@
 [gd_scene load_steps=20 format=3 uid="uid://dbvtepecg3dcm"]
 
 [ext_resource type="Texture2D" uid="uid://dmjit4apfuoei" path="res://Menus/ShipBuilder/ShipModules/Storage/Storage_1_spreadsheet.png" id="1_hkqto"]
-[ext_resource type="Script" path="res://Menus/ShipBuilder/ShipModules/Storage/storage_module.gd" id="1_vy5sq"]
+[ext_resource type="Script" path="res://Menus/ShipBuilder/ShipModules/Storage/storage.gd" id="1_vy5sq"]
 [ext_resource type="Texture2D" uid="uid://pfq6qy44t4qq" path="res://Menus/ShipBuilder/ShipModules/Storage/Storage_2_Spreadsheet_92x64.png" id="2_deqpo"]
 [ext_resource type="Texture2D" uid="uid://cjeatycgmtofm" path="res://Menus/ShipBuilder/ShipModules/Storage/Storage_3_Spreadsheet_92x64.png" id="3_1jk44"]
 [ext_resource type="Texture2D" uid="uid://c7krl5fqdgp06" path="res://Menus/ShipBuilder/ShipModules/Storage/Storage_4_92x64.png" id="4_x6hbq"]

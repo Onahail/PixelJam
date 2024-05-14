@@ -7,15 +7,13 @@ class_name Repairable
 signal hp_depleted
 signal repair_toggled
 signal repair_completed
+signal repair_cancelled
 	
 func applyDamage(damage):
 	currentHP -= damage
 	if currentHP <= 0:
 		hp_depleted.emit()
 		currentHP = 0
-	
-func beginRepair():
-	repair_toggled.emit()
 	
 func repairDamage(repairValue):
 	currentHP += repairValue

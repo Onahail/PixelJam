@@ -1,11 +1,14 @@
-[gd_scene load_steps=7 format=3 uid="uid://bispnc5n2jjek"]
+[gd_scene load_steps=10 format=3 uid="uid://bispnc5n2jjek"]
 
 [ext_resource type="Script" path="res://Menus/ShipBuilder/ship_builder.gd" id="1_nsu8l"]
 [ext_resource type="PackedScene" uid="uid://dpfx0d6gtsk6b" path="res://Menus/ShipBuilder/Ships/starter_ship.tscn" id="2_fk37k"]
 [ext_resource type="PackedScene" uid="uid://g6j6gqdq64h3" path="res://Menus/ShipBuilder/ShipModules/Gun/gun_deck.tscn" id="3_oylgu"]
 [ext_resource type="AudioStream" uid="uid://d0du7ubyvmbjv" path="res://Music/Shipbuilding.mp3" id="5_8upf1"]
 [ext_resource type="PackedScene" uid="uid://yfxrvicpswcc" path="res://Menus/ShipBuilder/ShipModules/Propeller/propeller.tscn" id="5_mr1rh"]
-[ext_resource type="PackedScene" uid="uid://dbvtepecg3dcm" path="res://Menus/ShipBuilder/ShipModules/Storage/storage_module.tscn" id="6_6vv7x"]
+[ext_resource type="PackedScene" uid="uid://dbvtepecg3dcm" path="res://Menus/ShipBuilder/ShipModules/Storage/storage.tscn" id="6_6vv7x"]
+[ext_resource type="PackedScene" uid="uid://bfeoqql17huda" path="res://Menus/ShipBuilder/ShipModules/Scoop/scoop.tscn" id="7_oq7eh"]
+[ext_resource type="PackedScene" uid="uid://dxkgwwaujmugp" path="res://Menus/ShipBuilder/ShipModules/Bridge/bridge.tscn" id="8_77ol1"]
+[ext_resource type="PackedScene" uid="uid://dggbslj7xvh07" path="res://Menus/ShipBuilder/ShipModules/Shield/shield.tscn" id="9_hrtnv"]
 
 [node name="ShipBuilder" type="Node2D"]
 script = ExtResource("1_nsu8l")
@@ -26,9 +29,6 @@ theme_override_font_sizes/font_size = 50
 text = "Ship Builder
 "
 
-[node name="GunModule" parent="." instance=ExtResource("3_oylgu")]
-position = Vector2(82, 582)
-
 [node name="BaseShip" parent="." instance=ExtResource("2_fk37k")]
 position = Vector2(552, 331)
 
@@ -36,10 +36,46 @@ position = Vector2(552, 331)
 stream = ExtResource("5_8upf1")
 autoplay = true
 
-[node name="Propeller" parent="." instance=ExtResource("5_mr1rh")]
+[node name="Shop" type="Control" parent="."]
+layout_mode = 3
+anchors_preset = 0
+
+[node name="Shield" parent="Shop" instance=ExtResource("9_hrtnv")]
+position = Vector2(663, 583)
+
+[node name="Bridge" parent="Shop" instance=ExtResource("8_77ol1")]
+position = Vector2(553, 582)
+
+[node name="Scoop" parent="Shop" instance=ExtResource("7_oq7eh")]
+position = Vector2(441, 581)
+
+[node name="StorageModule" parent="Shop" instance=ExtResource("6_6vv7x")]
+position = Vector2(331, 581)
+
+[node name="Propeller" parent="Shop" instance=ExtResource("5_mr1rh")]
 position = Vector2(215, 581)
 
-[node name="StorageModule" parent="." instance=ExtResource("6_6vv7x")]
-position = Vector2(331, 581)
+[node name="GunModule" parent="Shop" instance=ExtResource("3_oylgu")]
+position = Vector2(82, 582)
+
+[node name="Currency" type="Label" parent="."]
+offset_left = 959.0
+offset_top = 35.0
+offset_right = 1099.0
+offset_bottom = 94.0
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="NotEnoughMoney" type="Label" parent="."]
+offset_left = 395.0
+offset_top = 400.0
+offset_right = 767.0
+offset_bottom = 453.0
+theme_override_colors/font_color = Color(1, 0, 0, 1)
+theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
+theme_override_constants/outline_size = 5
+text = "Not enough money to purchase that."
+horizontal_alignment = 1
+vertical_alignment = 1
 
 [connection signal="pressed" from="Back" to="." method="_on_back_pressed"]
