@@ -7,7 +7,7 @@ func _ready():
 	$ProgressBar.value = Globals.RESOURCES_COLLECTED
 	$Victory.visible = false
 	Globals.VIEWPORT_CENTER = get_viewport().size * 0.5
-	$Timer.wait_time = Globals.SPAWN_SPEED 
+	$Timer.wait_time = Globals.SPAWN_RATE
 
 func _physics_process(delta):
 	Globals.RESOURCES_COLLECTED += Globals.COLLECTION_RATE * delta
