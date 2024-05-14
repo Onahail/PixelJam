@@ -1,18 +1,25 @@
-[gd_scene load_steps=6 format=3 uid="uid://l35y1g5j685o"]
+[gd_scene load_steps=8 format=3 uid="uid://l35y1g5j685o"]
 
 [ext_resource type="Script" path="res://Game/game.gd" id="1_ru1o3"]
 [ext_resource type="Texture2D" uid="uid://dnqn5fwhkb1w8" path="res://Game/Background_Level_1_Version_1.png" id="2_qwy0g"]
 [ext_resource type="Theme" uid="uid://cgkmqyuk7h3mi" path="res://ButtonThemes/disabled.tres" id="2_rdv2t"]
 [ext_resource type="AudioStream" uid="uid://dtmww5tol5oth" path="res://Music/Submarine_Rush.mp3" id="3_qn60e"]
+[ext_resource type="PackedScene" uid="uid://yfxrvicpswcc" path="res://Menus/ShipBuilder/ShipModules/Propeller/propeller.tscn" id="6_j8ouk"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_51ino"]
 bg_color = Color(0.063472, 0.716149, 0.375532, 1)
+
+[sub_resource type="Curve2D" id="Curve2D_wi1ho"]
+_data = {
+"points": PackedVector2Array(0, 0, 0, 0, -37, -44, 0, 0, 0, 0, 1192, -40, 0, 0, 0, 0, 1196, 678, 0, 0, 0, 0, -36, 675, 0, 0, 0, 0, -37, -44)
+}
+point_count = 5
 
 [node name="Game" type="Node2D"]
 script = ExtResource("1_ru1o3")
 
 [node name="BackgroundLevel1Version1" type="Sprite2D" parent="."]
-position = Vector2(574, 324)
+position = Vector2(576, 326)
 texture = ExtResource("2_qwy0g")
 
 [node name="ProgressBar" type="ProgressBar" parent="."]
@@ -24,6 +31,7 @@ theme_override_styles/fill = SubResource("StyleBoxFlat_51ino")
 step = 1.0
 
 [node name="Victory" type="ColorRect" parent="."]
+visible = false
 offset_left = 443.0
 offset_top = 129.0
 offset_right = 724.0
@@ -62,4 +70,19 @@ autowrap_mode = 3
 stream = ExtResource("3_qn60e")
 autoplay = true
 
+[node name="Path2D" type="Path2D" parent="."]
+curve = SubResource("Curve2D_wi1ho")
+
+[node name="PathFollow2D" type="PathFollow2D" parent="Path2D"]
+unique_name_in_owner = true
+position = Vector2(-37, -44)
+rotation = 0.00325467
+
+[node name="Timer" type="Timer" parent="."]
+autostart = true
+
+[node name="Propeller" parent="." instance=ExtResource("6_j8ouk")]
+position = Vector2(591, 326)
+
 [connection signal="pressed" from="Victory/ReturnToSurface" to="." method="_on_return_to_surface_pressed"]
+[connection signal="timeout" from="Timer" to="." method="_on_timer_timeout"]
