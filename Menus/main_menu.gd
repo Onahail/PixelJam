@@ -20,20 +20,20 @@ func _ready():
 	for i in Globals.ship_max_height:
 		Globals.ship_config.append([])
 		for j in Globals.ship_max_width:
-			Globals.ship_config[i].append(0)
+			Globals.ship_config[i].append("0")
 	#Load Default Ship if no ship file
 	if(savefile == null):
 		var centerheight:float = float(Globals.ship_max_height) / 2
 		var centerwidth:float = float(Globals.ship_max_width) / 2
-		Globals.ship_config[centerheight][centerwidth] = Globals.ship_hull
-		Globals.ship_config[centerheight][centerwidth+1] = Globals.ship_hull
-		Globals.ship_config[centerheight][centerwidth-1] = Globals.ship_hull
-		Globals.ship_config[centerheight+1][centerwidth] = Globals.ship_hull
-		Globals.ship_config[centerheight-1][centerwidth] = Globals.ship_hull
-		Globals.ship_config[centerheight+1][centerwidth+1] = Globals.ship_gun
-		Globals.ship_config[centerheight-1][centerwidth+1] = Globals.ship_hull
-		Globals.ship_config[centerheight+1][centerwidth-1] = Globals.ship_hull
-		Globals.ship_config[centerheight-1][centerwidth-1] = Globals.ship_hull
+		Globals.ship_config[centerheight][centerwidth] = "Hull"
+		Globals.ship_config[centerheight][centerwidth+1] = "Gun"
+		Globals.ship_config[centerheight][centerwidth-1] = "Hull"
+		Globals.ship_config[centerheight+1][centerwidth] = "Hull"
+		Globals.ship_config[centerheight-1][centerwidth] = "Hull"
+		Globals.ship_config[centerheight+1][centerwidth+1] = "Hull"
+		Globals.ship_config[centerheight-1][centerwidth+1] = "Hull"
+		Globals.ship_config[centerheight+1][centerwidth-1] = "Hull"
+		Globals.ship_config[centerheight-1][centerwidth-1] = "Hull"
 	else:
 		#load ship config from file
 		var saveline=true
@@ -42,7 +42,7 @@ func _ready():
 			#link variables here
 			if(saveline[0]=="ship_config"):
 				for i in Globals.ship_max_width:
-					Globals.ship_config[int(saveline[1])][i] = int(saveline[i+2])
+					Globals.ship_config[int(saveline[1])][i] = saveline[i+2]
 			elif(saveline[0]=="cash"):
 				Globals.cash = int(saveline[1])
 				

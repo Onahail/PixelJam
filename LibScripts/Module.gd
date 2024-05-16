@@ -1,7 +1,7 @@
 extends Purchase
 class_name Module
 
-var repairable = preload("res://LibScripts/Repairable.gd").new()
+var repairable = preload("res://LibScripts/repairable.gd").new()
 var currentlyRepairing = false
 
 #var repair = ModuleStats.module_data[module_name]["repair_time"]

@@ -1,12 +1,17 @@
 extends Node2D
 
+# TODO: Dynamic loading of assets
 const PROPELLER = preload("res://Menus/ShipBuilder/ShipModules/Propeller/propeller.tscn")
 const GUN = preload("res://Menus/ShipBuilder/ShipModules/Gun/gun_deck.tscn")
 const STORAGE = preload("res://Menus/ShipBuilder/ShipModules/Storage/storage.tscn")
 const SCOOP = preload("res://Menus/ShipBuilder/ShipModules/Scoop/scoop.tscn")
 const BRIDGE = preload("res://Menus/ShipBuilder/ShipModules/Bridge/bridge.tscn")
 const SHIELD = preload("res://Menus/ShipBuilder/ShipModules/Shield/shield.tscn")
+const HULL = preload("res://Menus/ShipBuilder/ShipModules/BaseTile/base_tile.tscn")
 const SHIP = preload("res://Menus/ShipBuilder/Ships/starter_ship.tscn")
+
+# TODO: Dynamic selection of positions
+var modules = []
 
 @onready var inventory_positions = {
 		PROPELLER: $UI/Shop/PropellerMarker.global_position,
@@ -21,7 +26,12 @@ const SHIP = preload("res://Menus/ShipBuilder/Ships/starter_ship.tscn")
 signal inventory_spawned
 
 func _ready():
-	
+	#Dynamically build module list and load scenes
+	for module in ModuleStats.module_data:
+		modules.append(str(module))
+		# TODO: Dynamically load modules from file instead of preload manually
+		#load(ModuleStats.module_data[str(module)]["assets"]["scene"])
+
 	EventBus.item_sold.connect(_on_item_sold)
 	EventBus.item_purchased.connect(_on_item_purchased)
 	EventBus.item_too_expensive.connect(_on_item_too_expensive)
@@ -82,6 +92,7 @@ func SpawnItem(item, location):
 
 func _on_shop_zone_area_exited(area):
 	var item_name = area.get_parent().module_name
+	# TODO: Dynamically un fuck whatever this is
 	match item_name:
 		"Propeller":
 			SpawnItem(PROPELLER, inventory_positions[PROPELLER])
@@ -95,5 +106,5 @@ func _on_shop_zone_area_exited(area):
 			SpawnItem(BRIDGE, inventory_positions[BRIDGE])
 		"Shield":
 			SpawnItem(SHIELD, inventory_positions[SHIELD])
-
-	
+		"HULL":
+			SpawnItem(HULL, inventory_positions[HULL])
