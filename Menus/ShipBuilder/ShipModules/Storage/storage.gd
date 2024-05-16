@@ -5,10 +5,8 @@ var animation = "fill_stage_1"
 
 func _ready():
 	
+	#CHANGE VALUES
 	module_name = "Storage"
-	health = ModuleStats.module_data[module_name]["health"]
-	price = Globals.STORAGE_PRICE
-	
 	$AnimatedSprite2D.play(animation)
 	
 	#CALL ORIGINAL
@@ -17,7 +15,9 @@ func _ready():
 
 func _on_hp_depleted():
 	$AnimatedSprite2D.stop()
+	#TODO Storage Destroyed
+	super._on_hp_depleted()
 
-func _on_timer_timeout():
-	super._on_timer_timeout()
+func _on_repair_timer_timeout():
 	$AnimatedSprite2D.play(animation)
+	super._on_repair_timer_timeout()

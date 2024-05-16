@@ -9,14 +9,11 @@
 
 [node name="Bridge" type="Node2D"]
 script = ExtResource("1_eicod")
-module_name = null
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
 texture = ExtResource("2_nvqqs")
 
 [node name="Area2D" type="Area2D" parent="."]
-collision_layer = 3
-collision_mask = 3
 
 [node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="Area2D"]
 position = Vector2(-1, -7)
@@ -32,9 +29,9 @@ fill_mode = 8
 texture_under = ExtResource("3_2anky")
 texture_progress = ExtResource("4_0u1o8")
 
-[node name="Timer" type="Timer" parent="."]
+[node name="RepairTimer" type="Timer" parent="."]
 
-[node name="RepairTimer" type="TextureProgressBar" parent="."]
+[node name="RepairProgressBar" type="TextureProgressBar" parent="."]
 offset_left = -22.0
 offset_top = -22.0
 offset_right = 22.0
@@ -48,4 +45,4 @@ texture_progress = ExtResource("6_qpbc4")
 [connection signal="body_exited" from="Area2D" to="." method="_on_area_2d_body_exited"]
 [connection signal="mouse_entered" from="Area2D" to="." method="_on_area_2d_mouse_entered"]
 [connection signal="mouse_exited" from="Area2D" to="." method="_on_area_2d_mouse_exited"]
-[connection signal="timeout" from="Timer" to="." method="_on_timer_timeout"]
+[connection signal="timeout" from="RepairTimer" to="." method="_on_repair_timer_timeout"]

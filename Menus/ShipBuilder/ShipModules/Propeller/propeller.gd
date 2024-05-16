@@ -14,8 +14,9 @@ func _ready():
 
 func _on_hp_depleted():
 	$AnimatedSprite2D.stop()
+	#TODO Propeller Destroyed
+	super._on_hp_depleted()
 	
 func _on_timer_timeout():
-	super._on_timer_timeout()
 	$AnimatedSprite2D.play(animation)
-	
+	super._on_repair_timer_timeout()

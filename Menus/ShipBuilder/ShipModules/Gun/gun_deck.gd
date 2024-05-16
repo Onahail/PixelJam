@@ -8,10 +8,6 @@ func _ready():
 	
 	#CHANGE VALUES
 	module_name = "Gun"
-	super._ready()
-	print(health)
-	#health = ModuleStats.module_data[module_name]["health"]
-	#price = Globals.GUN_TURRET_PRICE
 	
 	repairable.repair_completed.connect(gunBarrel._on_repair_completed)
 	repairable.hp_depleted.connect(gunBarrel._on_hp_depleted)
@@ -19,6 +15,10 @@ func _ready():
 	repairable.repair_cancelled.connect(gunBarrel._on_repair_cancelled)
 	
 	#CALL ORIGINAL
-	
-	
+	super._ready()
 
+
+func _on_hp_depleted():
+	#TODO Scoop Destroyed
+	super._on_hp_depleted()
+	pass

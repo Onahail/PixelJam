@@ -20,11 +20,16 @@ func _on_return_to_surface_pressed():
 	get_tree().change_scene_to_file("res://Menus/main_menu.tscn")
 
 func spawn_enemy():
-	var new_enemy = preload("res://Game/Enemies/enemy_1.tscn").instantiate()
-	%PathFollow2D.progress_ratio = randf()
-	new_enemy.global_position = %PathFollow2D.global_position
+	var new_enemy = preload("res://Game/Enemies/jellyfish.tscn").instantiate()
+	%JellyfishPath.progress_ratio = randf()
+	new_enemy.global_position = %JellyfishPath.global_position
 	add_child(new_enemy)
 
 
 func _on_timer_timeout():
 	spawn_enemy()
+
+
+func _on_kill_box_body_entered(body):
+	body.queue_free()
+

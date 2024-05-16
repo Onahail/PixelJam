@@ -1,7 +1,6 @@
-[gd_scene load_steps=6 format=3 uid="uid://bispnc5n2jjek"]
+[gd_scene load_steps=5 format=3 uid="uid://bispnc5n2jjek"]
 
 [ext_resource type="Script" path="res://Menus/ShipBuilder/ship_builder.gd" id="1_nsu8l"]
-[ext_resource type="PackedScene" uid="uid://dpfx0d6gtsk6b" path="res://Menus/ShipBuilder/Ships/starter_ship.tscn" id="2_fk37k"]
 [ext_resource type="AudioStream" uid="uid://ck6c3x2y4hkq1" path="res://Sounds/coin-and-money-bag-3-185264.mp3" id="4_i2e6w"]
 [ext_resource type="AudioStream" uid="uid://d0du7ubyvmbjv" path="res://Music/Shipbuilding.mp3" id="5_8upf1"]
 
@@ -12,79 +11,49 @@ size = Vector2(599, 95)
 script = ExtResource("1_nsu8l")
 
 [node name="Back" type="Button" parent="."]
-offset_left = 49.0
-offset_top = 47.0
-offset_right = 116.0
-offset_bottom = 101.0
+offset_left = 32.0
+offset_top = 24.0
+offset_right = 99.0
+offset_bottom = 78.0
 text = "Back"
-
-[node name="Title" type="Label" parent="."]
-offset_left = 683.0
-offset_top = 67.0
-offset_right = 1016.0
-offset_bottom = 136.0
-theme_override_font_sizes/font_size = 50
-text = "Ship Builder
-"
-
-[node name="Instructions" type="Label" parent="."]
-offset_left = 54.0
-offset_top = 142.0
-offset_right = 266.0
-offset_bottom = 273.0
-text = "Left click and drag on to the desired tile to purchase. Right click after placement to refund."
-horizontal_alignment = 1
-vertical_alignment = 1
-autowrap_mode = 3
-
-[node name="BaseShip" parent="." instance=ExtResource("2_fk37k")]
-position = Vector2(801, 367)
 
 [node name="AudioStreamPlayer2D" type="AudioStreamPlayer2D" parent="."]
 stream = ExtResource("5_8upf1")
 autoplay = true
 
-[node name="Shop" type="Control" parent="."]
+[node name="Timer" type="Timer" parent="."]
+wait_time = 2.0
+
+[node name="SoldModule" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource("4_i2e6w")
+
+[node name="UI" type="Control" parent="."]
 layout_mode = 3
 anchors_preset = 0
+offset_right = 40.0
+offset_bottom = 40.0
 
-[node name="PropellerMarker" type="Marker2D" parent="Shop"]
-position = Vector2(87, 901)
+[node name="Information" type="Control" parent="UI"]
+layout_mode = 3
+anchors_preset = 0
+offset_right = 40.0
+offset_bottom = 40.0
 
-[node name="GunMarker" type="Marker2D" parent="Shop"]
-position = Vector2(183, 901)
-
-[node name="StorageMarker" type="Marker2D" parent="Shop"]
-position = Vector2(279, 901)
-
-[node name="ScoopMarker" type="Marker2D" parent="Shop"]
-position = Vector2(374, 901)
-
-[node name="BridgeMarker" type="Marker2D" parent="Shop"]
-position = Vector2(469, 901)
-
-[node name="ShieldMarker" type="Marker2D" parent="Shop"]
-position = Vector2(564, 901)
-
-[node name="ShopZone" type="Area2D" parent="Shop"]
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="Shop/ShopZone"]
-position = Vector2(329.5, 904.5)
-shape = SubResource("RectangleShape2D_ah087")
-
-[node name="Currency" type="Label" parent="."]
-offset_left = 1473.0
-offset_top = 65.0
-offset_right = 1613.0
-offset_bottom = 124.0
+[node name="Currency" type="Label" parent="UI/Information"]
+layout_mode = 0
+offset_left = 643.0
+offset_top = 28.0
+offset_right = 831.0
+offset_bottom = 87.0
 horizontal_alignment = 1
 vertical_alignment = 1
 
-[node name="NotEnoughMoney" type="Label" parent="."]
-offset_left = 638.0
-offset_top = 452.0
-offset_right = 1010.0
-offset_bottom = 505.0
+[node name="NotEnoughMoney" type="Label" parent="UI/Information"]
+layout_mode = 0
+offset_left = 245.0
+offset_top = 287.0
+offset_right = 617.0
+offset_bottom = 340.0
 theme_override_colors/font_color = Color(1, 0, 0, 1)
 theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
 theme_override_constants/outline_size = 5
@@ -92,74 +61,158 @@ text = "Not enough money to purchase that."
 horizontal_alignment = 1
 vertical_alignment = 1
 
-[node name="Timer" type="Timer" parent="."]
+[node name="TooManyModules" type="Label" parent="UI/Information"]
+layout_mode = 0
+offset_left = 240.0
+offset_top = 288.0
+offset_right = 612.0
+offset_bottom = 341.0
+theme_override_colors/font_color = Color(1, 0, 0, 1)
+theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
+theme_override_constants/outline_size = 5
+text = "Too many modules"
+horizontal_alignment = 1
+vertical_alignment = 1
+justification_flags = 35
 
-[node name="ShopPrices" type="Control" parent="."]
+[node name="Instructions" type="Label" parent="UI/Information"]
+layout_mode = 0
+offset_left = 47.0
+offset_top = 132.0
+offset_right = 227.0
+offset_bottom = 285.0
+text = "Left click and drag on to the desired tile to purchase. Right click after placement to refund."
+horizontal_alignment = 1
+vertical_alignment = 1
+autowrap_mode = 3
+
+[node name="Title" type="Label" parent="UI/Information"]
+layout_mode = 0
+offset_left = 239.0
+offset_top = 8.0
+offset_right = 648.0
+offset_bottom = 77.0
+theme_override_font_sizes/font_size = 50
+text = "Ship Builder
+"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="ShipPartNumbers" type="Label" parent="UI/Information"]
+layout_mode = 0
+offset_left = 695.0
+offset_top = 104.0
+offset_right = 845.0
+offset_bottom = 310.0
+
+[node name="ShopPrices" type="Control" parent="UI"]
 layout_mode = 3
 anchors_preset = 0
-offset_left = 72.0
-offset_top = 464.0
-offset_right = 610.0
-offset_bottom = 503.0
+offset_left = 153.0
+offset_top = 336.0
+offset_right = 691.0
+offset_bottom = 375.0
 
-[node name="PropellerCost" type="Label" parent="ShopPrices"]
+[node name="PropellerCost" type="Label" parent="UI/ShopPrices"]
 layout_mode = 0
-offset_left = -2.0
-offset_top = 356.0
-offset_right = 38.0
-offset_bottom = 379.0
+offset_left = 11.0
+offset_top = 37.0
+offset_right = 51.0
+offset_bottom = 60.0
+text = "1
+"
 horizontal_alignment = 1
 vertical_alignment = 1
 
-[node name="GunCost" type="Label" parent="ShopPrices"]
+[node name="GunCost" type="Label" parent="UI/ShopPrices"]
 layout_mode = 0
-offset_left = 95.0
-offset_top = 356.0
-offset_right = 135.0
-offset_bottom = 379.0
+offset_left = 107.0
+offset_top = 37.0
+offset_right = 147.0
+offset_bottom = 60.0
+text = "2
+"
 horizontal_alignment = 1
 vertical_alignment = 1
 
-[node name="StorageCost" type="Label" parent="ShopPrices"]
+[node name="StorageCost" type="Label" parent="UI/ShopPrices"]
 layout_mode = 0
-offset_left = 190.0
-offset_top = 356.0
-offset_right = 230.0
-offset_bottom = 379.0
+offset_left = 202.0
+offset_top = 37.0
+offset_right = 242.0
+offset_bottom = 60.0
+text = "3"
 horizontal_alignment = 1
 vertical_alignment = 1
 
-[node name="ScoopCost" type="Label" parent="ShopPrices"]
+[node name="ScoopCost" type="Label" parent="UI/ShopPrices"]
 layout_mode = 0
-offset_left = 285.0
-offset_top = 356.0
-offset_right = 325.0
-offset_bottom = 379.0
+offset_left = 297.0
+offset_top = 37.0
+offset_right = 337.0
+offset_bottom = 60.0
+text = "4"
 horizontal_alignment = 1
 vertical_alignment = 1
 
-[node name="BridgeCost" type="Label" parent="ShopPrices"]
+[node name="BridgeCost" type="Label" parent="UI/ShopPrices"]
 layout_mode = 0
-offset_left = 381.0
-offset_top = 356.0
-offset_right = 421.0
-offset_bottom = 379.0
+offset_left = 389.0
+offset_top = 37.0
+offset_right = 429.0
+offset_bottom = 60.0
+text = "5"
 horizontal_alignment = 1
 vertical_alignment = 1
 
-[node name="ShieldCost" type="Label" parent="ShopPrices"]
+[node name="ShieldCost" type="Label" parent="UI/ShopPrices"]
 layout_mode = 0
-offset_left = 477.0
-offset_top = 356.0
-offset_right = 517.0
-offset_bottom = 379.0
+offset_left = 486.0
+offset_top = 37.0
+offset_right = 526.0
+offset_bottom = 60.0
+text = "6"
 horizontal_alignment = 1
 vertical_alignment = 1
 
-[node name="SoldModule" type="AudioStreamPlayer2D" parent="."]
-stream = ExtResource("4_i2e6w")
+[node name="Shop" type="Control" parent="UI"]
+layout_mode = 3
+anchors_preset = 0
+
+[node name="PropellerMarker" type="Marker2D" parent="UI/Shop"]
+position = Vector2(180, 431)
+
+[node name="GunMarker" type="Marker2D" parent="UI/Shop"]
+position = Vector2(276, 431)
+
+[node name="StorageMarker" type="Marker2D" parent="UI/Shop"]
+position = Vector2(372, 431)
+
+[node name="ScoopMarker" type="Marker2D" parent="UI/Shop"]
+position = Vector2(467, 431)
+
+[node name="BridgeMarker" type="Marker2D" parent="UI/Shop"]
+position = Vector2(562, 431)
+
+[node name="ShieldMarker" type="Marker2D" parent="UI/Shop"]
+position = Vector2(657, 431)
+
+[node name="ShopZone" type="Area2D" parent="UI/Shop"]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="UI/Shop/ShopZone"]
+visible = false
+position = Vector2(422, 431)
+shape = SubResource("RectangleShape2D_ah087")
+
+[node name="ShipSpawnPoint" type="Marker2D" parent="UI/Shop"]
+position = Vector2(434, 203)
+
+[node name="Camera2D" type="Camera2D" parent="."]
+position = Vector2(433, 242)
+scale = Vector2(2, 2)
+zoom = Vector2(2, 2)
 
 [connection signal="pressed" from="Back" to="." method="_on_back_pressed"]
-[connection signal="area_exited" from="Shop/ShopZone" to="." method="_on_area_2d_area_exited"]
-[connection signal="area_exited" from="Shop/ShopZone" to="." method="_on_shop_zone_area_exited"]
 [connection signal="timeout" from="Timer" to="." method="_on_timer_timeout"]
+[connection signal="area_exited" from="UI/Shop/ShopZone" to="." method="_on_shop_zone_area_exited"]
+[connection signal="area_exited" from="UI/Shop/ShopZone" to="." method="_on_area_2d_area_exited"]
