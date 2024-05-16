@@ -1,7 +1,7 @@
 extends Draggable
 class_name Module
 
-var repairable = preload("res://LibScripts/Repairable.gd").new()
+var repairable = preload("res://LibScripts/repairable.gd").new()
 var currentlyRepairing = false
 
 @export var module_name = "Default"
@@ -71,7 +71,7 @@ func _on_repair_cancelled():
 	currentlyRepairing = false
 	
 func moduleInit():
-	print("ModuleInit called")
+	#print("ModuleInit called")
 	health = ModuleStats.module_data[module_name]["health"]
 	price = ModuleStats.module_data[module_name]["price"]
 	repair_time = ModuleStats.module_data[module_name]["repair_time"]

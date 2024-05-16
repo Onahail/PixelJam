@@ -1,26 +1,35 @@
 extends Node2D
 
+# TODO: Dynamic loading of assets
 const PROPELLER = preload("res://Menus/ShipBuilder/ShipModules/Propeller/propeller.tscn")
 const GUN = preload("res://Menus/ShipBuilder/ShipModules/Gun/gun_deck.tscn")
 const STORAGE = preload("res://Menus/ShipBuilder/ShipModules/Storage/storage.tscn")
 const SCOOP = preload("res://Menus/ShipBuilder/ShipModules/Scoop/scoop.tscn")
 const BRIDGE = preload("res://Menus/ShipBuilder/ShipModules/Bridge/bridge.tscn")
 const SHIELD = preload("res://Menus/ShipBuilder/ShipModules/Shield/shield.tscn")
+const HULL = preload("res://Menus/ShipBuilder/ShipModules/BaseTile/base_tile.tscn")
+# TODO: Dynamic selection of positions
 @onready var inventory_positions = {
 		PROPELLER: $Shop/PropellerMarker.global_position,
 		GUN: $Shop/GunMarker.global_position,
 		STORAGE: $Shop/StorageMarker.global_position,
 		SCOOP: $Shop/ScoopMarker.global_position,
 		BRIDGE: $Shop/BridgeMarker.global_position,
-		SHIELD: $Shop/ShieldMarker.global_position
+		SHIELD: $Shop/ShieldMarker.global_position,
+		HULL: $Shop/HullMarker.global_position
 	}
 
-var modules = ["Propeller", "Gun", "Storage", "Scoop", "Bridge", "Shield"]
+var modules = []
 
 signal inventory_spawned
 
 func _ready():
-	
+	#Dynamically build module list and load scenes
+	for module in ModuleStats.module_data:
+		modules.append(str(module))
+		# TODO: Dynamically load modules from file instead of preload manually
+		#load(ModuleStats.module_data[str(module)]["assets"]["scene"])
+
 	EventBus.item_sold.connect(_on_item_sold)
 	
 	$NotEnoughMoney.visible = false
@@ -50,6 +59,7 @@ func _on_timer_timeout():
 
 func SetPriceLabels():
 	for module_name in modules:
+		#print(module_name)
 		$ShopPrices.get_node(module_name + "Cost").text = str(ModuleStats.module_data[module_name]["price"], "$")
 
 
@@ -64,6 +74,7 @@ func SpawnItem(item, location):
 
 func _on_shop_zone_area_exited(area):
 	var item_name = area.get_parent().module_name
+	# TODO: Dynamically un fuck whatever this is
 	match item_name:
 		"Propeller":
 			SpawnItem(PROPELLER, inventory_positions[PROPELLER])
@@ -77,3 +88,5 @@ func _on_shop_zone_area_exited(area):
 			SpawnItem(BRIDGE, inventory_positions[BRIDGE])
 		"Shield":
 			SpawnItem(SHIELD, inventory_positions[SHIELD])
+		"HULL":
+			SpawnItem(HULL, inventory_positions[HULL])

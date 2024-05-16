@@ -1,4 +1,4 @@
-[gd_scene load_steps=3 format=3 uid="uid://cx0bvrie533nn"]
+[gd_scene load_steps=3 format=3 uid="uid://d0gti5ph2m6et"]
 
 [ext_resource type="Script" path="res://Menus/ShipBuilder/Ships/player_ship.gd" id="1_cjvty"]
 [ext_resource type="Script" path="res://Menus/ShipBuilder/Ships/Button.gd" id="2_t1k5t"]

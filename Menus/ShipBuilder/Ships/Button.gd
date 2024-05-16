@@ -7,5 +7,5 @@ func _ready():
 	add_child(button)
 
 func _button_pressed():
-	print("Hello world!")
+	#print("Hello world!")
 	$"..".load_ship()
