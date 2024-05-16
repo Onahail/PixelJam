@@ -1,32 +1,47 @@
-[gd_scene load_steps=8 format=3 uid="uid://l35y1g5j685o"]
+[gd_scene load_steps=10 format=3 uid="uid://l35y1g5j685o"]
 
 [ext_resource type="Script" path="res://Game/game.gd" id="1_ru1o3"]
+[ext_resource type="Script" path="res://Game/ParallaxBackground.gd" id="2_nh28l"]
 [ext_resource type="Texture2D" uid="uid://dnqn5fwhkb1w8" path="res://Game/Background_Level_1_Version_1.png" id="2_qwy0g"]
 [ext_resource type="Theme" uid="uid://cgkmqyuk7h3mi" path="res://ButtonThemes/disabled.tres" id="2_rdv2t"]
 [ext_resource type="AudioStream" uid="uid://dtmww5tol5oth" path="res://Music/Submarine_Rush.mp3" id="3_qn60e"]
-[ext_resource type="PackedScene" uid="uid://yfxrvicpswcc" path="res://Menus/ShipBuilder/ShipModules/Propeller/propeller.tscn" id="6_j8ouk"]
+[ext_resource type="Texture2D" uid="uid://wkrgmy5gdtbq" path="res://Game/Level_1_Background_Second_Layer_Placeholder.png" id="3_vwv2g"]
+[ext_resource type="PackedScene" uid="uid://g6j6gqdq64h3" path="res://Menus/ShipBuilder/ShipModules/Gun/gun_deck.tscn" id="7_4l8po"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_51ino"]
 bg_color = Color(0.063472, 0.716149, 0.375532, 1)
 
 [sub_resource type="Curve2D" id="Curve2D_wi1ho"]
 _data = {
-"points": PackedVector2Array(0, 0, 0, 0, -37, -44, 0, 0, 0, 0, 1192, -40, 0, 0, 0, 0, 1196, 678, 0, 0, 0, 0, -36, 675, 0, 0, 0, 0, -37, -44)
+"points": PackedVector2Array(0, 0, 0, 0, -19, -16, 0, 0, 0, 0, 1759, -16, 0, 0, 0, 0, 1745, 988, 0, 0, 0, 0, -22, 990, 0, 0, 0, 0, -19, -16)
 }
 point_count = 5
 
 [node name="Game" type="Node2D"]
 script = ExtResource("1_ru1o3")
 
-[node name="BackgroundLevel1Version1" type="Sprite2D" parent="."]
-position = Vector2(576, 326)
+[node name="ParallaxBackground" type="ParallaxBackground" parent="."]
+script = ExtResource("2_nh28l")
+
+[node name="BackgroundLevel1Version1" type="Sprite2D" parent="ParallaxBackground"]
+position = Vector2(872, 486)
+scale = Vector2(1.51302, 1.50154)
 texture = ExtResource("2_qwy0g")
 
+[node name="ParallaxLayer" type="ParallaxLayer" parent="ParallaxBackground"]
+position = Vector2(0, 2)
+motion_offset = Vector2(-40, 0)
+motion_mirroring = Vector2(3456, 0)
+
+[node name="Level1BackgroundSecondLayerPlaceholder" type="Sprite2D" parent="ParallaxBackground/ParallaxLayer"]
+position = Vector2(1728, 485)
+texture = ExtResource("3_vwv2g")
+
 [node name="ProgressBar" type="ProgressBar" parent="."]
-offset_left = 374.0
-offset_top = 558.0
-offset_right = 790.0
-offset_bottom = 585.0
+offset_left = 628.0
+offset_top = 897.0
+offset_right = 1044.0
+offset_bottom = 924.0
 theme_override_styles/fill = SubResource("StyleBoxFlat_51ino")
 step = 1.0
 
@@ -75,14 +90,13 @@ curve = SubResource("Curve2D_wi1ho")
 
 [node name="PathFollow2D" type="PathFollow2D" parent="Path2D"]
 unique_name_in_owner = true
-position = Vector2(-37, -44)
-rotation = 0.00325467
+position = Vector2(-19, -16)
 
 [node name="Timer" type="Timer" parent="."]
 autostart = true
 
-[node name="Propeller" parent="." instance=ExtResource("6_j8ouk")]
-position = Vector2(591, 326)
+[node name="Gun" parent="." instance=ExtResource("7_4l8po")]
+position = Vector2(893, 491)
 
 [connection signal="pressed" from="Victory/ReturnToSurface" to="." method="_on_return_to_surface_pressed"]
 [connection signal="timeout" from="Timer" to="." method="_on_timer_timeout"]

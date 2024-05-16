@@ -1,4 +1,5 @@
 5/11/2024: Game Design Document started. Mostly completed. Initial tasking: Create Main Menu, Ship Builder, Mission Select, Game, and Victory Screen scenes. 
 Add code to set up resources being gathered. Once resource bar is full, show victory screen.
-5/13/2024
-Added Save Functionality
+5/13/2024: Added Save Functionality
+5/14/2024: Implemented propeller and storage modules as well as a repair functionality
+5/14/2024: Almost done with the shop. 2 MAJOR BUGS that need to be fixed. You can sell items from the shop, can't sell items after placing another item.

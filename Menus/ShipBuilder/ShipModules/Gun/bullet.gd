@@ -4,15 +4,15 @@ var travelled_distance = 0
 
 func _physics_process(delta):
 	var direction = Vector2.RIGHT.rotated(rotation)
-	global_position += direction * Globals.BULLET_SPEED * delta
+	global_position += direction * ModuleStats.module_data["Gun"]["misc"]["velocity"] * delta
 	
-	travelled_distance += Globals.BULLET_SPEED * delta
-	if travelled_distance > Globals.BULLET_RANGE:
+	travelled_distance += ModuleStats.module_data["Gun"]["misc"]["range"] * delta
+	if travelled_distance > ModuleStats.module_data["Gun"]["misc"]["range"]:
 		queue_free()
 		
 
 func _on_body_entered(body):
 	queue_free()
-	body.take_damage(Globals.BULLET_DAMAGE)
+	body.take_damage(ModuleStats.module_data["Gun"]["misc"]["damage"])
 	
 
