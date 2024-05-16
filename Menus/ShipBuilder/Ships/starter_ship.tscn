@@ -5,18 +5,19 @@
 [node name="BaseShip" type="Node2D" groups=["droppable"]]
 
 [node name="BaseTile" parent="." instance=ExtResource("1_jpcx5")]
+position = Vector2(-113, 15)
 
 [node name="BaseTile2" parent="." instance=ExtResource("1_jpcx5")]
-position = Vector2(76, -32)
+position = Vector2(-37, 47)
 
 [node name="BaseTile3" parent="." instance=ExtResource("1_jpcx5")]
-position = Vector2(0, -64)
+position = Vector2(115, -17)
 
 [node name="BaseTile4" parent="." instance=ExtResource("1_jpcx5")]
-position = Vector2(-76, -32)
+position = Vector2(-37, -17)
 
 [node name="BaseTile5" parent="." instance=ExtResource("1_jpcx5")]
-position = Vector2(76, -96)
+position = Vector2(39, 15)
 
 [node name="BaseTile6" parent="." instance=ExtResource("1_jpcx5")]
-position = Vector2(152, -64)
+position = Vector2(39, -49)

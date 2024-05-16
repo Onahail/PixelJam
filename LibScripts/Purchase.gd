@@ -1,5 +1,9 @@
+"""
+Handles all aspects of purchasing ship modules in the shop.
+"""
+
 extends Node2D
-class_name Draggable
+class_name Purchase
 
 var draggable = false
 var purchased = false
@@ -13,8 +17,8 @@ var drop_point
 var mouseOverBody = false
 
 #PURCHASING
-var price = 10 #default
-
+var price = null #default
+@export var module_name = "Default"
 
 	
 func _process(_delta):
@@ -31,16 +35,14 @@ func _process(_delta):
 		elif Input.is_action_just_released("leftclick"):
 			scale = Vector2(1,1)
 			Globals.is_dragging = false
-			if CanAfford():
+			if EligibleForPurchase():
 				CalculateDropPosition()
 			else:
 				DeleteItem()
 	if Input.is_action_just_pressed("rightclick")  and draggable:
-			print("Global Position: ", global_position)
-			print("Shop Position: ", shopPos)
 			if global_position != shopPos:
 				Globals.PLAYER_CURRENCY += price
-				EventBus.item_sold.emit()
+				EventBus.item_sold.emit(module_name)
 				DeleteItem()
 				
 func CalculateDropPosition():
@@ -54,8 +56,9 @@ func CalculateDropPosition():
 				drop_point = point
 		tween.tween_property(self, "global_position", drop_point.global_position,0.2).set_ease(Tween.EASE_OUT)
 		body_ref.modulate = Color(1,1,1,1)
-		Globals.PLAYER_CURRENCY -= Globals.purchase_price
+		Globals.PLAYER_CURRENCY -= price
 		purchased = true
+		EventBus.item_purchased.emit(module_name)
 	else:
 		DeleteItem()
 
@@ -94,10 +97,11 @@ func _on_area_2d_body_exited(body):
 			is_inside_droppable = false
 		body.modulate = Color(1,1,1,1)
 
-func CanAfford():
-	Globals.purchase_price = price
-	Globals.purchased_module = true
-	if Globals.purchase_price > Globals.PLAYER_CURRENCY:
-		Globals.insufficient_money = true
+func EligibleForPurchase():
+	if price > Globals.PLAYER_CURRENCY:
+		EventBus.item_too_expensive.emit()
+		return false
+	if Globals.modulesOnShip[module_name] == ModuleStats.module_data[module_name]["max_allowable"]:
+		EventBus.too_many_modules.emit(module_name)
 		return false
 	return true

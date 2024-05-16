@@ -3,7 +3,7 @@ extends Node
 var module_data = {
 	"Propeller": {
 		"health": 50,
-		"price": 1,
+		"price": 250,
 		"repair_time": 3,
 		"min_allowable": 1,
 		"max_allowable": 2,
@@ -22,7 +22,7 @@ var module_data = {
 		"min_allowable": 1,
 		"max_allowable": 4,
 		"misc": {
-			"damage": 5,
+			"damage": 1,
 			"fire_rate": 0.2,
 			"range": 1200,
 			"velocity": 1000
@@ -64,6 +64,7 @@ var module_data = {
 		"min_allowable": 1,
 		"max_allowable": 4,
 		"misc": {
+    			"collection_rate": 50
 		},
 		"assets": {
 			"scene": "res://Menus/ShipBuilder/ShipModules/Scoop/scoop.tscn"
