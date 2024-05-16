@@ -39,11 +39,14 @@ func _process(_delta):
 				CalculateDropPosition()
 			else:
 				DeleteItem()
-	if Input.is_action_just_pressed("rightclick")  and draggable:
-			if global_position != shopPos:
-				Globals.PLAYER_CURRENCY += price
-				EventBus.item_sold.emit(module_name)
-				DeleteItem()
+	
+	if Input.is_action_just_pressed("rightclick"):
+		print(shopPos)
+		print(global_position)
+		if global_position != shopPos:
+			Globals.PLAYER_CURRENCY += price
+			EventBus.item_sold.emit(module_name)
+			DeleteItem()
 				
 func CalculateDropPosition():
 	if is_inside_droppable:

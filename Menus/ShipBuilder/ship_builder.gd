@@ -41,6 +41,9 @@ func _ready():
 	$UI/Information/NotEnoughMoney.visible = false
 	SpawnInventory(inventory_positions)
 	SetPriceLabels()
+	
+	$PlayerShip.load_ship(true)
+	
 func _process(_delta):
 	$UI/Information/Currency.text = str("Available Money:\n", Globals.PLAYER_CURRENCY)
 	$UI/Information/ShipPartNumbers.text = str(
@@ -78,7 +81,7 @@ func _on_timer_timeout():
 
 func SetPriceLabels():
 	for module_name in Globals.modulesOnShip:
-		$UI/ShopPrices.get_node(module_name + "Cost").text = str(ModuleStats.module_data[module_name]["price"], "$")
+		$UI/Shop/ShopPrices.get_node(module_name + "Cost").text = str(ModuleStats.module_data[module_name]["price"], "$")
 
 
 func SpawnInventory(inventory):

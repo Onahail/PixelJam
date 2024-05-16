@@ -1,7 +1,9 @@
-extends StaticBody2D
+extends Module
+
 
 func _ready():
 	$AnimatedSprite2D.play("base_tile_animation")
+	module_name = "Hull"
 
 func  _process(_delta):
 	pass
