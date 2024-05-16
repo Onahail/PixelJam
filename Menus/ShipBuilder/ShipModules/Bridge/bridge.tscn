@@ -1,15 +1,15 @@
-[gd_scene load_steps=6 format=3 uid="uid://dxkgwwaujmugp"]
+[gd_scene load_steps=7 format=3 uid="uid://dxkgwwaujmugp"]
 
 [ext_resource type="Script" path="res://Menus/ShipBuilder/ShipModules/Bridge/bridge.gd" id="1_eicod"]
 [ext_resource type="Texture2D" uid="uid://bwfybmlipdeg6" path="res://Placeholder Assets/Bridge_Module_Placeholder.png" id="2_nvqqs"]
 [ext_resource type="Texture2D" uid="uid://dv5kqq4cpev0t" path="res://UI_Elements/Power_bar_empty.PNG" id="3_2anky"]
 [ext_resource type="Texture2D" uid="uid://bisvr7tt8gtyp" path="res://UI_Elements/Power_Bar_full_upsidedown.png" id="4_0u1o8"]
-
-[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_2thw3"]
-bg_color = Color(0, 0, 0.847059, 1)
+[ext_resource type="Texture2D" uid="uid://c8jhabk1jhk5o" path="res://UI_Elements/Repair_Progress_Bar_Empty.png" id="5_d387v"]
+[ext_resource type="Texture2D" uid="uid://bhyufmy42kn4m" path="res://UI_Elements/Repair_Progress_Bar_Full.png" id="6_qpbc4"]
 
 [node name="Bridge" type="Node2D"]
 script = ExtResource("1_eicod")
+module_name = null
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
 texture = ExtResource("2_nvqqs")
@@ -32,16 +32,17 @@ fill_mode = 8
 texture_under = ExtResource("3_2anky")
 texture_progress = ExtResource("4_0u1o8")
 
-[node name="RepairTimer" type="ProgressBar" parent="."]
-offset_left = -36.0
-offset_top = -47.0
-offset_right = 35.0
-offset_bottom = -37.0
-theme_override_styles/fill = SubResource("StyleBoxFlat_2thw3")
-max_value = 5.0
-show_percentage = false
-
 [node name="Timer" type="Timer" parent="."]
+
+[node name="RepairTimer" type="TextureProgressBar" parent="."]
+offset_left = -22.0
+offset_top = -22.0
+offset_right = 22.0
+offset_bottom = 22.0
+step = 0.01
+fill_mode = 4
+texture_under = ExtResource("5_d387v")
+texture_progress = ExtResource("6_qpbc4")
 
 [connection signal="body_entered" from="Area2D" to="." method="_on_area_2d_body_entered"]
 [connection signal="body_exited" from="Area2D" to="." method="_on_area_2d_body_exited"]

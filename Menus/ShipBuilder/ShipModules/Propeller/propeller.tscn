@@ -4,6 +4,8 @@
 [ext_resource type="Script" path="res://Menus/ShipBuilder/ShipModules/Propeller/propeller.gd" id="1_h5u48"]
 [ext_resource type="Texture2D" uid="uid://dv5kqq4cpev0t" path="res://UI_Elements/Power_bar_empty.PNG" id="3_4wt45"]
 [ext_resource type="Texture2D" uid="uid://bisvr7tt8gtyp" path="res://UI_Elements/Power_Bar_full_upsidedown.png" id="4_vhb5o"]
+[ext_resource type="Texture2D" uid="uid://c8jhabk1jhk5o" path="res://UI_Elements/Repair_Progress_Bar_Empty.png" id="5_lbdij"]
+[ext_resource type="Texture2D" uid="uid://bhyufmy42kn4m" path="res://UI_Elements/Repair_Progress_Bar_Full.png" id="6_hhm5b"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_5mrw3"]
 atlas = ExtResource("1_064bq")
@@ -26,12 +28,6 @@ animations = [{
 "name": &"propeller_spin",
 "speed": 16.0
 }]
-
-[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_mly1c"]
-bg_color = Color(0.0862745, 1, 0, 1)
-
-[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_gxggf"]
-bg_color = Color(0, 0, 0.847059, 1)
 
 [node name="Propeller" type="Node2D"]
 script = ExtResource("1_h5u48")
@@ -60,26 +56,17 @@ fill_mode = 8
 texture_under = ExtResource("3_4wt45")
 texture_progress = ExtResource("4_vhb5o")
 
-[node name="HealthBar" type="ProgressBar" parent="."]
-visible = false
-offset_left = -30.0
-offset_top = -30.0
-offset_right = 30.0
-offset_bottom = -26.0
-theme_override_styles/fill = SubResource("StyleBoxFlat_mly1c")
-value = 100.0
-show_percentage = false
-
 [node name="Timer" type="Timer" parent="."]
 
-[node name="RepairTimer" type="ProgressBar" parent="."]
-offset_left = -36.0
-offset_top = -47.0
-offset_right = 35.0
-offset_bottom = -37.0
-theme_override_styles/fill = SubResource("StyleBoxFlat_gxggf")
-max_value = 5.0
-show_percentage = false
+[node name="RepairTimer" type="TextureProgressBar" parent="."]
+offset_left = -22.0
+offset_top = -22.0
+offset_right = 22.0
+offset_bottom = 22.0
+step = 0.01
+fill_mode = 4
+texture_under = ExtResource("5_lbdij")
+texture_progress = ExtResource("6_hhm5b")
 
 [connection signal="body_entered" from="Area2D" to="." method="_on_area_2d_body_entered"]
 [connection signal="body_exited" from="Area2D" to="." method="_on_area_2d_body_exited"]

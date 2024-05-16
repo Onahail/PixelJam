@@ -2,10 +2,11 @@ extends Module
 
 var animation = "fill_stage_1"
 
+
 func _ready():
 	
-	
-	health = Globals.STORAGE_HEALTH
+	module_name = "Storage"
+	health = ModuleStats.module_data[module_name]["health"]
 	price = Globals.STORAGE_PRICE
 	
 	$AnimatedSprite2D.play(animation)

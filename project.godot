@@ -18,7 +18,18 @@ config/icon="res://icon.svg"
 [autoload]
 
 Globals="*res://LibScripts/Globals.gd"
-Purchasing="*res://LibScripts/Purchasing.gd"
+EventBus="*res://LibScripts/event_bus.gd"
+ModuleStats="*res://LibScripts/ModuleStats.gd"
+
+[display]
+
+window/size/viewport_width=1728
+window/size/viewport_height=972
+mouse_cursor/custom_image="res://UI_Elements/Default_Cursor.png"
+
+[editor_plugins]
+
+enabled=PackedStringArray("res://addons/Todo_Manager/plugin.cfg")
 
 [input]
 

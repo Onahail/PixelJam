@@ -7,10 +7,10 @@
 script = ExtResource("1_tm4h6")
 
 [node name="ShipBuilder" type="Button" parent="."]
-offset_left = 374.0
-offset_top = 161.0
-offset_right = 728.0
-offset_bottom = 266.0
+offset_left = 709.0
+offset_top = 358.0
+offset_right = 1063.0
+offset_bottom = 463.0
 text = "Ship Builder
 "
 
@@ -22,18 +22,18 @@ offset_bottom = 144.0
 text = "Exit Game"
 
 [node name="MissionSelect" type="Button" parent="."]
-offset_left = 373.0
-offset_top = 332.0
-offset_right = 727.0
-offset_bottom = 437.0
+offset_left = 708.0
+offset_top = 556.0
+offset_right = 1062.0
+offset_bottom = 661.0
 text = "Mission Select
 "
 
 [node name="Label" type="Label" parent="."]
-offset_left = 347.0
-offset_top = 23.0
-offset_right = 756.0
-offset_bottom = 92.0
+offset_left = 682.0
+offset_top = 83.0
+offset_right = 1091.0
+offset_bottom = 152.0
 theme_override_font_sizes/font_size = 50
 text = "GAME_TITLE_TBD"
 

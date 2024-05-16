@@ -21,6 +21,7 @@ var PLAYER_CURRENCY = 200
 #PURCHASING
 var purchased_module = false
 var purchase_price
+var insufficient_money = false
 
 #ENEMIES
 var ENEMY_MOVE_SPEED = 100
@@ -32,11 +33,15 @@ var ENEMY_DAMAGE = 5
 var BULLET_DAMAGE = 1
 var BULLET_SPEED = 1000
 var BULLET_RANGE = 1200
+var SHOOTING_SPEED = 0.2
+
+#SHIP STATS
+var SPEED = 250
+var REPAIR_TIME = 3
 
 #MISC
 var VIEWPORT_CENTER
 var is_dragging = false
-var REPAIR_TIME = 3
 
 #HEALTH
 var GUN_TURRET_HEALTH = 20
@@ -47,8 +52,8 @@ var SCOOP_HEALTH = 20
 var SHIELD_HEALTH = 20
 
 #PRICES
-var GUN_TURRET_PRICE = 1
-var PROPELLER_PRICE = 2
+var GUN_TURRET_PRICE = 250
+#var PROPELLER_PRICE = 2
 var STORAGE_PRICE = 3
 var BRIDGE_PRICE = 4
 var SCOOP_PRICE = 5

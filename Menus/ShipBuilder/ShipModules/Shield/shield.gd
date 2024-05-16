@@ -1,9 +1,11 @@
 extends Module
 
+
 func _ready():
 	
 	#CHANGE VALUES
-	health = Globals.SHIELD_HEALTH
+	module_name = "Shield"
+	health = ModuleStats.module_data[module_name]["health"]
 	price = Globals.SHIELD_PRICE
 	
 	#CALL ORIGINAL

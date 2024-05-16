@@ -4,25 +4,23 @@ class_name Module
 var repairable = preload("res://LibScripts/Repairable.gd").new()
 var currentlyRepairing = false
 
-var health = 100 #Default
-var repair = Globals.REPAIR_TIME
+@export var module_name = "Default"
+
+#var repair = ModuleStats.module_data[module_name]["repair_time"]
+var health = 0
+var repair_time = 0
 
 func _ready():
 	
 	moduleInit()
 	
-	#var shipbuilder = get_tree().get_root().find_node("ShipBuilder")
-	#print(shipbuilder)
-	#print("Hello")
-	#purchased_module.connect(shipbuilder._on_module_purchased)
-	
 	if get_tree().current_scene.name != "Game":
 		$TextureHealthBar.visible = false
-		initialPos = global_position
-		shopPos = global_position
 	
-
-func _physics_process(delta):
+	
+	shopPos = global_position
+	
+func _physics_process(_delta):
 	if get_tree().current_scene.name != "Game":
 		return
 
@@ -52,6 +50,8 @@ func _on_area_2d_mouse_exited():
 		repairable.repair_cancelled.emit()
 
 
+
+
 func _on_hp_depleted():
 	#FOR USAGE IF NEEDED
 	pass
@@ -71,13 +71,21 @@ func _on_repair_cancelled():
 	currentlyRepairing = false
 	
 func moduleInit():
+	print("ModuleInit called")
+	health = ModuleStats.module_data[module_name]["health"]
+	price = ModuleStats.module_data[module_name]["price"]
+	repair_time = ModuleStats.module_data[module_name]["repair_time"]
+	
 	$TextureHealthBar.max_value = health
 	$TextureHealthBar.value = health
 	repairable.currentHP = health
 	repairable.maxHP = health	
-	$RepairTimer.max_value = repair
-	$RepairTimer.value = repair
+	$RepairTimer.max_value = repair_time
+	$RepairTimer.value = repair_time
 	$RepairTimer.visible = false
 	repairable.hp_depleted.connect(_on_hp_depleted)
 	repairable.repair_toggled.connect(_on_repair_toggled)
 	repairable.repair_cancelled.connect(_on_repair_cancelled)
+	
+	
+	

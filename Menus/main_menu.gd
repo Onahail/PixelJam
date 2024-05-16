@@ -23,8 +23,8 @@ func _ready():
 			Globals.ship_config[i].append(0)
 	#Load Default Ship if no ship file
 	if(savefile == null):
-		var centerheight = Globals.ship_max_height / 2
-		var centerwidth = Globals.ship_max_width / 2
+		var centerheight:float = float(Globals.ship_max_height) / 2
+		var centerwidth:float = float(Globals.ship_max_width) / 2
 		Globals.ship_config[centerheight][centerwidth] = Globals.ship_hull
 		Globals.ship_config[centerheight][centerwidth+1] = Globals.ship_hull
 		Globals.ship_config[centerheight][centerwidth-1] = Globals.ship_hull

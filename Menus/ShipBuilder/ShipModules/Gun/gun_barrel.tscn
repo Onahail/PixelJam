@@ -17,3 +17,7 @@ texture = ExtResource("2_sa4ga")
 [node name="ShootPoint" type="Marker2D" parent="Gun"]
 position = Vector2(-0.167662, -28.0002)
 rotation = -1.57424
+
+[node name="Timer" type="Timer" parent="."]
+
+[connection signal="timeout" from="Timer" to="." method="_on_timer_timeout"]

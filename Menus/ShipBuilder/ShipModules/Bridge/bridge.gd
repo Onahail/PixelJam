@@ -1,9 +1,11 @@
 extends Module
 
+
 func _ready():
 	
 	#CHANGE VALUES
-	health = Globals.BRIDGE_HEALTH
+	module_name = "Bridge"
+	health = ModuleStats.module_data[module_name]["health"]
 	price = Globals.BRIDGE_PRICE
 	
 	#CALL ORIGINAL

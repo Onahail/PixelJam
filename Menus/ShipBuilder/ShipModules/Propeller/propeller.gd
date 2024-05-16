@@ -5,8 +5,7 @@ var animation = "propeller_spin"
 func _ready():
 	
 	#CHANGE VALUES
-	health = Globals.PROPELLER_HEALTH
-	price = Globals.PROPELLER_PRICE
+	module_name = "Propeller"
 	$AnimatedSprite2D.play(animation)
 	
 	#CALL ORIGINAL
