@@ -1,6 +1,6 @@
 extends Resource
 class_name Repairable
-
+#test thing?
 @export var currentHP: int = 100
 @export var maxHP: int = 100
 
