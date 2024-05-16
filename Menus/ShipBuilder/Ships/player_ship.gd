@@ -4,7 +4,7 @@ extends Node2D
 #
 
 func load_ship(isshipbuilder :bool = false):
-	print("LOAD SHIP CALLED")
+	#print("LOAD SHIP CALLED")
 	#Calculate Screen Center
 	var centerx = ($".".get_viewport().get_visible_rect().size.x) / 2
 	var centery = ($".".get_viewport().get_visible_rect().size.y) / 2
@@ -21,7 +21,7 @@ func load_ship(isshipbuilder :bool = false):
 	#Load Globals.ship_config
 	for i in Globals.ship_max_height:
 		for j in Globals.ship_max_width:
-			print(i, ",", j, " - ", Globals.ship_config[j][i])
+			#print(i, ",", j, " - ", Globals.ship_config[j][i])
 			if(Globals.ship_config[j][i] == "0"):
 				
 				continue
@@ -41,13 +41,13 @@ func load_ship(isshipbuilder :bool = false):
 				shipmod.global_position = spawnvector
 				#Attach Module to Ship
 				$".".add_child(shipmod)
-				print("Attempted to spawn ship module ", Globals.ship_config[j][i], " at position ", xposition, "," , yposition)
+				#print("Attempted to spawn ship module ", Globals.ship_config[j][i], " at position ", xposition, "," , yposition)
 				if(isshipbuilder and Globals.ship_config[j][i] != "Hull"):
 					module = load(ModuleStats.module_data["Hull"]["assets"]["scene"])
 					shipmod = module.instantiate()
 					shipmod.global_position = spawnvector
 					$".".add_child(shipmod)
-					print("Attempted to spawn Hull under ship module ", Globals.ship_config[j][i], " at position ", xposition, "," , yposition)
+					#print("Attempted to spawn Hull under ship module ", Globals.ship_config[j][i], " at position ", xposition, "," , yposition)
 
 	
 	

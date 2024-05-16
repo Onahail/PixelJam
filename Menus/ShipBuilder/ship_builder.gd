@@ -45,6 +45,7 @@ func _ready():
 	$PlayerShip.load_ship(true)
 	
 func _process(_delta):
+	
 	$UI/Information/Currency.text = str("Available Money:\n", Globals.PLAYER_CURRENCY)
 	$UI/Information/ShipPartNumbers.text = str(
 		"Propellers: ", Globals.modulesOnShip["Propeller"], "\n",
@@ -111,3 +112,11 @@ func _on_shop_zone_area_exited(area):
 			SpawnItem(SHIELD, inventory_positions[SHIELD])
 		"HULL":
 			SpawnItem(HULL, inventory_positions[HULL])
+
+
+func _on_shop_zone_mouse_entered():
+	Globals.MOUSE_IN_SHOP = true
+
+
+func _on_shop_zone_mouse_exited():
+	Globals.MOUSE_IN_SHOP = false

@@ -20,6 +20,9 @@ var mouseOverBody = false
 var price = null #default
 @export var module_name = "Default"
 
+func _ready():
+	shopPos = ModuleStats.module_data[module_name]["assets"]["shopPos"]
+
 	
 func _process(_delta):
 	if get_tree().current_scene.name != "ShipBuilder":
@@ -40,9 +43,7 @@ func _process(_delta):
 			else:
 				DeleteItem()
 	
-	if Input.is_action_just_pressed("rightclick"):
-		print(shopPos)
-		print(global_position)
+	if Input.is_action_just_pressed("rightclick") and !Globals.MOUSE_IN_SHOP and draggable:
 		if global_position != shopPos:
 			Globals.PLAYER_CURRENCY += price
 			EventBus.item_sold.emit(module_name)

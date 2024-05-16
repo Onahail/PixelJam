@@ -36,6 +36,7 @@ var REPAIR_TIME = 3
 #MISC
 var VIEWPORT_CENTER
 var is_dragging = false
+var MOUSE_IN_SHOP = false
 
 #SHIP PARTS
 var modulesOnShip = {
