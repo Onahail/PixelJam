@@ -11,6 +11,7 @@ var repair_time = null
 func _ready():
 	
 	moduleInit()
+	$TextureHealthBar.z_index = 2
 	
 	if get_tree().current_scene.name != "Game":
 		$TextureHealthBar.visible = false
@@ -55,7 +56,6 @@ func _on_hp_depleted():
 	Globals.modulesOnShip[module_name] -= 1
 	Globals.calc_collection_rates()
 	self.hide()
-	pass
 
 func _on_repair_timer_timeout():
 	Input.set_custom_mouse_cursor(Globals.DEFAULT_CURSOR)

@@ -48,7 +48,7 @@ func _ready():
 					for i in Globals.ship_max_width:
 						Globals.ship_config[int(saveline[1])][i] = saveline[i+2]
 				elif(saveline[0]=="cash"):
-					Globals.cash = int(saveline[1])
+					Globals.PLAYER_CURRENCY = int(saveline[1])
 					
 
 func _on_ship_builder_pressed():
@@ -82,7 +82,7 @@ func _on_exit_game_pressed():
 	#Save Cash
 	csvline = []
 	csvline.append("cash")
-	csvline.append(Globals.cash)
+	csvline.append(Globals.PLAYER_CURRENCY)
 	savefile.store_csv_line(csvline)
 	#Remove backup save if no errors
 	DirAccess.remove_absolute (Globals.backupsavelocation)

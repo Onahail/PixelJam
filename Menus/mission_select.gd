@@ -1,14 +1,20 @@
 extends Node2D
 
-func _ready():
-	pass
-	#var globals = get_node("res://LibScripts/Globals.gd")
+var SCALE_START = 1
+var SCALE_END = 10
 
+func _ready():
+	%DepthSlider.value = Globals.DEPTH
+	
+func _process(_delta):
+	%DepthDisplay.text = str("Depth:\n", %DepthSlider.value)
+	
+	
 func _on_back_pressed():
 	get_tree().change_scene_to_file("res://Menus/main_menu.tscn")
 
 func _on_mission_start_pressed():
 	get_tree().change_scene_to_file("res://Game/game.tscn")
 
-func _on_depth_selection_pressed():
-	pass
+func _on_v_slider_drag_ended(value_changed):
+	Globals.DEPTH = %DepthSlider.value

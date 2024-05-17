@@ -1,7 +1,7 @@
 extends CharacterBody2D
 
 @onready var currentHP = Globals.ENEMY_HEALTH
-var dart_speed = Globals.SPEED + 100
+var dart_speed = Globals.SPEED * 2
 var normal_speed = Globals.SPEED
 var darting = false
 var left = Vector2(-1, 0)
@@ -63,12 +63,12 @@ func _on_animated_sprite_2d_animation_finished():
 		damaged = false
 	if darting == true:
 		rand_num = int(randf_range(0,5))
-		dart_speed = int(randf_range(Globals.SPEED+100,Globals.SPEED+300))
+		dart_speed = int(randf_range(Globals.SPEED * 2, Globals.SPEED * 3))
 		darting = false
 	elif darting == false:
 		if $Timer.time_left <= 0:
 			$AnimatedSprite2D.play("idle")
-			$Timer.wait_time = randf_range(0, 2)
+			$Timer.wait_time = randf_range(0.2, 2)
 			$Timer.start()
 	if dead == true:
 		queue_free()

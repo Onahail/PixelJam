@@ -79,7 +79,7 @@ curve = SubResource("Curve2D_ne8vy")
 
 [node name="JellyfishPath" type="PathFollow2D" parent="JellyfishSpawns"]
 unique_name_in_owner = true
-position = Vector2(1770.97, 102.973)
+position = Vector2(1770.97, 102.97)
 rotation = -1.56948
 progress = 1514.01
 

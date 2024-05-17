@@ -7,6 +7,7 @@ const BULLET = preload("res://Menus/ShipBuilder/ShipModules/Gun/bullet.tscn")
 func _ready():
 	if get_tree().current_scene.name == "ShipBuilder":
 		global_rotation = -0.6
+	self.z_index = 3
 		
 
 func _physics_process(_delta):

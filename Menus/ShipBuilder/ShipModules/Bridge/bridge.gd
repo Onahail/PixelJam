@@ -11,5 +11,7 @@ func _ready():
 	
 func _on_hp_depleted():
 	#TODO Bridge Destroyed
+	print("Bridge Destroyed")
 	super._on_hp_depleted()
+	Globals.GameLoss()
 	pass
