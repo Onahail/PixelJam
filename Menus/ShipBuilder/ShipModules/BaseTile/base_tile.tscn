@@ -46,7 +46,7 @@ animations = [{
 "speed": 5.0
 }]
 
-[node name="BaseTile" type="StaticBody2D" groups=["droppable"]]
+[node name="BaseTile" type="StaticBody2D" groups=["droppable", "hull"]]
 script = ExtResource("1_qxjh6")
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]

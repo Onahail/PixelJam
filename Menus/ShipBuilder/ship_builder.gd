@@ -36,6 +36,7 @@ func _ready():
 	EventBus.item_purchased.connect(_on_item_purchased)
 	EventBus.item_too_expensive.connect(_on_item_too_expensive)
 	EventBus.too_many_modules.connect(_on_too_many_modules)
+	EventBus.module_stacked.connect(_on_module_stacked)
 	
 	$UI/Information/TooManyModules.visible = false
 	$UI/Information/NotEnoughMoney.visible = false
@@ -68,6 +69,11 @@ func _on_too_many_modules(module):
 	$UI/Information/TooManyModules.text = str("Exceeded maximum allowance of the ", module, " module.")
 	$Timer.start()
 	
+func _on_module_stacked(module):
+	print("Module stacked")
+	$UI/Information/TooManyModules.visible = true
+	$UI/Information/TooManyModules.text = str("Unable to place ", module, " on top of another module.")
+	$Timer.start()
 
 func _on_back_pressed():
 	get_tree().change_scene_to_file("res://Menus/main_menu.tscn")
@@ -78,8 +84,7 @@ func _on_timer_timeout():
 
 func SetPriceLabels():
 	for module_name in Globals.modulesOnShip:
-		$UI/ShopPrices.get_node(module_name + "Cost").text = str(ModuleStats.module_data[module_name]["price"], "$")
-
+		$UI/Shop/ShopPrices.get_node(module_name + "Cost").text = str(ModuleStats.module_data[module_name]["price"], "$")
 
 func SpawnInventory(inventory):
 	for item in inventory:
@@ -106,5 +111,5 @@ func _on_shop_zone_area_exited(area):
 			SpawnItem(BRIDGE, inventory_positions[BRIDGE])
 		"Shield":
 			SpawnItem(SHIELD, inventory_positions[SHIELD])
-		"HULL":
+		"Hull":
 			SpawnItem(HULL, inventory_positions[HULL])
