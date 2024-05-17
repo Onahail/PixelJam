@@ -16,7 +16,7 @@ var module_data = {
 		}
 	},
 	"Gun": {
-		"health": 15,
+		"health": 16,
 		"price": 2,
 		"repair_time": 3,
 		"min_allowable": 1,
@@ -83,7 +83,7 @@ var module_data = {
 		}
 	},
 	"Hull": {
-		"health": 1,
+		"health": 5,
 		"price": 7,
 		"repair_time": 3,
 		"min_allowable": 1,

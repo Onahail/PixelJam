@@ -52,6 +52,7 @@ func _on_repair_completed():
 
 func _on_hp_depleted():
 	$Area2D.set_collision_mask_value(4, false)
+	self.hide()
 	pass
 
 func _on_repair_timer_timeout():
