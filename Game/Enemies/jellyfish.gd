@@ -18,6 +18,12 @@ var rand_collision = 9
 
 
 func _physics_process(_delta):
+	if Input.is_action_pressed("leftclick") and Globals.MOUSE_ON_ENEMY:
+		Input.set_custom_mouse_cursor(Globals.CROSSHAIR_CURSOR)
+	if Input.is_action_just_released("leftclick") and Globals.MOUSE_ON_ENEMY:
+		Input.set_custom_mouse_cursor(Globals.DEFAULT_CURSOR)
+	
+	
 	if collided_with_ship == true:
 		velocity = left * 100
 	elif not damaged:
@@ -70,3 +76,12 @@ func _on_animated_sprite_2d_animation_finished():
 
 func _on_timer_timeout():
 			darting = true
+
+
+func _on_mouse_entered():
+	Globals.MOUSE_ON_ENEMY = true
+
+
+func _on_mouse_exited():
+	Globals.MOUSE_ON_ENEMY = false
+	Input.set_custom_mouse_cursor(Globals.DEFAULT_CURSOR)

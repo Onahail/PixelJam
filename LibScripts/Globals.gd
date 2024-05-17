@@ -11,11 +11,16 @@ var savelocation = "user://savegame.csv"
 var backupsavelocation = "user://backupsavegame.csv"
 var running = false
 
+#CURSORS
+var REPAIR_CURSOR = preload("res://UI_Elements/Repair_Cursor.png")
+var CROSSHAIR_CURSOR = preload("res://UI_Elements/Crosshair_Cursor.png")
+var DEFAULT_CURSOR = preload("res://UI_Elements/Default_Cursor.png")
+
 #COLLECTION
 var COLLECTION_RATE = 0
 var RESOURCES_COLLECTED = 0
 var MAX_RESOURCES = 100
-
+	
 #CURRENCY
 var PLAYER_CURRENCY = 200
 
@@ -29,6 +34,7 @@ var ENEMY_MOVE_SPEED = 220
 var ENEMY_HEALTH = 5
 var SPAWN_RATE = 1
 var ENEMY_DAMAGE = 5
+var MOUSE_ON_ENEMY = false
 
 #SHIP STATS
 var SPEED = 200

@@ -56,15 +56,17 @@ func _on_hp_depleted():
 	pass
 
 func _on_repair_timer_timeout():
+	Input.set_custom_mouse_cursor(Globals.DEFAULT_CURSOR)
 	repairable.repairDamage(health)
 	$RepairProgressBar.visible = false
 	
 func _on_repair_toggled():
-	print("Repairing")
+	Input.set_custom_mouse_cursor(Globals.REPAIR_CURSOR)
 	currentlyRepairing = true
 	$RepairProgressBar.visible = true
 	
 func _on_repair_cancelled():
+	Input.set_custom_mouse_cursor(Globals.DEFAULT_CURSOR)
 	$RepairTimer.stop()
 	$RepairProgressBar.visible = false
 	currentlyRepairing = false
