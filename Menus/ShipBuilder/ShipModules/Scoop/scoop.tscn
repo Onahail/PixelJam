@@ -1,7 +1,7 @@
 [gd_scene load_steps=7 format=3 uid="uid://bfeoqql17huda"]
 
-[ext_resource type="Texture2D" uid="uid://c5iidqitjndtq" path="res://Placeholder Assets/Scoop_Module_Placeholder.png" id="1_da63k"]
 [ext_resource type="Script" path="res://Menus/ShipBuilder/ShipModules/Scoop/scoop.gd" id="1_uqme5"]
+[ext_resource type="Texture2D" uid="uid://l5iou13hyv36" path="res://Menus/ShipBuilder/ShipModules/Scoop/Scoop_Deck_92x92.png" id="2_2rl5t"]
 [ext_resource type="Texture2D" uid="uid://dv5kqq4cpev0t" path="res://UI_Elements/Power_bar_empty.PNG" id="2_c3np8"]
 [ext_resource type="Texture2D" uid="uid://bisvr7tt8gtyp" path="res://UI_Elements/Power_Bar_full_upsidedown.png" id="3_uvkr4"]
 [ext_resource type="Texture2D" uid="uid://c8jhabk1jhk5o" path="res://UI_Elements/Repair_Progress_Bar_Empty.png" id="5_rwifl"]
@@ -11,9 +11,12 @@
 script = ExtResource("1_uqme5")
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
-texture = ExtResource("1_da63k")
+position = Vector2(0, 18)
+texture = ExtResource("2_2rl5t")
 
 [node name="Area2D" type="Area2D" parent="."]
+collision_layer = 4
+collision_mask = 14
 
 [node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="Area2D"]
 position = Vector2(-1, -7)
@@ -25,6 +28,7 @@ offset_top = 32.0
 offset_right = 138.0
 offset_bottom = 96.0
 rotation = -3.14027
+scale = Vector2(1, 1.00402)
 fill_mode = 8
 texture_under = ExtResource("2_c3np8")
 texture_progress = ExtResource("3_uvkr4")

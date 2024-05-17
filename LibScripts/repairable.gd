@@ -16,6 +16,7 @@ func applyDamage(damage):
 		currentHP = 0
 	
 func repairDamage(repairValue):
+	print("Repair Value: ", repairValue)
 	currentHP += repairValue
 	if currentHP > maxHP:
 		currentHP = maxHP

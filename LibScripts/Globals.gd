@@ -38,6 +38,7 @@ var REPAIR_TIME = 3
 var VIEWPORT_CENTER
 var is_dragging = false
 var MOUSE_IN_SHOP = false
+var INITIAL_LOAD = true
 
 #SHIP PARTS
 var modulesOnShip = {
@@ -49,3 +50,5 @@ var modulesOnShip = {
 	"Shield": 0
 }
 
+#DEBUG
+var COUNT = 0

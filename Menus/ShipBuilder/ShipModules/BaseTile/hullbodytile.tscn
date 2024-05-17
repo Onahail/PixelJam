@@ -1,0 +1,60 @@
+[gd_scene load_steps=9 format=3 uid="uid://cl15cxjbmox8d"]
+
+[ext_resource type="Script" path="res://Menus/ShipBuilder/ShipModules/BaseTile/hullbodytile.gd" id="1_e44j2"]
+[ext_resource type="Texture2D" uid="uid://bcpxsucjim2ak" path="res://Menus/ShipBuilder/ShipModules/BaseTile/Empty_Room_Doors_Opening_Spreadsheet_92x64.png" id="1_s6wso"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_tccar"]
+atlas = ExtResource("1_s6wso")
+region = Rect2(0, 0, 92, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_dje80"]
+atlas = ExtResource("1_s6wso")
+region = Rect2(92, 0, 92, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_powyi"]
+atlas = ExtResource("1_s6wso")
+region = Rect2(184, 0, 92, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_dwu1v"]
+atlas = ExtResource("1_s6wso")
+region = Rect2(276, 0, 92, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_jadru"]
+atlas = ExtResource("1_s6wso")
+region = Rect2(368, 0, 92, 64)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_nyq8i"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_tccar")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_dje80")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_powyi")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_dwu1v")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_jadru")
+}],
+"loop": true,
+"name": &"base_tile_animation",
+"speed": 5.0
+}]
+
+[node name="HullTile" type="StaticBody2D" groups=["droppable"]]
+collision_layer = 2
+collision_mask = 0
+script = ExtResource("1_e44j2")
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+sprite_frames = SubResource("SpriteFrames_nyq8i")
+animation = &"base_tile_animation"
+
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="."]
+position = Vector2(-1, -7)
+polygon = PackedVector2Array(-28, -23, 30, -23, 45, 7, 30, 37, -27, 37, -43, 7)

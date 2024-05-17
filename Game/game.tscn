@@ -6,7 +6,7 @@
 [ext_resource type="Theme" uid="uid://cgkmqyuk7h3mi" path="res://ButtonThemes/disabled.tres" id="2_rdv2t"]
 [ext_resource type="AudioStream" uid="uid://dtmww5tol5oth" path="res://Music/Submarine_Rush.mp3" id="3_qn60e"]
 [ext_resource type="Texture2D" uid="uid://wkrgmy5gdtbq" path="res://Game/Level_1_Background_Second_Layer_Placeholder.png" id="3_vwv2g"]
-[ext_resource type="PackedScene" uid="uid://g6j6gqdq64h3" path="res://Menus/ShipBuilder/ShipModules/Gun/gun_deck.tscn" id="7_4l8po"]
+[ext_resource type="PackedScene" uid="uid://d0gti5ph2m6et" path="res://Menus/ShipBuilder/Ships/player_ship.tscn" id="8_y7o76"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_51ino"]
 bg_color = Color(0.063472, 0.716149, 0.375532, 1)
@@ -111,9 +111,6 @@ position = Vector2(-19, -16)
 [node name="Timer" type="Timer" parent="."]
 autostart = true
 
-[node name="Gun" parent="." instance=ExtResource("7_4l8po")]
-position = Vector2(843, 489)
-
 [node name="JellyfishSpawns" type="Path2D" parent="."]
 curve = SubResource("Curve2D_ne8vy")
 
@@ -137,6 +134,8 @@ shape = SubResource("RectangleShape2D_ssbpd")
 [node name="CollisionShape2D3" type="CollisionShape2D" parent="KillBox"]
 position = Vector2(856, -111)
 shape = SubResource("RectangleShape2D_bwpcj")
+
+[node name="PlayerShip" parent="." instance=ExtResource("8_y7o76")]
 
 [connection signal="pressed" from="Victory/ReturnToSurface" to="." method="_on_return_to_surface_pressed"]
 [connection signal="timeout" from="Timer" to="." method="_on_timer_timeout"]

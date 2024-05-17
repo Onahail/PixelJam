@@ -12,8 +12,10 @@ var rand_num = 0
 var damaged = false
 var dead = false
 var collided_with_ship = false
+var rand_collision = 9
 
 #TODO Set random collision layer per enemy so they only hit specific modules.
+
 
 func _physics_process(_delta):
 	if collided_with_ship == true:
@@ -47,7 +49,7 @@ func take_damage(damage):
 func collided():
 	collided_with_ship = true
 	$AnimatedSprite2D.play("death")
-	move_and_slide()
+	self.set_collision_layer_value(4, false)
 	dead = true
 
 func _on_animated_sprite_2d_animation_finished():

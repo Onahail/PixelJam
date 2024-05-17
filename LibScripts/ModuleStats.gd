@@ -2,8 +2,8 @@ extends Node
 
 var module_data = {
 	"Propeller": {
-		"health": 50,
-		"price": 250,
+		"health": 15,
+		"price": 10,
 		"repair_time": 3,
 		"min_allowable": 1,
 		"max_allowable": 2,
@@ -16,7 +16,7 @@ var module_data = {
 		}
 	},
 	"Gun": {
-		"health": 50,
+		"health": 15,
 		"price": 2,
 		"repair_time": 3,
 		"min_allowable": 1,
@@ -32,7 +32,7 @@ var module_data = {
 		}
 	},
 	"Storage": {
-		"health": 25,
+		"health": 15,
 		"price": 3,
 		"repair_time": 3,
 		"min_allowable": 1,
@@ -46,7 +46,7 @@ var module_data = {
 		}
 	},    
 	"Bridge": {
-		"health": 25,
+		"health": 15,
 		"price": 4,
 		"repair_time": 3,
 		"min_allowable": 1,
@@ -58,7 +58,7 @@ var module_data = {
 		}
 	},
 	"Scoop": {
-		"health": 25,
+		"health": 15,
 		"price": 5,
 		"repair_time": 3,
 		"min_allowable": 1,
@@ -71,7 +71,7 @@ var module_data = {
 		}
 	},
 	"Shield": {
-		"health": 25,
+		"health": 15,
 		"price": 6,
 		"repair_time": 3,
 		"min_allowable": 1,
@@ -83,7 +83,7 @@ var module_data = {
 		}
 	},
 	"Hull": {
-		"health": 10,
+		"health": 15,
 		"price": 7,
 		"repair_time": 3,
 		"min_allowable": 1,

@@ -34,26 +34,25 @@ func _physics_process(_delta):
 	if currentlyRepairing == true:
 		$RepairProgressBar.value = $RepairTimer.wait_time - $RepairTimer.time_left
 		
-	var overlapping_enemies = $Area2D.get_overlapping_bodies()
-	if overlapping_enemies.size() > 0:
-		repairable.applyDamage(overlapping_enemies.size() * Globals.ENEMY_DAMAGE)
-		for enemy in overlapping_enemies:
-			enemy.collided()
-			enemy.set_collision_layer_value(2, true)
-			enemy.set_collision_layer_value(1, false)
+	var overlapping_bodies = $Area2D.get_overlapping_bodies()
+	if overlapping_bodies.size() > 0:
+		for body in overlapping_bodies:
+			repairable.applyDamage(overlapping_bodies.size() * Globals.ENEMY_DAMAGE)
+			body.collided()
+			body.set_collision_layer_value(4, false)
 			
 	$TextureHealthBar.value = repairable.currentHP
 
 func _on_area_2d_mouse_exited():
-	super._on_area_2d_mouse_exited()
 	if currentlyRepairing == true:
 		repairable.repair_cancelled.emit()
+	super._on_area_2d_mouse_exited()
 
-
-
+func _on_repair_completed():
+	$Area2D.set_collision_mask_value(4, true)
 
 func _on_hp_depleted():
-	print(module_name, " destroyed.")
+	$Area2D.set_collision_mask_value(4, false)
 	pass
 
 func _on_repair_timer_timeout():
@@ -61,6 +60,7 @@ func _on_repair_timer_timeout():
 	$RepairProgressBar.visible = false
 	
 func _on_repair_toggled():
+	print("Repairing")
 	currentlyRepairing = true
 	$RepairProgressBar.visible = true
 	
@@ -84,6 +84,7 @@ func moduleInit():
 	repairable.hp_depleted.connect(_on_hp_depleted)
 	repairable.repair_toggled.connect(_on_repair_toggled)
 	repairable.repair_cancelled.connect(_on_repair_cancelled)
+	repairable.repair_completed.connect(_on_repair_completed)
 	
 	
 	

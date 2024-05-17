@@ -16,15 +16,18 @@ var drop_point
 var mouseOverBody = false
 var mousedOverModule = null
 
+var testCount = 0
+
 #PURCHASING
 var price = null #default
 @export var module_name = "Default"
 
 func _ready():
-	shopPos = ModuleStats.module_data[module_name]["assets"]["shopPos"]
-
+	pass
+	
 	
 func _process(_delta):
+	
 	UpdateColor()
 	
 	if get_tree().current_scene.name != "ShipBuilder":
@@ -61,11 +64,10 @@ func CalculateDropPosition():
 			if distance < closest_distance:
 				closest_distance = distance
 				drop_point = point
-		tween.tween_property(self, "global_position", drop_point.global_position,0.2).set_ease(Tween.EASE_OUT)
 
 		drop_point.modulate = Color(1,1,1,1)
-		self.get_parent().remove_child(self)
-		drop_point.add_child(self)
+		tween.tween_property(self, "global_position", drop_point.global_position,0.2).set_ease(Tween.EASE_OUT)
+		tween.tween_callback(ChangeParent)
 
 		Globals.PLAYER_CURRENCY -= price
 		purchased = true
@@ -74,6 +76,11 @@ func CalculateDropPosition():
 	else:
 		EventBus.module_stacked.emit(module_name)
 		DeleteItem()
+
+func ChangeParent():
+	self.get_parent().remove_child(self)
+	drop_point.add_child(self)
+	global_position = drop_point.global_position
 
 func UpdateColor():
 	var closest_distance = INF
@@ -101,27 +108,27 @@ func DeleteItem():
 	
 func _on_area_2d_mouse_entered():
 	mouseOverBody = true
-	if get_tree().current_scene.name != "ShipBuilder":
-		return
-	if not Globals.is_dragging:
-		draggable = true
-		scale = Vector2(1.05,1.05)
+	if get_tree().current_scene.name == "ShipBuilder" and module_name != "Hull":
+		if not Globals.is_dragging:
+			draggable = true
+			scale = Vector2(1.05,1.05)
 		
 func _on_area_2d_mouse_exited():
 	mouseOverBody = false
-	if get_tree().current_scene.name != "ShipBuilder":
-		return
-	if not Globals.is_dragging:
-		draggable = false
-		scale = Vector2(1,1)
+	if get_tree().current_scene.name == "ShipBuilder" and module_name != "Hull":
+		if not Globals.is_dragging:
+			draggable = false
+			scale = Vector2(1,1)
 
 func _on_area_2d_body_entered(body):
+	if Globals.INITIAL_LOAD == true:
+		if module_name != "Hull":
+			drop_point = body
+			drop_point.remove_from_group('droppable')
 	if body.is_in_group('droppable'):
 		drop_points.append(body)
-		print(body.get_children())
 		is_inside_droppable = true
 	
-
 
 func _on_area_2d_body_exited(body):
 	body.modulate = Color(1,1,1,1)

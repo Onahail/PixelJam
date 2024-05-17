@@ -26,6 +26,8 @@ var modules = []
 signal inventory_spawned
 
 func _ready():
+	Globals.INITIAL_LOAD = true
+	
 	#Dynamically build module list and load scenes
 	for module in ModuleStats.module_data:
 		modules.append(str(module))
@@ -38,8 +40,7 @@ func _ready():
 	EventBus.too_many_modules.connect(_on_too_many_modules)
 	EventBus.module_stacked.connect(_on_module_stacked)
 	
-	$UI/Information/TooManyModules.visible = false
-	$UI/Information/NotEnoughMoney.visible = false
+	$UI/Information/ErrorMessage.visible = false
 	SpawnInventory(inventory_positions)
 	SetPriceLabels()
 	
@@ -62,21 +63,22 @@ func _on_item_sold(module):
 	Globals.modulesOnShip[module] -= 1
 	
 func _on_item_too_expensive():
-		$UI/Information/NotEnoughMoney.visible = true
+		$UI/Information/ErrorMessage.visible = true
+		$UI/Information/ErrorMessage.text = "Not enough money to purchase that."
 		$Timer.start()
 
 func _on_item_purchased(module):
 	Globals.modulesOnShip[module] += 1
 	
 func _on_too_many_modules(module):
-	$UI/Information/TooManyModules.visible = true
-	$UI/Information/TooManyModules.text = str("Exceeded maximum allowance of the ", module, " module.")
+	$UI/Information/ErrorMessage.visible = true
+	$UI/Information/ErrorMessage.text = str("Exceeded maximum allowance of the ", module, " module.")
 	$Timer.start()
 	
 func _on_module_stacked(module):
 	print("Module stacked")
-	$UI/Information/TooManyModules.visible = true
-	$UI/Information/TooManyModules.text = str("Unable to place ", module, " on top of another module.")
+	$UI/Information/ErrorMessage.visible = true
+	$UI/Information/ErrorMessage.text = str("Unable to place ", module, " on top of another module.")
 	$Timer.start()
 
 func _on_back_pressed():
@@ -85,8 +87,7 @@ func _on_back_pressed():
 	
 
 func _on_timer_timeout():
-	$UI/Information/NotEnoughMoney.visible = false
-	$UI/Information/TooManyModules.visible = false
+	$UI/Information/ErrorMessage.visible = false
 
 func SetPriceLabels():
 	for module_name in Globals.modulesOnShip:

@@ -2,24 +2,17 @@ extends Node2D
 
 var hulls = []
 func save_ship():
-	print("SaveCalled")
 	for i in Globals.ship_max_height:
 		for j in Globals.ship_max_width:
 			Globals.ship_config[j][i] = "0"
 	for hull in hulls:
-		print(hull)
 		var childfound = false
-		for child in hull.get_children():
-			print(child)
+		for child in hull.get_node("HullTile").get_children():
 			if(child is Module):
 				Globals.ship_config[hull.x][hull.y] = child.module_name
 				childfound = true
 		if(childfound == false):
 			Globals.ship_config[hull.x][hull.y] = "Hull"
-	for i in Globals.ship_max_height:
-		for j in Globals.ship_max_width:
-			if(Globals.ship_config[j][i] != "0"):
-				print(i, ",", j, " - ", Globals.ship_config[j][i])
 
 
 func load_ship(isshipbuilder :bool = false):
@@ -61,14 +54,16 @@ func load_ship(isshipbuilder :bool = false):
 				hullmod.y = i
 				hulls.append(hullmod)
 				$".".add_child(hullmod)
-				#print(hullmod)
 				if(Globals.ship_config[j][i] != "Hull"):
 					module = load(ModuleStats.module_data[Globals.ship_config[j][i]]["assets"]["scene"])
 					var shipmod = module.instantiate()
 					#Spawn Module
 					shipmod.global_position = Vector2(0,0)
 					#Attach Module to Ship
-					hullmod.add_child(shipmod)
+					hullmod.get_node("HullTile").add_child(shipmod)
 					shipmod.purchased = true
 					hullmod.purchased = true
 					Globals.modulesOnShip[Globals.ship_config[j][i]] += 1
+					
+func _on_init_timeout():
+	Globals.INITIAL_LOAD = false

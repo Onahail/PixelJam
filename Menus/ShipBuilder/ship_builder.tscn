@@ -49,32 +49,18 @@ offset_bottom = 87.0
 horizontal_alignment = 1
 vertical_alignment = 1
 
-[node name="NotEnoughMoney" type="Label" parent="UI/Information"]
+[node name="ErrorMessage" type="Label" parent="UI/Information"]
 layout_mode = 0
-offset_left = 726.0
-offset_top = 742.0
-offset_right = 1098.0
-offset_bottom = 795.0
+offset_left = 680.0
+offset_top = 152.0
+offset_right = 1052.0
+offset_bottom = 205.0
 theme_override_colors/font_color = Color(1, 0, 0, 1)
 theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
 theme_override_constants/outline_size = 5
-text = "Not enough money to purchase that."
+text = "LOREM IPSUM"
 horizontal_alignment = 1
 vertical_alignment = 1
-
-[node name="TooManyModules" type="Label" parent="UI/Information"]
-layout_mode = 0
-offset_left = 712.0
-offset_top = 741.0
-offset_right = 1084.0
-offset_bottom = 794.0
-theme_override_colors/font_color = Color(1, 0, 0, 1)
-theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
-theme_override_constants/outline_size = 5
-text = "Too many modules"
-horizontal_alignment = 1
-vertical_alignment = 1
-justification_flags = 35
 
 [node name="Instructions" type="Label" parent="UI/Information"]
 layout_mode = 0
@@ -133,6 +119,8 @@ position = Vector2(562, 431)
 position = Vector2(657, 431)
 
 [node name="ShopZone" type="Area2D" parent="UI/Shop"]
+collision_layer = 0
+collision_mask = 4
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="UI/Shop/ShopZone"]
 position = Vector2(422, 430)
