@@ -49,9 +49,9 @@ func _process(_delta):
 		if global_position != shopPos:
 			Globals.PLAYER_CURRENCY += price
 			EventBus.item_sold.emit(module_name)
-      drop_point.add_to_group("droppable")
-			DeleteItem()
-				
+		drop_point.add_to_group("droppable")
+		DeleteItem()
+			
 func CalculateDropPosition():
 	if is_inside_droppable:
 		var tween = get_tree().create_tween()
@@ -91,7 +91,8 @@ func UpdateColor():
 	for point in drop_points:
 		var distance = global_position.distance_to(point.global_position)
 		if distance == closest_distance and closest_count == 1:
-			point.modulate = Color(Color.GREEN, 0.5)
+			if (module_name != "Hull" and point.get_child_count() < 3):
+				point.modulate = Color(Color.GREEN, 0.5)
 		else:
 			point.modulate = Color(1,1,1,1)
 
@@ -117,11 +118,9 @@ func _on_area_2d_mouse_exited():
 func _on_area_2d_body_entered(body):
 	if body.is_in_group('droppable'):
 		drop_points.append(body)
+		print(body.get_children())
 		is_inside_droppable = true
-		if (module_name != "Hull" and body.get_child_count() < 3):
-			body.modulate = Color(Color.GREEN, 0.5)
-		body_ref = body
-
+	
 
 
 func _on_area_2d_body_exited(body):
