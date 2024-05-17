@@ -4,8 +4,6 @@ extends Node2D
 signal fullResources
 
 func _ready():
-	$ProgressBar.value = Globals.RESOURCES_COLLECTED
-	$Victory.visible = false
 	Globals.VIEWPORT_CENTER = get_viewport().size * 0.5
 	$Timer.wait_time = Globals.SPAWN_RATE
 	$PlayerShip.load_ship()
@@ -13,14 +11,12 @@ func _ready():
 
 func _physics_process(delta):
 	Globals.RESOURCES_COLLECTED += Globals.COLLECTION_RATE * delta
-	$ProgressBar.value = Globals.RESOURCES_COLLECTED
+	$ProgressBar.value =  Globals.RESOURCES_COLLECTED / Globals.MAX_RESOURCES * 100
+	print("Collected: ", Globals.RESOURCES_COLLECTED, " - Max Resources: ", Globals.MAX_RESOURCES)
+	print("Progress Bar Value = ", $ProgressBar.value)
 	if Globals.RESOURCES_COLLECTED >= Globals.MAX_RESOURCES:
-		$Victory/ResourcesCollected.text = str("You collected ", Globals.MAX_RESOURCES, " resources worth ", Globals.MAX_RESOURCES,"$.")
-		$Victory.visible = true
-
-func _on_return_to_surface_pressed():
-	get_tree().change_scene_to_file("res://Menus/main_menu.tscn")
-
+		get_tree().change_scene_to_file("res://Game/end_game_screen.tscn")
+		
 func spawn_enemy():
 	var new_enemy = preload("res://Game/Enemies/jellyfish.tscn").instantiate()
 	%JellyfishPath.progress_ratio = randf()
