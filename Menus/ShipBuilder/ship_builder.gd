@@ -42,7 +42,7 @@ func _ready():
 	SpawnInventory(inventory_positions)
 	SetPriceLabels()
 	
-	$PlayerShip.load_ship(true)
+	$PlayerShip.load_ship()
 	
 func _process(_delta):
 	
@@ -75,6 +75,8 @@ func _on_too_many_modules(module):
 
 func _on_back_pressed():
 	get_tree().change_scene_to_file("res://Menus/main_menu.tscn")
+	$PlayerShip.save_ship()
+	
 
 func _on_timer_timeout():
 	$UI/Information/NotEnoughMoney.visible = false

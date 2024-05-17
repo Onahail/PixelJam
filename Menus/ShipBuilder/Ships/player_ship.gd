@@ -1,10 +1,28 @@
 extends Node2D
 
-#
-#
+var hulls = []
+func save_ship():
+	print("SaveCalled")
+	for i in Globals.ship_max_height:
+		for j in Globals.ship_max_width:
+			Globals.ship_config[j][i] = "0"
+	for hull in hulls:
+		print(hull)
+		var childfound = false
+		for child in hull.get_children():
+			print(child)
+			if(child is Module):
+				Globals.ship_config[hull.x][hull.y] = child.module_name
+				childfound = true
+		if(childfound == false):
+			Globals.ship_config[hull.x][hull.y] = "Hull"
+	for i in Globals.ship_max_height:
+		for j in Globals.ship_max_width:
+			if(Globals.ship_config[j][i] != "0"):
+				print(i, ",", j, " - ", Globals.ship_config[j][i])
+
 
 func load_ship(isshipbuilder :bool = false):
-	#print("LOAD SHIP CALLED")
 	#Calculate Screen Center
 	var centerx = ($".".get_viewport().get_visible_rect().size.x) / 2
 	var centery = ($".".get_viewport().get_visible_rect().size.y) / 2
@@ -16,14 +34,15 @@ func load_ship(isshipbuilder :bool = false):
 	var nudgey = 0
 	#Enumerate Modules Types
 	var modules = []
+	#Reset Module Count
+	for glomod in Globals.modulesOnShip:
+		Globals.modulesOnShip[glomod] = 0
 	for module in ModuleStats.module_data:
 		modules.append(str(module))
 	#Load Globals.ship_config
 	for i in Globals.ship_max_height:
 		for j in Globals.ship_max_width:
-			#print(i, ",", j, " - ", Globals.ship_config[j][i])
 			if(Globals.ship_config[j][i] == "0"):
-				
 				continue
 			else:
 				#Calculate relative Module Position
@@ -35,19 +54,21 @@ func load_ship(isshipbuilder :bool = false):
 				var xposition = int(centerx + nudgex + ((i - (Globals.ship_max_width / 2)) * modulewidth))
 				var spawnvector = Vector2(xposition,yposition)
 				#Load Module
-				var module = load(ModuleStats.module_data[Globals.ship_config[j][i]]["assets"]["scene"])
-				var shipmod = module.instantiate()
-				#Spawn Module
-				shipmod.global_position = spawnvector
-				#Attach Module to Ship
-				$".".add_child(shipmod)
-				#print("Attempted to spawn ship module ", Globals.ship_config[j][i], " at position ", xposition, "," , yposition)
-				if(isshipbuilder and Globals.ship_config[j][i] != "Hull"):
-					module = load(ModuleStats.module_data["Hull"]["assets"]["scene"])
-					shipmod = module.instantiate()
-					shipmod.global_position = spawnvector
-					$".".add_child(shipmod)
-					#print("Attempted to spawn Hull under ship module ", Globals.ship_config[j][i], " at position ", xposition, "," , yposition)
-
-	
-	
+				var module = load(ModuleStats.module_data["Hull"]["assets"]["scene"])
+				var hullmod = module.instantiate()
+				hullmod.global_position = spawnvector
+				hullmod.x = j
+				hullmod.y = i
+				hulls.append(hullmod)
+				$".".add_child(hullmod)
+				#print(hullmod)
+				if(Globals.ship_config[j][i] != "Hull"):
+					module = load(ModuleStats.module_data[Globals.ship_config[j][i]]["assets"]["scene"])
+					var shipmod = module.instantiate()
+					#Spawn Module
+					shipmod.global_position = Vector2(0,0)
+					#Attach Module to Ship
+					hullmod.add_child(shipmod)
+					shipmod.purchased = true
+					hullmod.purchased = true
+					Globals.modulesOnShip[Globals.ship_config[j][i]] += 1

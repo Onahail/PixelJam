@@ -60,6 +60,13 @@ func CalculateDropPosition():
 				drop_point = point
 		tween.tween_property(self, "global_position", drop_point.global_position,0.2).set_ease(Tween.EASE_OUT)
 		body_ref.modulate = Color(1,1,1,1)
+		print(drop_point)
+		print(drop_point.get_children())
+		self.get_parent().remove_child(self)
+		drop_point.add_child(self)
+		print("Child of ", drop_point, " added as ", self)
+		print(drop_point)
+		print(drop_point.get_children())
 		Globals.PLAYER_CURRENCY -= price
 		purchased = true
 		EventBus.item_purchased.emit(module_name)
@@ -68,7 +75,6 @@ func CalculateDropPosition():
 
 func DeleteItem():
 	queue_free()
-	purchased = false
 	
 func _on_area_2d_mouse_entered():
 	mouseOverBody = true
@@ -90,11 +96,13 @@ func _on_area_2d_body_entered(body):
 	if body.is_in_group('droppable'):
 		drop_points.append(body)
 		is_inside_droppable = true
-		body.modulate = Color(Color.GREEN, 0.5)
+		if (module_name != "Hull" and body.get_child_count() < 3):
+			body.modulate = Color(Color.GREEN, 0.5)
 		body_ref = body
 
 
 func _on_area_2d_body_exited(body):
+	body.modulate = Color(1,1,1,1)
 	if body.is_in_group('droppable'):
 		drop_points.erase(body)
 		if drop_points.size() == 0:

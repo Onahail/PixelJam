@@ -1,5 +1,7 @@
 extends Module
 
+var x = null
+var y = null
 
 func _ready():
 	$AnimatedSprite2D.play("base_tile_animation")
