@@ -20,6 +20,9 @@ var mousedOverModule = null
 var price = null #default
 @export var module_name = "Default"
 
+func _ready():
+	shopPos = ModuleStats.module_data[module_name]["assets"]["shopPos"]
+
 	
 func _process(_delta):
 	UpdateColor()
@@ -41,14 +44,14 @@ func _process(_delta):
 				CalculateDropPosition()
 			else:
 				DeleteItem()
-	if Input.is_action_just_pressed("rightclick") and draggable:
-			if global_position != shopPos:
-				Globals.PLAYER_CURRENCY += price
-				EventBus.item_sold.emit(module_name)
-				drop_point.add_to_group("droppable")
-				DeleteItem()
-
-			
+	
+	if Input.is_action_just_pressed("rightclick") and !Globals.MOUSE_IN_SHOP and draggable:
+		if global_position != shopPos:
+			Globals.PLAYER_CURRENCY += price
+			EventBus.item_sold.emit(module_name)
+      drop_point.add_to_group("droppable")
+			DeleteItem()
+				
 func CalculateDropPosition():
 	if is_inside_droppable:
 		var tween = get_tree().create_tween()
@@ -59,7 +62,11 @@ func CalculateDropPosition():
 				closest_distance = distance
 				drop_point = point
 		tween.tween_property(self, "global_position", drop_point.global_position,0.2).set_ease(Tween.EASE_OUT)
+
 		drop_point.modulate = Color(1,1,1,1)
+		self.get_parent().remove_child(self)
+		drop_point.add_child(self)
+
 		Globals.PLAYER_CURRENCY -= price
 		purchased = true
 		drop_point.remove_from_group("droppable")
@@ -111,9 +118,14 @@ func _on_area_2d_body_entered(body):
 	if body.is_in_group('droppable'):
 		drop_points.append(body)
 		is_inside_droppable = true
+		if (module_name != "Hull" and body.get_child_count() < 3):
+			body.modulate = Color(Color.GREEN, 0.5)
+		body_ref = body
+
 
 
 func _on_area_2d_body_exited(body):
+	body.modulate = Color(1,1,1,1)
 	if body.is_in_group('droppable'):
 		drop_points.erase(body)
 		if drop_points.size() == 0:

@@ -42,7 +42,11 @@ func _ready():
 	$UI/Information/NotEnoughMoney.visible = false
 	SpawnInventory(inventory_positions)
 	SetPriceLabels()
+	
+	$PlayerShip.load_ship()
+	
 func _process(_delta):
+	
 	$UI/Information/Currency.text = str("Available Money:\n", Globals.PLAYER_CURRENCY)
 	$UI/Information/ShipPartNumbers.text = str(
 		"Propellers: ", Globals.modulesOnShip["Propeller"], "\n",
@@ -77,6 +81,8 @@ func _on_module_stacked(module):
 
 func _on_back_pressed():
 	get_tree().change_scene_to_file("res://Menus/main_menu.tscn")
+	$PlayerShip.save_ship()
+	
 
 func _on_timer_timeout():
 	$UI/Information/NotEnoughMoney.visible = false
@@ -113,3 +119,11 @@ func _on_shop_zone_area_exited(area):
 			SpawnItem(SHIELD, inventory_positions[SHIELD])
 		"Hull":
 			SpawnItem(HULL, inventory_positions[HULL])
+
+
+func _on_shop_zone_mouse_entered():
+	Globals.MOUSE_IN_SHOP = true
+
+
+func _on_shop_zone_mouse_exited():
+	Globals.MOUSE_IN_SHOP = false

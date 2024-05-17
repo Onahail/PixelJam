@@ -16,7 +16,7 @@ func _ready():
 		$TextureHealthBar.visible = false
 	
 	
-	shopPos = global_position
+	#shopPos = global_position
 	
 func _physics_process(_delta):
 	if get_tree().current_scene.name != "Game":

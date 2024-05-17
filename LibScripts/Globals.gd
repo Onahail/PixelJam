@@ -9,6 +9,7 @@ var ship_hull = 1
 var ship_gun = 2
 var savelocation = "user://savegame.csv"
 var backupsavelocation = "user://backupsavegame.csv"
+var running = false
 
 #COLLECTION
 var COLLECTION_RATE = 0
@@ -36,6 +37,7 @@ var REPAIR_TIME = 3
 #MISC
 var VIEWPORT_CENTER
 var is_dragging = false
+var MOUSE_IN_SHOP = false
 
 #SHIP PARTS
 var modulesOnShip = {
