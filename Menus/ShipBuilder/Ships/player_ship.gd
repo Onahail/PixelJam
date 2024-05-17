@@ -60,6 +60,7 @@ func load_ship():
 				hullmod.y = i
 				hulls.append(hullmod)
 				$".".add_child(hullmod)
+				Globals.modulesOnShip["Hull"] += 1
 				#If a module needs to be loaded on top of the hull, do so
 				if(Globals.ship_config[j][i] != "Hull"):
 					module = load(ModuleStats.module_data[Globals.ship_config[j][i]]["assets"]["scene"])

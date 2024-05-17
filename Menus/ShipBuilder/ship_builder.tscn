@@ -6,7 +6,7 @@
 [ext_resource type="AudioStream" uid="uid://d0du7ubyvmbjv" path="res://Music/Shipbuilding.mp3" id="5_8upf1"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_ah087"]
-size = Vector2(599, 95)
+size = Vector2(673.5, 95)
 
 [node name="ShipBuilder" type="Node2D"]
 script = ExtResource("1_nsu8l")
@@ -118,12 +118,16 @@ position = Vector2(562, 431)
 [node name="ShieldMarker" type="Marker2D" parent="UI/Shop"]
 position = Vector2(657, 431)
 
+[node name="HullMarker" type="Marker2D" parent="UI/Shop"]
+position = Vector2(162, 578)
+
 [node name="ShopZone" type="Area2D" parent="UI/Shop"]
+position = Vector2(-10, 0)
 collision_layer = 0
 collision_mask = 4
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="UI/Shop/ShopZone"]
-position = Vector2(422, 430)
+position = Vector2(441, 417)
 shape = SubResource("RectangleShape2D_ah087")
 
 [node name="ShipSpawnPoint" type="Marker2D" parent="UI/Shop"]
@@ -198,6 +202,13 @@ offset_bottom = 60.0
 text = "6"
 horizontal_alignment = 1
 vertical_alignment = 1
+
+[node name="HullCost" type="Label" parent="UI/Shop/ShopPrices"]
+layout_mode = 0
+offset_left = 48.0
+offset_top = 235.0
+offset_right = 88.0
+offset_bottom = 258.0
 
 [node name="PlayerShip" parent="." instance=ExtResource("4_mu5ef")]
 

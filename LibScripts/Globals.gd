@@ -53,8 +53,13 @@ var modulesOnShip = {
 	"Storage": 0, 
 	"Scoop": 0, 
 	"Bridge": 0, 
-	"Shield": 0
+	"Shield": 0,
+	"Hull": 0
 }
 
 #DEBUG
 var COUNT = 0
+
+func calc_collection_rates():
+	Globals.MAX_RESOURCES = (Globals.modulesOnShip["Storage"] + 1) * ModuleStats.module_data["Storage"]["misc"]["capacity"]
+	Globals.COLLECTION_RATE = Globals.modulesOnShip["Propeller"] * Globals.modulesOnShip["Scoop"] * ModuleStats.module_data["Scoop"]["misc"]["collection_rate"]

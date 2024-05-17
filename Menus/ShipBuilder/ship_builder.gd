@@ -49,14 +49,10 @@ func _ready():
 func _process(_delta):
 	
 	$UI/Information/Currency.text = str("Available Money:\n", Globals.PLAYER_CURRENCY)
-	$UI/Information/ShipPartNumbers.text = str(
-		"Propellers: ", Globals.modulesOnShip["Propeller"], "\n",
-		"Weapons: ", Globals.modulesOnShip["Gun"], "\n",
-		"Storage: ", Globals.modulesOnShip["Storage"], "\n",
-		"Scoops: ", Globals.modulesOnShip["Scoop"], "\n",
-		"Bridge: ", Globals.modulesOnShip["Bridge"], "\n",
-		"Shields: ", Globals.modulesOnShip["Shield"], "\n"
-	)
+	var shipinfo = ""
+	for module in Globals.modulesOnShip:
+		shipinfo = str(shipinfo, module, ": ", Globals.modulesOnShip[module], "\n")
+	$UI/Information/ShipPartNumbers.text = shipinfo
 
 func _on_item_sold(module):
 	$SoldModule.play()
