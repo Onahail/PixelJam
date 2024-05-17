@@ -24,17 +24,20 @@ func _ready():
 				Globals.ship_config[i].append("0")
 		#Load Default Ship if no ship file
 		if(savefile == null):
-			var centerheight:float = float(Globals.ship_max_height) / 2
-			var centerwidth:float = float(Globals.ship_max_width) / 2
+			var centerheight = Globals.ship_max_height / 2
+			var centerwidth = Globals.ship_max_width / 2 
+			#Top row left to right
+			Globals.ship_config[centerheight+1][centerwidth-1] = "Hull"
+			Globals.ship_config[centerheight+1][centerwidth] = "Hull"
+			Globals.ship_config[centerheight+1][centerwidth+1] = "Hull"
+			#Center row left to right
+			Globals.ship_config[centerheight][centerwidth-1] = "Propeller"
 			Globals.ship_config[centerheight][centerwidth] = "Bridge"
 			Globals.ship_config[centerheight][centerwidth+1] = "Gun"
-			Globals.ship_config[centerheight][centerwidth-1] = "Propeller"
-			Globals.ship_config[centerheight+1][centerwidth] = "Hull"
-			Globals.ship_config[centerheight-1][centerwidth] = "Hull"
-			Globals.ship_config[centerheight+1][centerwidth+1] = "Hull"
-			Globals.ship_config[centerheight-1][centerwidth+1] = "Hull"
-			Globals.ship_config[centerheight+1][centerwidth-1] = "Hull"
+			#Bottom row left to right
 			Globals.ship_config[centerheight-1][centerwidth-1] = "Hull"
+			Globals.ship_config[centerheight-1][centerwidth] = "Hull"
+			Globals.ship_config[centerheight-1][centerwidth+1] = "Hull"
 		else:
 			#load ship config from file
 			var saveline=true

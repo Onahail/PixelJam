@@ -83,7 +83,7 @@ var module_data = {
 		}
 	},
 	"Hull": {
-		"health": 15,
+		"health": 1,
 		"price": 7,
 		"repair_time": 3,
 		"min_allowable": 1,

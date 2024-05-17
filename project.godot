@@ -21,6 +21,10 @@ Globals="*res://LibScripts/Globals.gd"
 EventBus="*res://LibScripts/EventBus.gd"
 ModuleStats="*res://LibScripts/ModuleStats.gd"
 
+[debug]
+
+gdscript/warnings/integer_division=0
+
 [display]
 
 window/size/viewport_width=1728

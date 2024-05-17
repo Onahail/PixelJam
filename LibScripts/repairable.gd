@@ -9,11 +9,36 @@ signal repair_toggled
 signal repair_completed
 signal repair_cancelled
 	
-func applyDamage(damage):
-	currentHP -= damage
-	if currentHP <= 0:
-		hp_depleted.emit()
-		currentHP = 0
+func applyDamage(damage, module, ishullcalling:bool = false):
+	#If the damage is to be applied to a hull, check if a module is attached first
+	if(module.module_name == "Hull"):
+		var modfound = false
+		for mod in module.get_node("HullTile").get_children():
+			if (mod is Module):
+				modfound = true
+				#If the module is already dead, damage hull, else damage module
+				if(mod.repairable.currentHP == 0):
+					currentHP -= damage
+					if currentHP <= 0:
+						hp_depleted.emit()
+						currentHP = 0
+				else:
+					print("Hull Damaged but ",mod," still has ",mod.repairable.currentHP," HP. Damage Ignored")
+					mod.repairable.applyDamage(damage, mod, true)
+		#If no module is attached, apply damage to hull
+		if(!modfound): 
+			currentHP -= damage
+			if currentHP <= 0:
+				hp_depleted.emit()
+				currentHP = 0
+	#If we are not a hull, damage me
+	elif(ishullcalling):
+		currentHP -= damage
+		print("Hull asked for ", damage, " damage, applying to ", self, ". HP now at ", currentHP)
+		#Trigger Module Death
+		if currentHP <= 0:
+			hp_depleted.emit()
+			currentHP = 0
 	
 func repairDamage(repairValue):
 	print("Repair Value: ", repairValue)

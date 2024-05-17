@@ -35,11 +35,10 @@ func _physics_process(_delta):
 		$RepairProgressBar.value = $RepairTimer.wait_time - $RepairTimer.time_left
 		
 	var overlapping_bodies = $Area2D.get_overlapping_bodies()
-	if overlapping_bodies.size() > 0:
-		for body in overlapping_bodies:
-			repairable.applyDamage(overlapping_bodies.size() * Globals.ENEMY_DAMAGE)
-			body.collided()
-			body.set_collision_layer_value(4, false)
+	for body in overlapping_bodies:
+		repairable.applyDamage(overlapping_bodies.size() * Globals.ENEMY_DAMAGE, self)
+		body.collided()
+		body.set_collision_layer_value(4, false)
 			
 	$TextureHealthBar.value = repairable.currentHP
 
@@ -79,7 +78,7 @@ func moduleInit():
 	$TextureHealthBar.max_value = health
 	$TextureHealthBar.value = health
 	repairable.currentHP = health
-	repairable.maxHP = health	
+	repairable.maxHP = health
 	$RepairProgressBar.max_value = repair_time
 	$RepairProgressBar.value = repair_time
 	$RepairProgressBar.visible = false
