@@ -16,7 +16,6 @@ var collided_with_ship = false
 #TODO Set random collision layer per enemy so they only hit specific modules.
 
 func _physics_process(_delta):
-	print(collided_with_ship)
 	if collided_with_ship == true:
 		velocity = left * 100
 	elif not damaged:
