@@ -18,12 +18,16 @@ var DEFAULT_CURSOR = preload("res://UI_Elements/Default_Cursor.png")
 #GAME STATS
 var PLAYER_WIN = false
 var DEPTH = 100
+var DIFFICULTY = 0
+var DIFF_SCALE_START = 1
+var DIFF_SCALE_END = 10
+var CURRENCY_SCALE_START = 0.2
+var CURRENCY_SCALE_END = 1
 
 #COLLECTION
 var COLLECTION_RATE = 0
 var RESOURCES_COLLECTED = 0
 var MAX_RESOURCES = 100
-	
 #CURRENCY
 var PLAYER_CURRENCY = 200
 
@@ -67,7 +71,7 @@ var COUNT = 0
 func calc_collection_rates():
 	Globals.MAX_RESOURCES = (Globals.modulesOnShip["Storage"] + 1) * ModuleStats.module_data["Storage"]["misc"]["capacity"]
 	Globals.COLLECTION_RATE = Globals.modulesOnShip["Propeller"] * Globals.modulesOnShip["Scoop"] * ModuleStats.module_data["Scoop"]["misc"]["collection_rate"]
-	SPAWN_RATE = float((BASE_SPAWN_RATE/modulesOnShip["Propeller"])/DEPTH)
+	SPAWN_RATE = float((BASE_SPAWN_RATE/modulesOnShip["Propeller"])/DIFFICULTY)
 	print(SPAWN_RATE)
 	print(modulesOnShip["Propeller"])
 	SPEED = modulesOnShip["Propeller"] * ModuleStats.module_data["Propeller"]["misc"]["speed_boost"]
@@ -79,5 +83,4 @@ func GameLoss():
 	
 func GameWin():
 	PLAYER_WIN = true
-	PLAYER_CURRENCY += int(RESOURCES_COLLECTED)
 	get_tree().change_scene_to_file("res://Game/end_game_screen.tscn")

@@ -46,7 +46,7 @@ var module_data = {
 		}
 	},    
 	"Bridge": {
-		"health": 1000,
+		"health": 10,
 		"price": 4,
 		"repair_time": 3,
 		"min_allowable": 1,
@@ -58,7 +58,7 @@ var module_data = {
 		}
 	},
 	"Scoop": {
-		"health": 1000,
+		"health": 10,
 		"price": 5,
 		"repair_time": 3,
 		"min_allowable": 1,
