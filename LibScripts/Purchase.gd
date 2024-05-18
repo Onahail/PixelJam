@@ -17,7 +17,6 @@ var mouseOverBody = false
 var mousedOverModule = null
 var hull_marker
 var params = PhysicsPointQueryParameters2D.new()
-var dragging_object
 
 var testCount = 0
 
@@ -30,7 +29,7 @@ func _ready():
 	
 	
 func _process(_delta):
-	if dragging_object == true:
+	if Globals.is_dragging == true:
 		UpdateColor()
 	
 	if get_tree().current_scene.name != "ShipBuilder":
@@ -38,20 +37,20 @@ func _process(_delta):
 	if draggable and !purchased:
 		if Input.is_action_just_pressed("leftclick"):
 			offset = get_global_mouse_position()
-			dragging_object = true
+			Globals.is_dragging = true
 			z_index = 3
 			scale = Vector2(0.7,0.7)
 		if Input.is_action_pressed("leftclick"):
 			global_position = get_global_mouse_position()
 		elif Input.is_action_just_released("leftclick"):
 			scale = Vector2(1,1)
-			dragging_object = false
+			Globals.is_dragging = false
 			if EligibleForPurchase():
 				CalculateDropPosition()
 			else:
 				DeleteItem()
 	
-	if Input.is_action_just_pressed("rightclick") and !Globals.MOUSE_IN_SHOP and draggable and module_name == "Hull" and !dragging_object:
+	if Input.is_action_just_pressed("rightclick") and !Globals.MOUSE_IN_SHOP and draggable and module_name == "Hull" and !Globals.is_dragging:
 		if global_position != shopPos:
 			var found_child = false
 			for child in self.get_node("HullTile").get_children():
@@ -65,6 +64,7 @@ func _process(_delta):
 				Globals.PLAYER_CURRENCY += price
 				EventBus.item_sold.emit(module_name)
 				GenerateMarker()
+				Globals.ship_config[self.x][self.y] = "0"
 				Globals.HULLS.erase(self)
 				DeleteItem()
 				
@@ -73,6 +73,8 @@ func GenerateMarker():
 	var marker = load(ModuleStats.module_data["Hull"]["assets"]["expansion_marker"])
 	hull_marker = marker.instantiate()
 	hull_marker.global_position = global_position
+	hull_marker.x = self.x
+	hull_marker.y = self.y
 	self.get_parent().add_child(hull_marker)
 			
 func DeleteItem():
@@ -101,7 +103,6 @@ func CalculateDropPosition():
 				self.x = drop_point.x
 				self.y = drop_point.y
 				Globals.ship_config[drop_point.x][drop_point.y] = "Hull"
-				drop_point.hide()
 				Globals.HULLS.append(self)
 		else:
 			#EventBus.invalid_module_position.emit(module_name)
@@ -130,16 +131,22 @@ func CheckDropPositionEligibility(point: Vector2) -> bool:
 	var area = get_world_2d().direct_space_state
 	
 	if module_name in offsets:
+		var count = 0
 		for offset in offsets[module_name]:
 			var check_pos = point + offset
 			params.position = check_pos
-			var collision_check = area.intersect_point(params)
-			results.append({
-				"check": collision_check,
-				"offset": offset
-			})
 			
-		var count = 0
+			var collision_check = area.intersect_point(params)
+			if(collision_check.size() > 0):
+				for thing in collision_check:
+					if(thing["collider"] == self.get_node("HullTile")):
+						count += 1
+				if(count == 0):
+					results.append({
+						"check": collision_check,
+						"offset": offset
+					})
+		count = 0
 		var propeller_found_right = false
 		var scoop_found_vertical = false
 		for result in results:
@@ -147,10 +154,9 @@ func CheckDropPositionEligibility(point: Vector2) -> bool:
 				
 				var collider = result["check"][0]["collider"]
 				var offset = result["offset"]
-				
 				if collider.body_name != "expansion_marker":
 					count += 1
-				elif(Globals.ship_config[collider.x][collider.y] == "Hull"):
+				elif(collider.body_name == "expansion_marker" and Globals.ship_config[collider.x][collider.y] == "Hull"):
 					count += 1
 				if collider.get_parent().name != "PlayerShip":
 					if module_name == "Hull":
@@ -169,7 +175,7 @@ func CheckDropPositionEligibility(point: Vector2) -> bool:
 			(module_name == "Scoop" and count > 1) or 
 			#Hull wont be allowed to be placed if all surrouning spaces are expansion markers or to the left of propellers, or above/below scoops
 			(module_name == "Hull" and (count == 0 or propeller_found_right == true or scoop_found_vertical == true))):
-				if dragging_object == false:
+				if Globals.is_dragging == false:
 					if propeller_found_right == true:
 						EventBus.hull_placed_behind_propeller.emit()
 						return false
@@ -198,7 +204,7 @@ func ChangeParent():
 
 
 func UpdateColor():
-	if dragging_object == true:
+	if Globals.is_dragging == true:
 		var closest_distance = INF
 		var closest_node = null
 		for point in drop_points:
@@ -219,11 +225,11 @@ func UpdateColor():
 				var distance = global_position.distance_to(point.global_position)
 				if point == closest_node and closest_count == 1:
 					if module_name == "Hull":
-						point.get_child(2).visible = true
+						point.get_node("AnimatedSprite2D").visible = true
 						if CheckDropPositionEligibility(point.global_position) == false:
-							point.get_child(2).modulate = Color(Color.RED, 0.2)
+							point.get_node("AnimatedSprite2D").modulate = Color(Color.RED, 0.2)
 						else:
-							point.get_child(2).modulate = Color(Color.GREEN, 0.2)
+							point.get_node("AnimatedSprite2D").modulate = Color(Color.GREEN, 0.2)
 					if (point.get_child_count() < 3):
 						if CheckDropPositionEligibility(point.global_position) == false:
 							point.modulate = Color(Color.RED, 0.5)
@@ -231,21 +237,21 @@ func UpdateColor():
 							point.modulate = Color(Color.GREEN, 0.5)
 				else:
 					if module_name == "Hull":
-						point.get_child(2).visible = false
+						point.get_node("AnimatedSprite2D").visible = false
 					point.modulate = Color(1,1,1,1)
 
 	
 func _on_area_2d_mouse_entered():
 	mouseOverBody = true
 	if get_tree().current_scene.name == "ShipBuilder":
-			if not dragging_object:
+			if not Globals.is_dragging:
 				draggable = true
 				scale = Vector2(1.05,1.05)
 		
 func _on_area_2d_mouse_exited():
 	mouseOverBody = false
 	if get_tree().current_scene.name == "ShipBuilder":
-		if not dragging_object:
+		if not Globals.is_dragging:
 			draggable = false
 			scale = Vector2(1,1)
 
@@ -261,7 +267,7 @@ func _on_area_2d_body_entered(body):
 
 func _on_area_2d_body_exited(body):
 	if module_name == "Hull":
-		body.get_child(2).visible = false
+		body.get_node("AnimatedSprite2D").visible = false
 	body.modulate = Color(1,1,1,1)
 	if body.is_in_group('droppable'):
 		drop_points.erase(body)
