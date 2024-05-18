@@ -59,7 +59,7 @@ func _process(_delta):
 					EventBus.item_sold.emit(child.module_name)
 					child.drop_point.add_to_group("droppable")
 					child.DeleteItem()
-			if found_child == false:
+			if found_child == false and Globals.modulesOnShip["Hull"] > 1:
 				Globals.PLAYER_CURRENCY += price
 				EventBus.item_sold.emit(module_name)
 				GenerateMarker()
@@ -97,8 +97,8 @@ func CalculateDropPosition():
 			drop_point.remove_from_group("droppable")
 			EventBus.item_purchased.emit(module_name)
 			if module_name == "Hull":
-				#print(self.x)
-				#print(self.y)
+				self.x = drop_point.x
+				self.y = drop_point.y
 				Globals.HULLS.append(self)
 		else:
 			#EventBus.invalid_module_position.emit(module_name)
@@ -139,14 +139,20 @@ func CheckDropPositionEligibility(point: Vector2) -> bool:
 		var count = 0
 		var propeller_found_right = false
 		var scoop_found_vertical = false
-		
+		var test1 = 0
+		#print("start")
 		for result in results:
 			if result["check"].size() > 0:
-
+				
 				var collider = result["check"][0]["collider"]
 				var offset = result["offset"]
+				
 				if collider.body_name != "expansion_marker":
 					count += 1
+				else:
+					test1 += 1
+					#print("Marker at ",collider.x,",",collider.y)
+				
 				
 				#THIS IS A DEBUG STATEMENT
 				#########################
@@ -168,6 +174,7 @@ func CheckDropPositionEligibility(point: Vector2) -> bool:
 								elif child.module_name == "Scoop" and (offset == top or offset == bottom):
 									scoop_found_vertical = true
 			#If no hull tiles, allow placement anywhere
+		#print(Time.get_unix_time_from_system()," - Expansion Markers found = ", test1)
 		if module_name == "Hull" and Globals.modulesOnShip["Hull"] == 0: return true
 			#Propeller only checks tiles to its left. If theres any hull spaces it cant be placed
 		if ((module_name == "Propeller" and count > 0) or 
@@ -175,6 +182,8 @@ func CheckDropPositionEligibility(point: Vector2) -> bool:
 			(module_name == "Scoop" and count > 1) or 
 			#Hull wont be allowed to be placed if all surrouning spaces are expansion markers or to the left of propellers, or above/below scoops
 			(module_name == "Hull" and (count == 0 or propeller_found_right == true or scoop_found_vertical == true))):
+				#print(Time.get_unix_time_from_system()," - No Hulls Found")
+				#print("module_name = ", module_name, ", count = ", count, ", propeller_found_right = ", propeller_found_right, ", scoop_found_vertical = ", scoop_found_vertical, ", test1 = ", test1)
 				if Globals.is_dragging == false:
 					if propeller_found_right == true:
 						EventBus.hull_placed_behind_propeller.emit()
@@ -218,25 +227,29 @@ func ChangeParent():
 func UpdateColor():
 	if Globals.is_dragging == true:
 		var closest_distance = INF
+		var closest_node = null
 		for point in drop_points:
 			if point != null:
 				var distance = global_position.distance_to(point.global_position)
 				if distance < closest_distance:
 					closest_distance = distance
-		
+					closest_node = point
+		#if(closest_node != null):
+		#	print("Nearest Node at - ",closest_node.global_position, " at distance ", closest_distance)
 		var closest_count = 0
 		for point in drop_points:
 			if point != null:
 				var distance = global_position.distance_to(point.global_position)
 				if distance == closest_distance:
 					closest_count += 1
-
+		
 		for point in drop_points:
 			if point != null:
 				var distance = global_position.distance_to(point.global_position)
-				if distance == closest_distance and closest_count == 1:
+				if point == closest_node and closest_count == 1:
 					if module_name == "Hull":
 						point.get_child(2).visible = true
+						print(point)
 						if CheckDropPositionEligibility(point.global_position) == false:
 							point.get_child(2).modulate = Color(Color.RED, 0.2)
 						else:

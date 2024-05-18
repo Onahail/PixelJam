@@ -21,6 +21,7 @@ func save_ship():
 
 
 func load_ship():
+	Globals.HULLS = []
 	#Calculate Screen Center
 	var centerx = ($".".get_viewport().get_visible_rect().size.x) / 2
 	var centery = ($".".get_viewport().get_visible_rect().size.y) / 2
@@ -55,8 +56,8 @@ func load_ship():
 					var hull_marker = marker.instantiate()
 					hull_marker.global_position = spawnvector
 					#Save grid position to hull for use in reloads and saving to file
-					#hull_marker.x = j
-					#hull_marker.y = i
+					hull_marker.x = j
+					hull_marker.y = i
 					#Globals.HULLS.append(hullmod)
 					$".".add_child(hull_marker)
 				else:

@@ -217,7 +217,7 @@ vertical_alignment = 1
 
 [connection signal="pressed" from="Back" to="." method="_on_back_pressed"]
 [connection signal="timeout" from="Timer" to="." method="_on_timer_timeout"]
-[connection signal="area_exited" from="UI/Shop/ShopZone" to="." method="_on_shop_zone_area_exited"]
 [connection signal="area_exited" from="UI/Shop/ShopZone" to="." method="_on_area_2d_area_exited"]
+[connection signal="area_exited" from="UI/Shop/ShopZone" to="." method="_on_shop_zone_area_exited"]
 [connection signal="mouse_entered" from="UI/Shop/ShopZone" to="." method="_on_shop_zone_mouse_entered"]
 [connection signal="mouse_exited" from="UI/Shop/ShopZone" to="." method="_on_shop_zone_mouse_exited"]
