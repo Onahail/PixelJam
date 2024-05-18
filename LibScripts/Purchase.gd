@@ -17,6 +17,7 @@ var mouseOverBody = false
 var mousedOverModule = null
 var hull_marker
 var params = PhysicsPointQueryParameters2D.new()
+var dragging_object
 
 var testCount = 0
 
@@ -29,27 +30,28 @@ func _ready():
 	
 	
 func _process(_delta):
-	UpdateColor()
+	if dragging_object == true:
+		UpdateColor()
 	
 	if get_tree().current_scene.name != "ShipBuilder":
 		return
 	if draggable and !purchased:
 		if Input.is_action_just_pressed("leftclick"):
 			offset = get_global_mouse_position()
-			Globals.is_dragging = true
+			dragging_object = true
 			z_index = 3
 			scale = Vector2(0.7,0.7)
 		if Input.is_action_pressed("leftclick"):
 			global_position = get_global_mouse_position()
 		elif Input.is_action_just_released("leftclick"):
 			scale = Vector2(1,1)
-			Globals.is_dragging = false
+			dragging_object = false
 			if EligibleForPurchase():
 				CalculateDropPosition()
 			else:
 				DeleteItem()
 	
-	if Input.is_action_just_pressed("rightclick") and !Globals.MOUSE_IN_SHOP and draggable and module_name == "Hull" and !Globals.is_dragging:
+	if Input.is_action_just_pressed("rightclick") and !Globals.MOUSE_IN_SHOP and draggable and module_name == "Hull" and !dragging_object:
 		if global_position != shopPos:
 			var found_child = false
 			for child in self.get_node("HullTile").get_children():
@@ -156,7 +158,7 @@ func CheckDropPositionEligibility(point: Vector2) -> bool:
 				
 				#THIS IS A DEBUG STATEMENT
 				#########################
-				if Globals.is_dragging == false:
+				if dragging_object == false:
 					if collider.get_parent() is Module:
 						print(collider.get_parent().module_name)
 					else:
@@ -184,7 +186,7 @@ func CheckDropPositionEligibility(point: Vector2) -> bool:
 			(module_name == "Hull" and (count == 0 or propeller_found_right == true or scoop_found_vertical == true))):
 				#print(Time.get_unix_time_from_system()," - No Hulls Found")
 				#print("module_name = ", module_name, ", count = ", count, ", propeller_found_right = ", propeller_found_right, ", scoop_found_vertical = ", scoop_found_vertical, ", test1 = ", test1)
-				if Globals.is_dragging == false:
+				if dragging_object == false:
 					if propeller_found_right == true:
 						EventBus.hull_placed_behind_propeller.emit()
 						return false
@@ -202,7 +204,7 @@ func CheckDropPositionEligibility(point: Vector2) -> bool:
 	
 """
 #print(count)
-if Globals.is_dragging == false:
+if dragging_object == false:
 		for result in results:
 			if result.size() > 0:
 				if result[0]["collider"].get_parent().name != "PlayerShip":
@@ -225,7 +227,7 @@ func ChangeParent():
 
 
 func UpdateColor():
-	if Globals.is_dragging == true:
+	if dragging_object == true:
 		var closest_distance = INF
 		var closest_node = null
 		for point in drop_points:
@@ -268,14 +270,14 @@ func UpdateColor():
 func _on_area_2d_mouse_entered():
 	mouseOverBody = true
 	if get_tree().current_scene.name == "ShipBuilder":
-			if not Globals.is_dragging:
+			if not dragging_object:
 				draggable = true
 				scale = Vector2(1.05,1.05)
 		
 func _on_area_2d_mouse_exited():
 	mouseOverBody = false
 	if get_tree().current_scene.name == "ShipBuilder":
-		if not Globals.is_dragging:
+		if not dragging_object:
 			draggable = false
 			scale = Vector2(1,1)
 
