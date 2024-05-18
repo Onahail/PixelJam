@@ -91,7 +91,8 @@ var module_data = {
 		"misc": {
 		},
 		"assets": {
-			"scene": "res://Menus/ShipBuilder/ShipModules/BaseTile/base_tile.tscn"
+			"scene": "res://Menus/ShipBuilder/ShipModules/BaseTile/base_tile.tscn",
+			"expansion_marker": "res://Menus/ShipBuilder/ShipModules/BaseTile/expansion_marker.tscn"
 		}
 	}
 }

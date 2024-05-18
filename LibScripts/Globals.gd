@@ -65,6 +65,8 @@ var modulesOnShip = {
 	"Hull": 0
 }
 
+var HULLS = []
+
 #DEBUG
 var COUNT = 0
 
@@ -72,8 +74,8 @@ func calc_collection_rates():
 	Globals.MAX_RESOURCES = (Globals.modulesOnShip["Storage"] + 1) * ModuleStats.module_data["Storage"]["misc"]["capacity"]
 	Globals.COLLECTION_RATE = Globals.modulesOnShip["Propeller"] * Globals.modulesOnShip["Scoop"] * ModuleStats.module_data["Scoop"]["misc"]["collection_rate"]
 	SPAWN_RATE = float((BASE_SPAWN_RATE/modulesOnShip["Propeller"])/DIFFICULTY)
-	print(SPAWN_RATE)
-	print(modulesOnShip["Propeller"])
+	#print(SPAWN_RATE)
+	#print(modulesOnShip["Propeller"])
 	SPEED = modulesOnShip["Propeller"] * ModuleStats.module_data["Propeller"]["misc"]["speed_boost"]
 	
 func GameLoss():

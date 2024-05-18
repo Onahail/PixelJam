@@ -10,9 +10,15 @@
 [node name="Scoop" type="Node2D"]
 script = ExtResource("1_uqme5")
 
-[node name="Sprite2D" type="Sprite2D" parent="."]
+[node name="DownScoop" type="Sprite2D" parent="."]
 position = Vector2(0, 18)
 texture = ExtResource("2_2rl5t")
+
+[node name="UpScoop" type="Sprite2D" parent="."]
+visible = false
+position = Vector2(0, -17)
+texture = ExtResource("2_2rl5t")
+flip_v = true
 
 [node name="Area2D" type="Area2D" parent="."]
 collision_layer = 4

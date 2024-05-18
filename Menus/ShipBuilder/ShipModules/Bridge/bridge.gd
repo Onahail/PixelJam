@@ -1,10 +1,12 @@
 extends Module
 
+var animation = "bridge_anim"
 
 func _ready():
 	
 	#CHANGE VALUES
 	module_name = "Bridge"
+	$AnimatedSprite2D.play(animation)
 	
 	#CALL ORIGINAL
 	super._ready()

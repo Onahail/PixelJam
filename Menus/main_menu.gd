@@ -1,6 +1,10 @@
 extends Node2D
 
+
+
+
 func _ready():
+	
 	var savefile = null
 	if(Globals.running == false):
 		Globals.running = true

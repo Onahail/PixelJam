@@ -1,17 +1,58 @@
-[gd_scene load_steps=7 format=3 uid="uid://dggbslj7xvh07"]
+[gd_scene load_steps=15 format=3 uid="uid://dggbslj7xvh07"]
 
 [ext_resource type="Script" path="res://Menus/ShipBuilder/ShipModules/Shield/shield.gd" id="1_vnblg"]
-[ext_resource type="Texture2D" uid="uid://j3b43xsylk6j" path="res://Placeholder Assets/Shield_Module_Placeholder.png" id="2_52o8s"]
 [ext_resource type="Texture2D" uid="uid://dv5kqq4cpev0t" path="res://UI_Elements/Power_bar_empty.PNG" id="3_nb05q"]
 [ext_resource type="Texture2D" uid="uid://bisvr7tt8gtyp" path="res://UI_Elements/Power_Bar_full_upsidedown.png" id="4_k2c03"]
 [ext_resource type="Texture2D" uid="uid://c8jhabk1jhk5o" path="res://UI_Elements/Repair_Progress_Bar_Empty.png" id="5_c330a"]
+[ext_resource type="Texture2D" uid="uid://3vihsyi4r2ue" path="res://Menus/ShipBuilder/ShipModules/Shield/Shields_Deck_Spreadsheet_92x64.png" id="6_2ucgk"]
 [ext_resource type="Texture2D" uid="uid://bhyufmy42kn4m" path="res://UI_Elements/Repair_Progress_Bar_Full.png" id="6_smlt4"]
+[ext_resource type="Texture2D" uid="uid://bfycmeon7n0n8" path="res://Menus/ShipBuilder/ShipModules/Shield/Shields_Off_92x64.png" id="7_7yw4s"]
+[ext_resource type="Texture2D" uid="uid://cs3fmtical76i" path="res://Menus/ShipBuilder/ShipModules/Shield/Shield_Power_Bar_Empty.png" id="8_358xr"]
+[ext_resource type="Texture2D" uid="uid://lncsl16ujkpb" path="res://Menus/ShipBuilder/ShipModules/Shield/Shield_Power_Bar_Full.png" id="9_t7mx4"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_do4ou"]
+atlas = ExtResource("6_2ucgk")
+region = Rect2(0, 0, 92, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_by4nu"]
+atlas = ExtResource("6_2ucgk")
+region = Rect2(92, 0, 92, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_bmk8v"]
+atlas = ExtResource("6_2ucgk")
+region = Rect2(184, 0, 92, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_kj817"]
+atlas = ExtResource("7_7yw4s")
+region = Rect2(0, 0, 92, 64)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_oj1oq"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_do4ou")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_by4nu")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_bmk8v")
+}],
+"loop": true,
+"name": &"shields_active",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_kj817")
+}],
+"loop": true,
+"name": &"shields_off",
+"speed": 5.0
+}]
 
 [node name="Shield" type="Node2D"]
 script = ExtResource("1_vnblg")
-
-[node name="Sprite2D" type="Sprite2D" parent="."]
-texture = ExtResource("2_52o8s")
 
 [node name="Area2D" type="Area2D" parent="."]
 collision_layer = 4
@@ -42,6 +83,19 @@ step = 0.01
 fill_mode = 4
 texture_under = ExtResource("5_c330a")
 texture_progress = ExtResource("6_smlt4")
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+sprite_frames = SubResource("SpriteFrames_oj1oq")
+animation = &"shields_off"
+
+[node name="ShieldCharge" type="TextureProgressBar" parent="."]
+offset_left = -26.0
+offset_top = -23.0
+offset_right = 42.0
+offset_bottom = 12.0
+scale = Vector2(0.75, 0.75)
+texture_under = ExtResource("8_358xr")
+texture_progress = ExtResource("9_t7mx4")
 
 [connection signal="body_entered" from="Area2D" to="." method="_on_area_2d_body_entered"]
 [connection signal="body_exited" from="Area2D" to="." method="_on_area_2d_body_exited"]

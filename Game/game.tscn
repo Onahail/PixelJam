@@ -1,10 +1,12 @@
-[gd_scene load_steps=13 format=3 uid="uid://l35y1g5j685o"]
+[gd_scene load_steps=15 format=3 uid="uid://l35y1g5j685o"]
 
 [ext_resource type="Script" path="res://Game/game.gd" id="1_ru1o3"]
 [ext_resource type="Script" path="res://Game/ParallaxBackground.gd" id="2_nh28l"]
 [ext_resource type="Texture2D" uid="uid://dnqn5fwhkb1w8" path="res://Game/Background_Level_1_Version_1.png" id="2_qwy0g"]
 [ext_resource type="AudioStream" uid="uid://dtmww5tol5oth" path="res://Music/Submarine_Rush.mp3" id="3_qn60e"]
 [ext_resource type="Texture2D" uid="uid://wkrgmy5gdtbq" path="res://Game/Level_1_Background_Second_Layer_Placeholder.png" id="3_vwv2g"]
+[ext_resource type="Texture2D" uid="uid://cs3fmtical76i" path="res://Menus/ShipBuilder/ShipModules/Shield/Shield_Power_Bar_Empty.png" id="7_6ovgu"]
+[ext_resource type="Texture2D" uid="uid://lncsl16ujkpb" path="res://Menus/ShipBuilder/ShipModules/Shield/Shield_Power_Bar_Full.png" id="8_46hg6"]
 [ext_resource type="PackedScene" uid="uid://d0gti5ph2m6et" path="res://Menus/ShipBuilder/Ships/player_ship.tscn" id="8_y7o76"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_51ino"]
@@ -100,6 +102,15 @@ position = Vector2(856, -111)
 shape = SubResource("RectangleShape2D_bwpcj")
 
 [node name="PlayerShip" parent="." instance=ExtResource("8_y7o76")]
+
+[node name="ShieldCharge" type="TextureProgressBar" parent="."]
+offset_left = -26.0
+offset_top = -23.0
+offset_right = 42.0
+offset_bottom = 12.0
+scale = Vector2(0.75, 0.75)
+texture_under = ExtResource("7_6ovgu")
+texture_progress = ExtResource("8_46hg6")
 
 [connection signal="timeout" from="Timer" to="." method="_on_timer_timeout"]
 [connection signal="body_entered" from="KillBox" to="." method="_on_kill_box_body_entered"]
