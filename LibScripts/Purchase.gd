@@ -49,9 +49,8 @@ func _process(_delta):
 			else:
 				DeleteItem()
 	
-	if Input.is_action_just_pressed("rightclick") and !Globals.MOUSE_IN_SHOP and draggable and module_name == "Hull":
+	if Input.is_action_just_pressed("rightclick") and !Globals.MOUSE_IN_SHOP and draggable and module_name == "Hull" and !Globals.is_dragging:
 		if global_position != shopPos:
-			
 			var found_child = false
 			for child in self.get_node("HullTile").get_children():
 				if child is Module:
@@ -148,20 +147,35 @@ func CheckDropPositionEligibility(point: Vector2) -> bool:
 				var offset = result["offset"]
 				if collider.body_name != "expansion_marker":
 					count += 1
+				
+				#THIS IS A DEBUG STATEMENT
+				#########################
+				if Globals.is_dragging == false:
+					if collider.get_parent() is Module:
+						print(collider.get_parent().module_name)
+					else:
+						print(collider.get_parent())
+				###############################		
+				#TODO FIGURE OUT WHY THE FUCK HULLS DONT RECOGNIZE EACH OTHER RANDOMLY
+				
 				if collider.get_parent().name != "PlayerShip":
 					if module_name == "Hull":
 						for child in collider.get_parent().get_node("HullTile").get_children():
-							if child.name == "Propeller" and (offset == top_right or offset == bottom_right):
-								propeller_found_right = true
-							elif child.name == "Scoop" and (offset == top or offset == bottom):
-								scoop_found_vertical = true
+							if child is Module:
+								#Check for propeller or scoops by comparing current offset in the for loop with the offset that determined its placement
+								if child.module_name == "Propeller" and (offset == top_right or offset == bottom_right):
+									propeller_found_right = true
+								elif child.module_name == "Scoop" and (offset == top or offset == bottom):
+									scoop_found_vertical = true
+			#If no hull tiles, allow placement anywhere
 		if module_name == "Hull" and Globals.modulesOnShip["Hull"] == 0: return true
+			#Propeller only checks tiles to its left. If theres any hull spaces it cant be placed
 		if ((module_name == "Propeller" and count > 0) or 
+			#Scoop only checks for areas directly above or below it.
 			(module_name == "Scoop" and count > 1) or 
+			#Hull wont be allowed to be placed if all surrouning spaces are expansion markers or to the left of propellers, or above/below scoops
 			(module_name == "Hull" and (count == 0 or propeller_found_right == true or scoop_found_vertical == true))):
 				if Globals.is_dragging == false:
-					print(propeller_found_right)
-					print(scoop_found_vertical)
 					if propeller_found_right == true:
 						EventBus.hull_placed_behind_propeller.emit()
 						return false
