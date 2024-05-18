@@ -76,7 +76,6 @@ func GenerateMarker():
 	self.get_parent().add_child(hull_marker)
 			
 func DeleteItem():
-	#print(self)
 	queue_free()
 
 func CalculateDropPosition():
@@ -101,6 +100,8 @@ func CalculateDropPosition():
 			if module_name == "Hull":
 				self.x = drop_point.x
 				self.y = drop_point.y
+				Globals.ship_config[drop_point.x][drop_point.y] = "Hull"
+				drop_point.hide()
 				Globals.HULLS.append(self)
 		else:
 			#EventBus.invalid_module_position.emit(module_name)
@@ -141,8 +142,6 @@ func CheckDropPositionEligibility(point: Vector2) -> bool:
 		var count = 0
 		var propeller_found_right = false
 		var scoop_found_vertical = false
-		var test1 = 0
-		#print("start")
 		for result in results:
 			if result["check"].size() > 0:
 				
@@ -151,21 +150,8 @@ func CheckDropPositionEligibility(point: Vector2) -> bool:
 				
 				if collider.body_name != "expansion_marker":
 					count += 1
-				else:
-					test1 += 1
-					#print("Marker at ",collider.x,",",collider.y)
-				
-				
-				#THIS IS A DEBUG STATEMENT
-				#########################
-				if dragging_object == false:
-					if collider.get_parent() is Module:
-						print(collider.get_parent().module_name)
-					else:
-						print(collider.get_parent())
-				###############################		
-				#TODO FIGURE OUT WHY THE FUCK HULLS DONT RECOGNIZE EACH OTHER RANDOMLY
-				
+				elif(Globals.ship_config[collider.x][collider.y] == "Hull"):
+					count += 1
 				if collider.get_parent().name != "PlayerShip":
 					if module_name == "Hull":
 						for child in collider.get_parent().get_node("HullTile").get_children():
@@ -176,7 +162,6 @@ func CheckDropPositionEligibility(point: Vector2) -> bool:
 								elif child.module_name == "Scoop" and (offset == top or offset == bottom):
 									scoop_found_vertical = true
 			#If no hull tiles, allow placement anywhere
-		#print(Time.get_unix_time_from_system()," - Expansion Markers found = ", test1)
 		if module_name == "Hull" and Globals.modulesOnShip["Hull"] == 0: return true
 			#Propeller only checks tiles to its left. If theres any hull spaces it cant be placed
 		if ((module_name == "Propeller" and count > 0) or 
@@ -184,8 +169,6 @@ func CheckDropPositionEligibility(point: Vector2) -> bool:
 			(module_name == "Scoop" and count > 1) or 
 			#Hull wont be allowed to be placed if all surrouning spaces are expansion markers or to the left of propellers, or above/below scoops
 			(module_name == "Hull" and (count == 0 or propeller_found_right == true or scoop_found_vertical == true))):
-				#print(Time.get_unix_time_from_system()," - No Hulls Found")
-				#print("module_name = ", module_name, ", count = ", count, ", propeller_found_right = ", propeller_found_right, ", scoop_found_vertical = ", scoop_found_vertical, ", test1 = ", test1)
 				if dragging_object == false:
 					if propeller_found_right == true:
 						EventBus.hull_placed_behind_propeller.emit()
@@ -197,19 +180,10 @@ func CheckDropPositionEligibility(point: Vector2) -> bool:
 						EventBus.invalid_module_position.emit(module_name)
 				return false
 	else:
-		#print("Module name not handled: " + module_name)
 		pass
 
 	return true 
 	
-"""
-#print(count)
-if dragging_object == false:
-		for result in results:
-			if result.size() > 0:
-				if result[0]["collider"].get_parent().name != "PlayerShip":
-					for child in result[0]["collider"].get_parent().get_node("HullTile").get_children():
-						print(child.name)"""
 
 func ChangeParent():
 	self.get_parent().remove_child(self)
@@ -217,11 +191,8 @@ func ChangeParent():
 		drop_point.get_parent().add_child(self)
 		#drop_point.queue_free()
 	else:
-		print("ChangeParent Drop Point: ", drop_point)
-		print("ChangeParent Drop Point Parent: ", drop_point.get_parent())
 		drop_point.add_child(self)
 		global_position = drop_point.global_position
-		#print(drop_point.get_children())
 		if module_name == "Scoop":
 			$".".FlipScoop()
 
@@ -236,8 +207,6 @@ func UpdateColor():
 				if distance < closest_distance:
 					closest_distance = distance
 					closest_node = point
-		#if(closest_node != null):
-		#	print("Nearest Node at - ",closest_node.global_position, " at distance ", closest_distance)
 		var closest_count = 0
 		for point in drop_points:
 			if point != null:
@@ -251,7 +220,6 @@ func UpdateColor():
 				if point == closest_node and closest_count == 1:
 					if module_name == "Hull":
 						point.get_child(2).visible = true
-						print(point)
 						if CheckDropPositionEligibility(point.global_position) == false:
 							point.get_child(2).modulate = Color(Color.RED, 0.2)
 						else:
@@ -282,14 +250,11 @@ func _on_area_2d_mouse_exited():
 			scale = Vector2(1,1)
 
 func _on_area_2d_body_entered(body):
-	#print(body)
 	if Globals.INITIAL_LOAD == true:
 		if module_name != "Hull":
 			drop_point = body
 			drop_point.remove_from_group('droppable')
-			#print(drop_point.is_in_group('droppable')
 	if body.is_in_group('droppable'):
-		#print(drop_points)
 		drop_points.append(body)
 		is_inside_droppable = true
 	
