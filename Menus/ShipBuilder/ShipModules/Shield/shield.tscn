@@ -1,4 +1,4 @@
-[gd_scene load_steps=22 format=3 uid="uid://dggbslj7xvh07"]
+[gd_scene load_steps=19 format=3 uid="uid://dggbslj7xvh07"]
 
 [ext_resource type="Script" path="res://Menus/ShipBuilder/ShipModules/Shield/shield.gd" id="1_vnblg"]
 [ext_resource type="Texture2D" uid="uid://dv5kqq4cpev0t" path="res://UI_Elements/Power_bar_empty.PNG" id="3_nb05q"]
@@ -9,38 +9,12 @@
 [ext_resource type="Texture2D" uid="uid://bfycmeon7n0n8" path="res://Menus/ShipBuilder/ShipModules/Shield/Shields_Off_92x64.png" id="7_7yw4s"]
 [ext_resource type="Texture2D" uid="uid://bv0gmw3ydr7vm" path="res://Menus/ShipBuilder/ShipModules/Shield/Shield_Pulse_Spreadsheet_92x64.png" id="10_f0db3"]
 
-[sub_resource type="AtlasTexture" id="AtlasTexture_do4ou"]
-atlas = ExtResource("6_2ucgk")
-region = Rect2(0, 0, 92, 64)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_by4nu"]
-atlas = ExtResource("6_2ucgk")
-region = Rect2(92, 0, 92, 64)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_bmk8v"]
-atlas = ExtResource("6_2ucgk")
-region = Rect2(184, 0, 92, 64)
-
 [sub_resource type="AtlasTexture" id="AtlasTexture_kj817"]
 atlas = ExtResource("7_7yw4s")
 region = Rect2(0, 0, 92, 64)
 
 [sub_resource type="SpriteFrames" id="SpriteFrames_oj1oq"]
 animations = [{
-"frames": [{
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_do4ou")
-}, {
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_by4nu")
-}, {
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_bmk8v")
-}],
-"loop": true,
-"name": &"shields_active",
-"speed": 5.0
-}, {
 "frames": [{
 "duration": 1.0,
 "texture": SubResource("AtlasTexture_kj817")
@@ -141,7 +115,7 @@ fill_mode = 4
 texture_under = ExtResource("5_c330a")
 texture_progress = ExtResource("6_smlt4")
 
-[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+[node name="ShieldsOff" type="AnimatedSprite2D" parent="."]
 sprite_frames = SubResource("SpriteFrames_oj1oq")
 animation = &"shields_off"
 

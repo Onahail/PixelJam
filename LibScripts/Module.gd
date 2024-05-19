@@ -68,6 +68,7 @@ func _on_hp_depleted():
 	$Area2D.set_collision_mask_value(4, false)
 	Globals.modulesOnShip[module_name] -= 1
 	Globals.calc_collection_rates()
+	#@$".".surrounding_modules.erase(self)
 	self.hide()
 
 func _on_repair_timer_timeout():

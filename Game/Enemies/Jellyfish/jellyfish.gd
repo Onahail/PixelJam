@@ -32,8 +32,7 @@ func collided():
 	super.collided()
 	
 func take_damage(damage):
-	if damaged == true:
-		$AnimatedSprite2D.play("damaged")
+	$AnimatedSprite2D.play("damaged")
 	if currentHP <= 0:
 		$AnimatedSprite2D.play("death")
 	super.take_damage(damage)

@@ -15,8 +15,8 @@ func _ready():
 func _process(delta):
 
 	if get_tree().current_scene.name == "Game":
-		$ShieldsActive.visible = true
 		if Input.is_action_pressed("Activate Shields"):
+			$ShieldsActive.visible = true
 			#print(Globals.SHIELD_POWER)
 			Globals.SHIELD_POWER -= Globals.SHIELD_DRAIN * delta
 			for module in surrounding_modules:
