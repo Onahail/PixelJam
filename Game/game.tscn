@@ -1,12 +1,14 @@
-[gd_scene load_steps=15 format=3 uid="uid://l35y1g5j685o"]
+[gd_scene load_steps=17 format=3 uid="uid://l35y1g5j685o"]
 
 [ext_resource type="Script" path="res://Game/game.gd" id="1_ru1o3"]
 [ext_resource type="Script" path="res://Game/ParallaxBackground.gd" id="2_nh28l"]
 [ext_resource type="Texture2D" uid="uid://dnqn5fwhkb1w8" path="res://Backgrounds/Background_Level_1_Version_1.png" id="2_qwy0g"]
 [ext_resource type="Texture2D" uid="uid://wkrgmy5gdtbq" path="res://Backgrounds/Level_1_Background_Second_Layer_Placeholder.png" id="3_vwv2g"]
 [ext_resource type="Texture2D" uid="uid://byti4slpwbe51" path="res://Backgrounds/Level_2_Background.png" id="4_mq1pi"]
+[ext_resource type="Texture2D" uid="uid://bqio0wupusl6m" path="res://Backgrounds/Level_3_Background.png" id="5_5yhm5"]
 [ext_resource type="Texture2D" uid="uid://ctp4ig6sb8vi2" path="res://Backgrounds/Level_2_Parallax_Background.png" id="6_2tvtc"]
 [ext_resource type="AudioStream" uid="uid://jwl4vslhva8y" path="res://Music/063 Heartbound OST Ten Below.mp3" id="7_126kc"]
+[ext_resource type="Texture2D" uid="uid://bpnq43x72gaa1" path="res://Backgrounds/Level_3_Parallax.png" id="8_ltvmb"]
 [ext_resource type="PackedScene" uid="uid://d0gti5ph2m6et" path="res://Menus/ShipBuilder/Ships/player_ship.tscn" id="8_y7o76"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_51ino"]
@@ -48,6 +50,10 @@ texture = ExtResource("2_qwy0g")
 position = Vector2(864, 486)
 texture = ExtResource("4_mq1pi")
 
+[node name="BackgroundLevel3" type="Sprite2D" parent="ParallaxBackground"]
+position = Vector2(864, 486)
+texture = ExtResource("5_5yhm5")
+
 [node name="ParallaxLayer" type="ParallaxLayer" parent="ParallaxBackground"]
 position = Vector2(0, 2)
 motion_offset = Vector2(-40, 0)
@@ -60,6 +66,10 @@ texture = ExtResource("3_vwv2g")
 [node name="Level2BackgroundSecondLayer" type="Sprite2D" parent="ParallaxBackground/ParallaxLayer"]
 position = Vector2(864, 729)
 texture = ExtResource("6_2tvtc")
+
+[node name="Level3BackgroundSecondLayer" type="Sprite2D" parent="ParallaxBackground/ParallaxLayer"]
+position = Vector2(1728, 485)
+texture = ExtResource("8_ltvmb")
 
 [node name="ProgressBar" type="ProgressBar" parent="."]
 offset_left = 628.0
