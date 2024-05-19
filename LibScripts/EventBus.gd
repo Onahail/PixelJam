@@ -10,3 +10,4 @@ signal invalid_module_position
 signal hull_placed_behind_propeller
 signal hull_placed_above_or_below_scoop
 signal apply_explosive_damage
+signal hull_placed_right_of_bridge

@@ -124,6 +124,7 @@ func CheckDropPositionEligibility(point: Vector2) -> bool:
 
 	var offsets = {
 		"Propeller": [top_left, bottom_left],  # Top left and bottom left
+		"Bridge": [top_right, bottom_right],  # Top right and bottom right
 		"Scoop": [top, bottom],  # Directly above and below
 		"Hull": [top, bottom, top_left, top_right, bottom_left, bottom_right]
 	}
@@ -149,6 +150,7 @@ func CheckDropPositionEligibility(point: Vector2) -> bool:
 		count = 0
 		var propeller_found_right = false
 		var scoop_found_vertical = false
+		var bridge_found_left = false
 		for result in results:
 			if result["check"].size() > 0:
 				
@@ -167,20 +169,26 @@ func CheckDropPositionEligibility(point: Vector2) -> bool:
 									propeller_found_right = true
 								elif child.module_name == "Scoop" and (offset == top or offset == bottom):
 									scoop_found_vertical = true
+								elif child.module_name == "Bridge" and (offset == top_left or offset == bottom_left):
+									bridge_found_left = true
 			#If no hull tiles, allow placement anywhere
 		if module_name == "Hull" and Globals.modulesOnShip["Hull"] == 0: return true
 			#Propeller only checks tiles to its left. If theres any hull spaces it cant be placed
 		if ((module_name == "Propeller" and count > 0) or 
 			#Scoop only checks for areas directly above or below it.
 			(module_name == "Scoop" and count > 1) or 
+			(module_name == "Bridge" and count > 0) or 
 			#Hull wont be allowed to be placed if all surrouning spaces are expansion markers or to the left of propellers, or above/below scoops
-			(module_name == "Hull" and (count == 0 or propeller_found_right == true or scoop_found_vertical == true))):
+			(module_name == "Hull" and (count == 0 or propeller_found_right == true or scoop_found_vertical == true or bridge_found_left == true ))):
 				if Globals.is_dragging == false:
 					if propeller_found_right == true:
 						EventBus.hull_placed_behind_propeller.emit()
 						return false
 					elif scoop_found_vertical == true:
 						EventBus.hull_placed_above_or_below_scoop.emit()
+						return false
+					elif bridge_found_left == true:
+						EventBus.hull_placed_right_of_bridge.emit()
 						return false
 					else:
 						EventBus.invalid_module_position.emit(module_name)

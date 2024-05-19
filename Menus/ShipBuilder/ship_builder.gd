@@ -43,7 +43,7 @@ func _ready():
 	EventBus.invalid_module_position.connect(_on_invalid_module_position)
 	EventBus.hull_placed_above_or_below_scoop.connect(_on_hull_placed_by_scoop)
 	EventBus.hull_placed_behind_propeller.connect(_on_hull_placed_behind_propeller)
-	
+	EventBus.hull_placed_right_of_bridge.connect(_on_hull_placed_right_of_bridge)
 	$UI/Information/ErrorMessage.visible = false
 	SpawnInventory(inventory_positions)
 	SetPriceLabels()
@@ -59,6 +59,12 @@ func _process(_delta):
 	for module in Globals.modulesOnShip:
 		shipinfo = str(shipinfo, module, ": ", Globals.modulesOnShip[module], "\n")
 	$UI/Information/ShipPartNumbers.text = shipinfo
+
+func _on_hull_placed_right_of_bridge():
+	print("Hull bridge function")
+	DisplayErrorMessage()
+	$UI/Information/ErrorMessage.text = str("Hull can not be placed right of bridge.")
+	pass
 
 func _on_invalid_module_position(module):
 	match module:
@@ -118,7 +124,7 @@ func DisplayErrorMessage():
 	
 func SetPriceLabels():
 	for module_name in Globals.modulesOnShip:
-		$UI/Shop/ShopPrices.get_node(module_name + "Cost").text = str(ModuleStats.module_data[module_name]["price"], "$")
+		$UI/Shop/ShopPrices.get_node(module_name + "Cost").text = str("$",ModuleStats.module_data[module_name]["price"])
 
 func SpawnInventory(inventory):
 	for item in inventory:

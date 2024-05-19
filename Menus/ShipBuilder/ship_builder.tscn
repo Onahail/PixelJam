@@ -101,25 +101,25 @@ offset_right = 465.0
 offset_bottom = 470.0
 
 [node name="PropellerMarker" type="Marker2D" parent="UI/Shop"]
-position = Vector2(180, 431)
+position = Vector2(180, 430)
 
 [node name="GunMarker" type="Marker2D" parent="UI/Shop"]
-position = Vector2(276, 431)
+position = Vector2(275, 430)
 
 [node name="StorageMarker" type="Marker2D" parent="UI/Shop"]
-position = Vector2(372, 431)
+position = Vector2(371, 430)
 
 [node name="ScoopMarker" type="Marker2D" parent="UI/Shop"]
-position = Vector2(467, 431)
+position = Vector2(466, 430)
 
 [node name="BridgeMarker" type="Marker2D" parent="UI/Shop"]
-position = Vector2(562, 431)
+position = Vector2(739, 430)
 
 [node name="ShieldMarker" type="Marker2D" parent="UI/Shop"]
-position = Vector2(657, 431)
+position = Vector2(556, 430)
 
 [node name="HullMarker" type="Marker2D" parent="UI/Shop"]
-position = Vector2(752, 431)
+position = Vector2(648, 430)
 
 [node name="ShopZone" type="Area2D" parent="UI/Shop"]
 position = Vector2(-17, -5)
@@ -127,7 +127,7 @@ collision_layer = 20
 collision_mask = 20
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="UI/Shop/ShopZone"]
-position = Vector2(484.625, 417)
+position = Vector2(483, 533)
 shape = SubResource("RectangleShape2D_ah087")
 
 [node name="ShipSpawnPoint" type="Marker2D" parent="UI/Shop"]
@@ -136,10 +136,10 @@ position = Vector2(-1058, 1)
 [node name="ShopPrices" type="Control" parent="UI/Shop"]
 layout_mode = 3
 anchors_preset = 0
-offset_left = 153.0
-offset_top = 336.0
-offset_right = 691.0
-offset_bottom = 375.0
+offset_left = 149.0
+offset_top = 340.0
+offset_right = 687.0
+offset_bottom = 379.0
 
 [node name="PropellerCost" type="Label" parent="UI/Shop/ShopPrices"]
 layout_mode = 0
@@ -185,9 +185,9 @@ vertical_alignment = 1
 
 [node name="BridgeCost" type="Label" parent="UI/Shop/ShopPrices"]
 layout_mode = 0
-offset_left = 389.0
+offset_left = 570.0
 offset_top = 37.0
-offset_right = 429.0
+offset_right = 610.0
 offset_bottom = 60.0
 text = "5"
 horizontal_alignment = 1
@@ -195,9 +195,9 @@ vertical_alignment = 1
 
 [node name="ShieldCost" type="Label" parent="UI/Shop/ShopPrices"]
 layout_mode = 0
-offset_left = 486.0
+offset_left = 386.0
 offset_top = 37.0
-offset_right = 526.0
+offset_right = 426.0
 offset_bottom = 60.0
 text = "6"
 horizontal_alignment = 1
@@ -205,13 +205,77 @@ vertical_alignment = 1
 
 [node name="HullCost" type="Label" parent="UI/Shop/ShopPrices"]
 layout_mode = 0
-offset_left = 579.0
+offset_left = 480.0
 offset_top = 37.0
-offset_right = 619.0
+offset_right = 520.0
 offset_bottom = 60.0
 text = "7"
 horizontal_alignment = 1
 vertical_alignment = 1
+
+[node name="PropellerLabel" type="Label" parent="UI/Shop/ShopPrices"]
+layout_mode = 0
+offset_left = -3.0
+offset_top = 10.0
+offset_right = 68.0
+offset_bottom = 33.0
+tooltip_text = "Add Propellers to speed up the ship and make the scoops collect faster! Be careful! Increased speed will encounter enemies faster!"
+text = "Propeller"
+horizontal_alignment = 1
+
+[node name="GunLabel" type="Label" parent="UI/Shop/ShopPrices"]
+layout_mode = 0
+offset_left = 108.0
+offset_top = 10.0
+offset_right = 148.0
+offset_bottom = 33.0
+text = "Gun"
+horizontal_alignment = 1
+
+[node name="StorageLabel" type="Label" parent="UI/Shop/ShopPrices"]
+layout_mode = 0
+offset_left = 192.0
+offset_top = 10.0
+offset_right = 252.0
+offset_bottom = 33.0
+text = "Storage"
+horizontal_alignment = 1
+
+[node name="ScoopLabel" type="Label" parent="UI/Shop/ShopPrices"]
+layout_mode = 0
+offset_left = 294.0
+offset_top = 10.0
+offset_right = 341.0
+offset_bottom = 33.0
+text = "Scoop"
+horizontal_alignment = 1
+
+[node name="BridgeLabel" type="Label" parent="UI/Shop/ShopPrices"]
+layout_mode = 0
+offset_left = 563.0
+offset_top = 10.0
+offset_right = 614.0
+offset_bottom = 33.0
+text = "Bridge"
+horizontal_alignment = 1
+
+[node name="ShieldLabel" type="Label" parent="UI/Shop/ShopPrices"]
+layout_mode = 0
+offset_left = 380.0
+offset_top = 10.0
+offset_right = 428.0
+offset_bottom = 33.0
+text = "Shield"
+horizontal_alignment = 1
+
+[node name="HullLabel" type="Label" parent="UI/Shop/ShopPrices"]
+layout_mode = 0
+offset_left = 477.0
+offset_top = 10.0
+offset_right = 517.0
+offset_bottom = 33.0
+text = "Hull"
+horizontal_alignment = 1
 
 [node name="PlayerShip" parent="." instance=ExtResource("4_mu5ef")]
 
