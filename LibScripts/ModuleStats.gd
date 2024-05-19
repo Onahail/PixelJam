@@ -77,6 +77,9 @@ var module_data = {
 		"min_allowable": 1,
 		"max_allowable": 2,
 		"misc": {
+			"shield_hp": 20,
+			"recharge_rate": 2,
+			"recharge_delay": 5
 		},
 		"assets": {
 			"scene": "res://Menus/ShipBuilder/ShipModules/Shield/shield.tscn"

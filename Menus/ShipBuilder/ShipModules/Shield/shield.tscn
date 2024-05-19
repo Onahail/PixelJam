@@ -130,8 +130,14 @@ sprite_frames = SubResource("SpriteFrames_uq7mw")
 animation = &"shields_active"
 frame_progress = 0.219273
 
+[node name="ChargeDelay" type="Timer" parent="."]
+
+[node name="Recharger" type="Timer" parent="."]
+
 [connection signal="body_entered" from="Area2D" to="." method="_on_area_2d_body_entered"]
 [connection signal="body_exited" from="Area2D" to="." method="_on_area_2d_body_exited"]
 [connection signal="mouse_entered" from="Area2D" to="." method="_on_area_2d_mouse_entered"]
 [connection signal="mouse_exited" from="Area2D" to="." method="_on_area_2d_mouse_exited"]
 [connection signal="timeout" from="RepairTimer" to="." method="_on_repair_timer_timeout"]
+[connection signal="timeout" from="ChargeDelay" to="." method="_on_charge_delay_timeout"]
+[connection signal="timeout" from="Recharger" to="." method="_on_recharger_timeout"]

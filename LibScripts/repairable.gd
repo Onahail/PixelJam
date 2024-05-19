@@ -12,6 +12,21 @@ signal repair_cancelled
 func applyDamage(damage, module, ishullcalling:bool = false):
 	#If the damage is to be applied to a hull, check if a module is attached first
 	if(module.module_name == "Hull"):
+		print("Shield Count is ",module.shieldmod.size())
+		if(module.shieldmod.size() > 0):
+			print("Shield taking ",damage," damage")
+			for shield in module.shieldmod:
+				shield.shield_hp -= damage
+				shield.get_node("ChargeDelay").start()
+				shield.get_node("ChargeDelay").paused = false
+				shield.charging = false
+				print("Shield now has",shield.shield_hp," hp")
+				if(shield.shield_hp <= 0):
+					damage = 0 - shield.shield_hp
+					shield.shield_hp = 0
+				else:
+					return 0
+				break
 		var modfound = false
 		for mod in module.get_node("HullTile").get_children():
 			if (mod is Module):

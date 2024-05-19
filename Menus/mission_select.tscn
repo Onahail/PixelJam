@@ -1,7 +1,8 @@
-[gd_scene load_steps=3 format=3 uid="uid://cwyaji7wn7snp"]
+[gd_scene load_steps=4 format=3 uid="uid://cwyaji7wn7snp"]
 
 [ext_resource type="Script" path="res://Menus/mission_select.gd" id="1_xk8tw"]
 [ext_resource type="AudioStream" uid="uid://chq56rpyr1g8b" path="res://Music/Mainmenu.mp3" id="2_xlygh"]
+[ext_resource type="PackedScene" uid="uid://d0gti5ph2m6et" path="res://Menus/ShipBuilder/Ships/player_ship.tscn" id="3_n1ivd"]
 
 [node name="MissionSelect" type="Node2D"]
 script = ExtResource("1_xk8tw")
@@ -18,8 +19,7 @@ offset_left = 694.0
 offset_top = 400.0
 offset_right = 1048.0
 offset_bottom = 505.0
-text = "Mission Start
-"
+text = "DIVE!"
 
 [node name="Label" type="Label" parent="."]
 offset_left = 660.0
@@ -27,7 +27,7 @@ offset_top = 222.0
 offset_right = 1069.0
 offset_bottom = 291.0
 theme_override_font_sizes/font_size = 50
-text = "Mission Select
+text = "Launch Depth
 "
 horizontal_alignment = 1
 vertical_alignment = 1
@@ -38,10 +38,10 @@ autoplay = true
 
 [node name="DepthSlider" type="VSlider" parent="."]
 unique_name_in_owner = true
-offset_left = 1148.0
-offset_top = 585.0
-offset_right = 1164.0
-offset_bottom = 815.0
+offset_left = 1109.0
+offset_top = 570.0
+offset_right = 1125.0
+offset_bottom = 800.0
 rotation = -3.14143
 min_value = 5000.0
 max_value = 10000.0
@@ -59,6 +59,9 @@ text = "DEPTH
 "
 horizontal_alignment = 1
 vertical_alignment = 1
+
+[node name="PlayerShip" parent="." instance=ExtResource("3_n1ivd")]
+position = Vector2(871, 420)
 
 [connection signal="pressed" from="Back" to="." method="_on_back_pressed"]
 [connection signal="pressed" from="MissionStart" to="." method="_on_mission_start_pressed"]

@@ -46,9 +46,17 @@ func SpawnShark():
 	add_child(new_shark)
 
 func _on_timer_timeout():
-	#spawn_enemy()
-	SpawnShark()
-	SpawnJellyfish()
+	var ScaledDiff = float((Globals.DIFFICULTY - Globals.DIFF_SCALE_START) / (Globals.DIFF_SCALE_END - Globals.DIFF_SCALE_START))
+	print(ScaledDiff)
+	var rng = RandomNumberGenerator.new()
+	var rando = rng.randf_range(0, 1)
+	if(ScaledDiff < 0.3):
+		SpawnJellyfish()
+	elif(ScaledDiff >= 0.3):
+		if(rando < 0.5):
+			SpawnJellyfish()
+		else:
+			SpawnShark()
 	pass
 
 

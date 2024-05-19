@@ -4,7 +4,8 @@ var SCALE_START = Globals.DIFF_SCALE_START
 var SCALE_END = Globals.DIFF_SCALE_END
 
 func _ready():
-
+	$PlayerShip.load_ship()
+	$PlayerShip.scale = Vector2(.6,.6)
 	if(Globals.DEPTH >= %DepthSlider.min_value and Globals.DEPTH <= %DepthSlider.max_value):
 		var scalesize = %DepthSlider.max_value - %DepthSlider.min_value
 		var scalepoint = %DepthSlider.value - %DepthSlider.min_value
