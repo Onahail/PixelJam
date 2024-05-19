@@ -103,8 +103,18 @@ func _on_module_stacked(module):
 	$UI/Information/ErrorMessage.text = str("Unable to place ", module, " on top of another module.")
 
 func _on_back_pressed():
-	get_tree().change_scene_to_file("res://Menus/main_menu.tscn")
-	$PlayerShip.save_ship()
+	var required_modules = ["Propeller", "Scoop", "Bridge"]
+	var all_required_modules = true
+	for module in required_modules:
+		if Globals.modulesOnShip[module] == 0:
+			print(Globals.modulesOnShip[module])
+			$UI/Information/ErrorMessage.text = str("You must have at least one ", module)
+			DisplayErrorMessage()
+			all_required_modules = false
+			break
+	if all_required_modules:
+		get_tree().change_scene_to_file("res://Menus/main_menu.tscn")
+		$PlayerShip.save_ship()
 	
 
 func _on_timer_timeout():
