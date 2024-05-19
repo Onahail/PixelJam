@@ -88,7 +88,7 @@ var COUNT = 0
 
 func calc_collection_rates():
 	SPEED = float(Globals.modulesOnShip["Propeller"] * (8/float(Globals.modulesOnShip["Hull"]))) * ModuleStats.module_data["Propeller"]["misc"]["speed_boost"]
-	Globals.MAX_RESOURCES = (Globals.modulesOnShip["Storage"] + 0.4) * ModuleStats.module_data["Storage"]["misc"]["capacity"]
+	Globals.MAX_RESOURCES = (Globals.modulesOnShip["Storage"] + 0.8) * ModuleStats.module_data["Storage"]["misc"]["capacity"]
 	Globals.COLLECTION_RATE = float(Globals.modulesOnShip["Propeller"] * (8/float(Globals.modulesOnShip["Hull"]))) * Globals.modulesOnShip["Scoop"] * ModuleStats.module_data["Scoop"]["misc"]["collection_rate"]
 	SPAWN_RATE = float(BASE_SPAWN_RATE/(float(Globals.modulesOnShip["Propeller"] * (8/float(Globals.modulesOnShip["Hull"]))))/DIFFICULTY)
 func GameLoss():
