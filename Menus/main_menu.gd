@@ -31,17 +31,17 @@ func _ready():
 			var centerheight = Globals.ship_max_height / 2
 			var centerwidth = Globals.ship_max_width / 2 
 			#Top row left to right
-			Globals.ship_config[centerheight+1][centerwidth-1] = "Hull"
-			Globals.ship_config[centerheight+1][centerwidth] = "Hull"
-			Globals.ship_config[centerheight+1][centerwidth+1] = "Hull"
-			#Center row left to right
-			Globals.ship_config[centerheight][centerwidth-1] = "Propeller"
-			Globals.ship_config[centerheight][centerwidth] = "Bridge"
-			Globals.ship_config[centerheight][centerwidth+1] = "Gun"
-			#Bottom row left to right
 			Globals.ship_config[centerheight-1][centerwidth-1] = "Hull"
 			Globals.ship_config[centerheight-1][centerwidth] = "Hull"
-			Globals.ship_config[centerheight-1][centerwidth+1] = "Hull"
+			Globals.ship_config[centerheight-1][centerwidth+1] = "Gun"
+			#Center row left to right
+			Globals.ship_config[centerheight][centerwidth-1] = "Propeller"
+			Globals.ship_config[centerheight][centerwidth] = "Hull"
+			Globals.ship_config[centerheight][centerwidth+1] = "Bridge"
+			#Bottom row left to right
+			Globals.ship_config[centerheight+1][centerwidth-1] = "Hull"
+			Globals.ship_config[centerheight+1][centerwidth] = "Scoop"
+			Globals.ship_config[centerheight+1][centerwidth+1] = "Hull"
 		else:
 			#load ship config from file
 			var saveline=true
@@ -53,7 +53,8 @@ func _ready():
 						Globals.ship_config[int(saveline[1])][i] = saveline[i+2]
 				elif(saveline[0]=="cash"):
 					Globals.PLAYER_CURRENCY = int(saveline[1])
-					
+	$PlayerShip.load_ship()
+	$PlayerShip.scale = Vector2(.6,.6)
 
 func _on_ship_builder_pressed():
 	get_tree().change_scene_to_file("res://Menus/ShipBuilder/ship_builder.tscn")

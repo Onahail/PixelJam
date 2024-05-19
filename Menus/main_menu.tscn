@@ -1,7 +1,8 @@
-[gd_scene load_steps=3 format=3 uid="uid://bfwnhju0lpjof"]
+[gd_scene load_steps=4 format=3 uid="uid://bfwnhju0lpjof"]
 
 [ext_resource type="Script" path="res://Menus/main_menu.gd" id="1_tm4h6"]
 [ext_resource type="AudioStream" uid="uid://chq56rpyr1g8b" path="res://Music/Mainmenu.mp3" id="2_52aa6"]
+[ext_resource type="PackedScene" uid="uid://d0gti5ph2m6et" path="res://Menus/ShipBuilder/Ships/player_ship.tscn" id="3_dktnb"]
 
 [node name="MainMenu" type="Node2D"]
 position = Vector2(440, 252)
@@ -16,10 +17,10 @@ text = "Ship Builder
 "
 
 [node name="ExitGame" type="Button" parent="."]
-offset_left = 30.0
-offset_top = 25.0
-offset_right = 93.0
-offset_bottom = 88.0
+offset_left = -407.0
+offset_top = -217.0
+offset_right = -344.0
+offset_bottom = -154.0
 text = "Exit 
 Game"
 
@@ -41,8 +42,10 @@ text = "GAME_TITLE_TBD"
 
 [node name="AudioStreamPlayer2D" type="AudioStreamPlayer2D" parent="."]
 stream = ExtResource("2_52aa6")
-volume_db = 6.559
 autoplay = true
+
+[node name="PlayerShip" parent="." instance=ExtResource("3_dktnb")]
+position = Vector2(431, 168)
 
 [connection signal="pressed" from="ShipBuilder" to="." method="_on_ship_builder_pressed"]
 [connection signal="pressed" from="ExitGame" to="." method="_on_exit_game_pressed"]

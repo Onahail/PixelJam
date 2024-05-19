@@ -23,7 +23,7 @@ func _physics_process(delta):
 				#print(self.module_name)
 	
 func _on_apply_explosion_damage():
-	if in_explosion_radius and shielded == false:
+	if in_explosion_radius:
 		repairable.applyDamage(Globals.EXPLOSION_DAMAGE, self)
 		in_explosion_radius = null
 

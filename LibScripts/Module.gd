@@ -8,6 +8,7 @@ var currentlyRepairing = false
 var health = null
 var repair_time = null
 var shielded = false
+var shieldmod = []
 
 func _ready():
 	
@@ -43,18 +44,22 @@ func _physics_process(_delta):
 	for body in overlapping_bodies:
 		body.collided()
 		EventBus.apply_explosive_damage.emit()
-		if shielded == false:
-			repairable.applyDamage(overlapping_bodies.size() * Globals.ENEMY_DAMAGE, self)
+		repairable.applyDamage(overlapping_bodies.size() * Globals.ENEMY_DAMAGE, self)
 			
 	$TextureHealthBar.value = repairable.currentHP
 
-func ActivateShields():
+func ActivateShields(caller = null):
 	shielded = true
 	$ShieldOverlay.visible = true
+	shieldmod.append(caller)
+	print("activate shield called, array size is now ",shieldmod.size())
 	
-func DeactivateShields():
+func DeactivateShields(caller = null):
+	shieldmod.erase(caller)
+	print("deactivate shield called, array size is now ",shieldmod.size())
 	shielded = false
-	$ShieldOverlay.visible = false
+	if(shieldmod.size() == 0):
+		$ShieldOverlay.visible = false
 
 func _on_area_2d_mouse_exited():
 	if currentlyRepairing == true:
@@ -68,7 +73,6 @@ func _on_hp_depleted():
 	$Area2D.set_collision_mask_value(4, false)
 	Globals.modulesOnShip[module_name] -= 1
 	Globals.calc_collection_rates()
-	#@$".".surrounding_modules.erase(self)
 	self.hide()
 
 func _on_repair_timer_timeout():
