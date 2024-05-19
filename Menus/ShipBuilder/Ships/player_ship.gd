@@ -68,8 +68,8 @@ func load_ship():
 	for node in get_tree().get_nodes_in_group('droppable'):
 		node.remove_from_group('droppable')
 	#Calculate Screen Center
-	var centerx = 0 #($".".get_viewport().get_visible_rect().size.x) / 2
-	var centery = 0 #($".".get_viewport().get_visible_rect().size.y) / 2
+	var centerx = ($".".get_viewport().get_visible_rect().size.x) / 2
+	var centery = ($".".get_viewport().get_visible_rect().size.y) / 2
 	#Define Module Size
 	var moduleheight = 64
 	var modulewidth = 76

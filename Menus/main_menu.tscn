@@ -44,7 +44,7 @@ horizontal_alignment = 1
 vertical_alignment = 1
 
 [node name="PlayerShip" parent="." instance=ExtResource("3_dktnb")]
-position = Vector2(864, 486)
+position = Vector2(431, 168)
 
 [node name="BackgroundLevel1Version1" type="Sprite2D" parent="."]
 z_index = -4

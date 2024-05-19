@@ -298,7 +298,6 @@ text = "Hull"
 horizontal_alignment = 1
 
 [node name="PlayerShip" parent="." instance=ExtResource("4_mu5ef")]
-position = Vector2(864, 486)
 
 [node name="BackgroundMusic" type="AudioStreamPlayer2D" parent="."]
 stream = ExtResource("2_68q7y")
