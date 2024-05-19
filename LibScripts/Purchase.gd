@@ -266,7 +266,7 @@ func _on_area_2d_body_entered(body):
 	
 
 func _on_area_2d_body_exited(body):
-	if module_name == "Hull":
+	if module_name == "Hull" and get_tree().current_scene.name == "ShipBuilder":
 		body.get_node("AnimatedSprite2D").visible = false
 	body.modulate = Color(1,1,1,1)
 	if body.is_in_group('droppable'):

@@ -85,8 +85,4 @@ func CheckShieldableModules():
 					})
 	for result in results:
 		if result["check"].size() > 0:
-			#print(result["check"])
-			print(result["check"][0]["collider"].get_parent().get_node("HullTile"))
 			surrounding_modules.append(result["check"][0]["collider"].get_parent())
-			
-	print("Found all shieldable modules: ", surrounding_modules)

@@ -2,6 +2,7 @@ extends Node2D
 
 const JELLYFISH = preload("res://Game/Enemies/Jellyfish/jellyfish.tscn")
 const BOMBSHARK = preload("res://Game/Enemies/Bomb_Shark/bombshark.tscn")
+const LAUNCHERFISH = preload("res://Game/Enemies/Launcherfish/launcherfish.tscn")
 
 signal fullResources
 
@@ -45,10 +46,18 @@ func SpawnShark():
 	new_shark.global_position = %EnemyPath.global_position
 	add_child(new_shark)
 
+func SpawnLauncherFish():
+	var new_launcherfish = LAUNCHERFISH.instantiate()
+	%EnemyPath.progress_ratio = randf()
+	new_launcherfish.global_position = %EnemyPath.global_position
+	add_child(new_launcherfish)
+
+
 func _on_timer_timeout():
 	#spawn_enemy()
-	SpawnShark()
-	SpawnJellyfish()
+	#SpawnShark()
+	#SpawnJellyfish()
+	SpawnLauncherFish()
 	pass
 
 

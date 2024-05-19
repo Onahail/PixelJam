@@ -1,0 +1,38 @@
+[gd_scene load_steps=5 format=3 uid="uid://djruf2q7aeqcu"]
+
+[ext_resource type="Texture2D" uid="uid://ck0xm2edj1vlb" path="res://Placeholder Assets/Enemy_Placeholder.png" id="1_6wco5"]
+[ext_resource type="Script" path="res://Game/Enemies/Launcherfish/launcherfish.gd" id="1_jwndv"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_4nska"]
+radius = 53.0
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_3wc81"]
+radius = 423.03
+
+[node name="Launcherfish" type="CharacterBody2D"]
+collision_layer = 8
+collision_mask = 0
+script = ExtResource("1_jwndv")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+texture = ExtResource("1_6wco5")
+flip_h = true
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(-6, 1)
+shape = SubResource("CircleShape2D_4nska")
+
+[node name="ShootTimer" type="Timer" parent="."]
+
+[node name="Range" type="Area2D" parent="."]
+collision_layer = 0
+collision_mask = 4
+
+[node name="CollisionShape2D2" type="CollisionShape2D" parent="Range"]
+shape = SubResource("CircleShape2D_3wc81")
+debug_color = Color(0.945773, 0.0899449, 0.53687, 0.42)
+
+[node name="FirePoint" type="Marker2D" parent="."]
+position = Vector2(-32, 3)
+
+[connection signal="timeout" from="ShootTimer" to="." method="_on_shoot_timer_timeout"]
