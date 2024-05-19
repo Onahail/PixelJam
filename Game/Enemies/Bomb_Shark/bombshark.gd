@@ -19,10 +19,16 @@ func _physics_process(delta):
 
 
 func take_damage(damage):
-	#$AnimatedSprite2D.play("damaged")
-	if dead == true:
+	currentHP -= damage
+	if currentHP <= 0:
+		dead = true
 		PlayExplosion($DeathAnimation)
-	super.take_damage(damage)
+		self.set_collision_layer_value(4, false)
+	else:
+		damaged = true
+		velocity = left * normal_speed
+		$AnimatedSprite2D.play("damaged")	
+
 
 
 func collided():

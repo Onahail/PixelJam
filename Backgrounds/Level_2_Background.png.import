@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://wkrgmy5gdtbq"
-path="res://.godot/imported/Level_1_Background_Second_Layer_Placeholder.png-f6614a71925faf0b527b487a7356dfc4.ctex"
+uid="uid://byti4slpwbe51"
+path="res://.godot/imported/Level_2_Background.png-3e91c76fc425ae5f4ae048794617310f.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://Game/Level_1_Background_Second_Layer_Placeholder.png"
-dest_files=["res://.godot/imported/Level_1_Background_Second_Layer_Placeholder.png-f6614a71925faf0b527b487a7356dfc4.ctex"]
+source_file="res://Backgrounds/Level_2_Background.png"
+dest_files=["res://.godot/imported/Level_2_Background.png-3e91c76fc425ae5f4ae048794617310f.ctex"]
 
 [params]
 
