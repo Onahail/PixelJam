@@ -25,15 +25,18 @@ func _process(delta):
 
 	if get_tree().current_scene.name == "Game":
 		if(surrounding_modules.size() == 0):
+			$ShieldsActive.visible = true
 			CheckShieldableModules()
 			for module in surrounding_modules:
 				if module != null:
 					module.ActivateShields(self)
 		if(shield_hp <= 0):
+			$ShieldsActive.visible = false
 			for module in surrounding_modules:
 				if module != null:
 					module.DeactivateShields(self)
-		if(shield_hp < ModuleStats.module_data["Shield"]["misc"]["recharge_delay"]):
+		elif(shield_hp < ModuleStats.module_data["Shield"]["misc"]["recharge_delay"]):
+			$ShieldsActive.visible = true
 			$ChargeDelay.paused = false
 		if(charging):
 			$Recharger.paused = false
@@ -124,6 +127,9 @@ func _on_charge_delay_timeout():
 		shield_hp = ModuleStats.module_data["Shield"]["misc"]["shield_hp"]
 		$ChargeDelay.paused = true
 		$ChargeDelay.start()
+		for module in surrounding_modules:
+			if module != null:
+				module.ActivateShields(self)
 	else:
 		charging = true
 		$ChargeDelay.paused = true
