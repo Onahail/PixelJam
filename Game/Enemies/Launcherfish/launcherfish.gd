@@ -35,6 +35,18 @@ func _physics_process(delta):
 	
 	super._physics_process(delta)
 
+func take_damage(damage):
+	currentHP -= damage
+	if currentHP <= 0:
+		dead = true
+		#$AnimatedSprite2D.play("death")
+		self.set_collision_layer_value(4, false)
+	else:
+		damaged = true
+		velocity = left * normal_speed
+		#$AnimatedSprite2D.play("damaged")	
+
+
 func _on_shoot_timer_timeout():
 	shoot()
 	pass # Replace with function body.

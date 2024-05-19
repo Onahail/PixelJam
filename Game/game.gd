@@ -11,13 +11,8 @@ func _ready():
 	$PlayerShip.load_ship()
 	Globals.calc_collection_rates()
 	Globals.RESOURCES_COLLECTED = 0
-	$ShieldPower.max_value = Globals.SHIELD_POWER
 
 func _physics_process(delta):
-	if Globals.modulesOnShip["Shield"] > 0:
-		$ShieldPower.value = Globals.SHIELD_POWER
-	else:
-		$ShieldPower.visible = false
 	$Timer.wait_time = Globals.SPAWN_RATE
 	Globals.RESOURCES_COLLECTED += Globals.COLLECTION_RATE * delta
 	$ProgressBar.value =  Globals.RESOURCES_COLLECTED / Globals.MAX_RESOURCES * 100
@@ -60,11 +55,18 @@ func _on_timer_timeout():
 	var rando = rng.randf_range(0, 1)
 	if(ScaledDiff < 0.3):
 		SpawnJellyfish()
-	elif(ScaledDiff >= 0.3):
+	elif(ScaledDiff <= 0.6):
 		if(rando < 0.5):
 			SpawnJellyfish()
 		else:
 			SpawnShark()
+	elif(ScaledDiff <= 1):
+		if(rando < 0.3):
+			SpawnJellyfish()
+		elif(rando < 0.6):
+			SpawnShark()
+		else:
+			SpawnLauncherFish()
 
 
 func _on_kill_box_body_entered(body):
