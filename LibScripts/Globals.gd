@@ -97,8 +97,10 @@ func calc_collection_rates():
 func GameLoss():
 	PLAYER_WIN = false
 	print("Game Loss called")
+	Input.set_custom_mouse_cursor(Globals.DEFAULT_CURSOR)
 	get_tree().change_scene_to_file("res://Game/end_game_screen.tscn")
 	
 func GameWin():
 	PLAYER_WIN = true
+	Input.set_custom_mouse_cursor(Globals.DEFAULT_CURSOR)
 	get_tree().change_scene_to_file("res://Game/end_game_screen.tscn")

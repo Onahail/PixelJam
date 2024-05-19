@@ -21,8 +21,9 @@ func save_ship():
 
 
 func load_ship():
-	print("Load ship called")
 	Globals.HULLS = []
+	for node in get_tree().get_nodes_in_group('droppable'):
+		node.remove_from_group('droppable')
 	#Calculate Screen Center
 	var centerx = ($".".get_viewport().get_visible_rect().size.x) / 2
 	var centery = ($".".get_viewport().get_visible_rect().size.y) / 2
@@ -84,8 +85,10 @@ func load_ship():
 				#Set the purchased flags so the object acts as if it was added from the store
 				hullmod.purchased = true
 				Globals.modulesOnShip["Hull"] += 1
+				hullmod.add_to_group('droppable')
 				#If a module needs to be loaded on top of the hull, do so
 				if(Globals.ship_config[j][i] != "Hull"):
+					hullmod.remove_from_group('droppable')
 					module = load(ModuleStats.module_data[Globals.ship_config[j][i]]["assets"]["scene"])
 					var shipmod = module.instantiate()
 					#Spawn Module on hull position, 0,0 is realitve to the hull position
