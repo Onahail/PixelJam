@@ -47,6 +47,7 @@ func _physics_process(delta):
 	
 	super._physics_process(delta)
 
+"""
 func take_damage(damage):
 	currentHP -= damage
 	if currentHP <= 0:
@@ -58,7 +59,7 @@ func take_damage(damage):
 		damaged = true
 		velocity = left * normal_speed
 		#$AnimatedSprite2D.play("damaged")	
-
+"""
 
 func _on_shoot_timer_timeout():
 	shoot()

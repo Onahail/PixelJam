@@ -33,6 +33,19 @@ func collided():
 	self.set_collision_layer_value(4, false)
 	dead = true
 
+func take_damage(damage):
+	if $AnimatedSprite2D.animation == "swimming":
+		$AnimatedSprite2D.stop()
+	currentHP -= damage
+	if currentHP <= 0:
+		dead = true
+		$AnimatedSprite2D.play("death")
+		self.set_collision_layer_value(4, false)
+	else:
+		damaged = true
+		velocity = left * normal_speed
+		$AnimatedSprite2D.play("damaged")	
+
 
 func _on_mouse_entered():
 	#print("Mouse Entered")

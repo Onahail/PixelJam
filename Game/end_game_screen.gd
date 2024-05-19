@@ -7,7 +7,15 @@ func _ready():
 		$Stats.text = str("You collected ", int(Globals.RESOURCES_COLLECTED), " resources worth ", int(earnings), "$.")
 	else:
 		#TODO Better loss message
-		$Stats.text = str("You suck")
+		var required_modules = ["Propeller", "Scoop", "Bridge"]
+		for module in required_modules:
+			if Globals.modulesOnShip[module] == 0:
+				print(Globals.modulesOnShip[module])
+				if module == "Bridge":
+					$Stats.text = str("Unfortunately your ", module, " was destroyed and your exepedition under the sea ended in failure.\nTry again?")
+					break
+				else:
+					$Stats.text = str("Unfortunately all your ", module, "s were destroyed and your exepedition under the sea ended in failure.\nTry again?")
 	
 
 func _on_return_to_menu_pressed():
