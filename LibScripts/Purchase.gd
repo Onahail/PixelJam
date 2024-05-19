@@ -265,27 +265,26 @@ func _on_area_2d_mouse_exited():
 			draggable = false
 			scale = Vector2(1,1)
 
-func _on_area_2d_body_entered(body, recurse:bool = false):
+func _on_area_2d_body_entered(body):
 	if Globals.INITIAL_LOAD == true:
 		if module_name != "Hull":
 			drop_point = body
 			drop_point.remove_from_group('droppable')
-	#if(recurse):
-		#print("RECURSE DETECTED - ", body.is_in_group('droppable'), " Group size = ", get_tree().get_nodes_in_group('droppable').size(), " Initial Load = ", Globals.INITIAL_LOAD)
-		#print(get_tree().get_nodes_in_group('droppable'))
 	if body.is_in_group('droppable'):
 		drop_points.append(body)
 		is_inside_droppable = true
 	else:
+		
 		var test = false
 		for thing in body.get_children():
 			if(thing is Module):
 				test = true
 		if((not test) and (not Globals.INITIAL_LOAD)):
 			body.add_to_group('droppable')
-			#print("EMPTY HULL NOT DROPPABLE - ", body.is_in_group('droppable'), " Group size = ", get_tree().get_nodes_in_group('droppable').size())
-			_on_area_2d_body_entered(body, true)
-	
+			print("EMPTY HULL NOT DROPPABLE - FIXING NOW - Group status is now ", body.is_in_group('droppable'), ", Group size = ", get_tree().get_nodes_in_group('droppable').size(), ", Initial load = ", Globals.INITIAL_LOAD)
+			_on_area_2d_body_entered(body)
+		if((not test) and Globals.INITIAL_LOAD):
+			print("EMPTY HULL NOT DROPPABLE - Initial load detected, will not fix until needed")
 
 func _on_area_2d_body_exited(body):
 	if module_name == "Hull" and get_tree().current_scene.name == "ShipBuilder":
