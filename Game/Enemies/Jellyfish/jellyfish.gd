@@ -34,6 +34,8 @@ func collided():
 	
 
 func take_damage(damage):
+	if $AnimatedSprite2D.animation == "movement":
+		$AnimatedSprite2D.stop()
 	currentHP -= damage
 	if currentHP <= 0:
 		dead = true
