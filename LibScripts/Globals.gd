@@ -21,10 +21,10 @@ var DEFAULT_CURSOR = preload("res://UI_Elements/Default_Cursor.png")
 var PLAYER_WIN = false
 var DEPTH = 100
 var DIFFICULTY :float = 0
-var DIFF_SCALE_START = 3
+var DIFF_SCALE_START = 2
 var DIFF_SCALE_END = 10
-var CURRENCY_SCALE_START = 0.1
-var CURRENCY_SCALE_END = 1
+var CURRENCY_SCALE_START = 0.2
+var CURRENCY_SCALE_END = 0.6
 
 #COLLECTION
 var COLLECTION_RATE = 0
@@ -87,13 +87,10 @@ var HULLS = []
 var COUNT = 0
 
 func calc_collection_rates():
+	SPEED = float(Globals.modulesOnShip["Propeller"] * (8/float(Globals.modulesOnShip["Hull"]))) * ModuleStats.module_data["Propeller"]["misc"]["speed_boost"]
 	Globals.MAX_RESOURCES = (Globals.modulesOnShip["Storage"] + 0.4) * ModuleStats.module_data["Storage"]["misc"]["capacity"]
-	Globals.COLLECTION_RATE = Globals.modulesOnShip["Propeller"] * Globals.modulesOnShip["Scoop"] * ModuleStats.module_data["Scoop"]["misc"]["collection_rate"]
-	SPAWN_RATE = float((BASE_SPAWN_RATE/modulesOnShip["Propeller"])/DIFFICULTY)
-	#print(SPAWN_RATE)
-	#print(modulesOnShip["Propeller"])
-	SPEED = modulesOnShip["Propeller"] * ModuleStats.module_data["Propeller"]["misc"]["speed_boost"]
-	
+	Globals.COLLECTION_RATE = float(Globals.modulesOnShip["Propeller"] * (8/float(Globals.modulesOnShip["Hull"]))) * Globals.modulesOnShip["Scoop"] * ModuleStats.module_data["Scoop"]["misc"]["collection_rate"]
+	SPAWN_RATE = float(BASE_SPAWN_RATE/(float(Globals.modulesOnShip["Propeller"] * (8/float(Globals.modulesOnShip["Hull"]))))/DIFFICULTY)
 func GameLoss():
 	PLAYER_WIN = false
 	print("Game Loss called")

@@ -19,7 +19,7 @@ var module_data = {
 		"health": 16,
 		"price": 25,
 		"repair_time": 3,
-		"min_allowable": 1,
+		"min_allowable": 0,
 		"max_allowable": 4,
 		"misc": {
 			"damage": 1,
@@ -35,7 +35,7 @@ var module_data = {
 		"health": 15,
 		"price": 40,
 		"repair_time": 3,
-		"min_allowable": 1,
+		"min_allowable": 0,
 		"max_allowable": 3,
 		"misc": {
 			"capacity": 1000,
@@ -74,7 +74,7 @@ var module_data = {
 		"health": 15,
 		"price": 300,
 		"repair_time": 3,
-		"min_allowable": 1,
+		"min_allowable": 0,
 		"max_allowable": 2,
 		"misc": {
 			"shield_hp": 20,
@@ -87,7 +87,8 @@ var module_data = {
 	},
 	"Hull": {
 		"health": 20,
-		"price": 75,
+		"price": 50,
+		"base_price": 50,
 		"repair_time": 3,
 		"min_allowable": 1,
 		"max_allowable": 100,

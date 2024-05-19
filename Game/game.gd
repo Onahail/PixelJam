@@ -35,8 +35,8 @@ func _physics_process(delta):
 		#TODO Math for actual value per resource
 		Globals.GameWin()
 	if Globals.modulesOnShip["Propeller"] == 0 or Globals.modulesOnShip["Scoop"] == 0:
-		Globals.GameLoss()	
-		
+		Globals.GameLoss()
+	$ProgressBar/Label.text = str("Resources Collected: ", int(Globals.RESOURCES_COLLECTED),"    Total Storage: ", Globals.MAX_RESOURCES)
 func spawn_enemy():
 	pass
 
@@ -73,9 +73,9 @@ func _on_timer_timeout():
 		else:
 			SpawnShark()
 	elif(ScaledDiff <= 1):
-		if(rando < 0.3):
+		if(rando < 0.333):
 			SpawnJellyfish()
-		elif(rando < 0.6):
+		elif(rando < 0.666):
 			SpawnShark()
 		else:
 			SpawnLauncherFish()
