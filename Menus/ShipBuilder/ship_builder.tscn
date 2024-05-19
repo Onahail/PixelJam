@@ -12,8 +12,11 @@ size = Vector2(760.75, 95)
 script = ExtResource("1_nsu8l")
 
 [node name="Storage Label" type="Label" parent="."]
-offset_right = 40.0
-offset_bottom = 23.0
+offset_left = 1014.0
+offset_top = 49.0
+offset_right = 1348.0
+offset_bottom = 72.0
+text = "Storage label"
 
 [node name="Back" type="Button" parent="."]
 offset_left = 32.0
@@ -46,6 +49,7 @@ offset_left = 643.0
 offset_top = 28.0
 offset_right = 831.0
 offset_bottom = 87.0
+text = "Money"
 horizontal_alignment = 1
 vertical_alignment = 1
 
@@ -93,6 +97,7 @@ offset_left = 1528.0
 offset_top = 36.0
 offset_right = 1678.0
 offset_bottom = 242.0
+text = "Parts"
 
 [node name="Shop" type="Control" parent="UI"]
 layout_mode = 3

@@ -62,7 +62,7 @@ func _process(_delta):
 	$UI/Information/ShipPartNumbers.text = shipinfo
 	ModuleStats.module_data["Hull"]["price"] = int(ModuleStats.module_data["Hull"]["base_price"] + pow(2,(Globals.modulesOnShip["Hull"] - 5)))
 	$UI/Shop/ShopPrices/HullCost.text = str("$",int(ModuleStats.module_data["Hull"]["price"]))
-	
+	$"Storage Label".text = str("Storage amount: ", ModuleStats.module_data["Storage"]["misc"]["capacity"] * Globals.modulesOnShip["Storage"] + ModuleStats.module_data["Storage"]["misc"]["capacity"] * .8)
 func _on_hull_placed_right_of_bridge():
 	print("Hull bridge function")
 	DisplayErrorMessage()
