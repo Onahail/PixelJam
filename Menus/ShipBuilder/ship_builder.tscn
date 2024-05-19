@@ -11,6 +11,10 @@ size = Vector2(760.75, 95)
 [node name="ShipBuilder" type="Node2D"]
 script = ExtResource("1_nsu8l")
 
+[node name="Storage Label" type="Label" parent="."]
+offset_right = 40.0
+offset_bottom = 23.0
+
 [node name="Back" type="Button" parent="."]
 offset_left = 32.0
 offset_top = 24.0
