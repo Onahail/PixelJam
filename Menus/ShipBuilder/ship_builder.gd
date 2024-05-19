@@ -60,7 +60,9 @@ func _process(_delta):
 	for module in Globals.modulesOnShip:
 		shipinfo = str(shipinfo, module, ": ", Globals.modulesOnShip[module],"/",ModuleStats.module_data[module]["max_allowable"], "\n")
 	$UI/Information/ShipPartNumbers.text = shipinfo
-
+	ModuleStats.module_data["Hull"]["price"] = ModuleStats.module_data["Hull"]["base_price"] + pow(2,(Globals.modulesOnShip["Hull"] - 5))
+	$UI/Shop/ShopPrices/HullCost.text = str("$",int(ModuleStats.module_data["Hull"]["price"]))
+	
 func _on_hull_placed_right_of_bridge():
 	print("Hull bridge function")
 	DisplayErrorMessage()
