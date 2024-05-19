@@ -127,7 +127,7 @@ collision_layer = 20
 collision_mask = 20
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="UI/Shop/ShopZone"]
-position = Vector2(483, 533)
+position = Vector2(488, 411)
 shape = SubResource("RectangleShape2D_ah087")
 
 [node name="ShipSpawnPoint" type="Marker2D" parent="UI/Shop"]
@@ -220,6 +220,7 @@ offset_top = 10.0
 offset_right = 68.0
 offset_bottom = 33.0
 tooltip_text = "Add Propellers to speed up the ship and make the scoops collect faster! Be careful! Increased speed will encounter enemies faster!"
+mouse_filter = 0
 text = "Propeller"
 horizontal_alignment = 1
 
@@ -229,6 +230,8 @@ offset_left = 108.0
 offset_top = 10.0
 offset_right = 148.0
 offset_bottom = 33.0
+tooltip_text = "Defend Yourself!"
+mouse_filter = 0
 text = "Gun"
 horizontal_alignment = 1
 
@@ -238,6 +241,8 @@ offset_left = 192.0
 offset_top = 10.0
 offset_right = 252.0
 offset_bottom = 33.0
+tooltip_text = "Stay down longer to collect more resources!"
+mouse_filter = 0
 text = "Storage"
 horizontal_alignment = 1
 
@@ -247,6 +252,8 @@ offset_left = 294.0
 offset_top = 10.0
 offset_right = 341.0
 offset_bottom = 33.0
+tooltip_text = "Collect resources faster!"
+mouse_filter = 0
 text = "Scoop"
 horizontal_alignment = 1
 
@@ -256,6 +263,8 @@ offset_left = 563.0
 offset_top = 10.0
 offset_right = 614.0
 offset_bottom = 33.0
+tooltip_text = "You need somewhere to pilot the ship."
+mouse_filter = 0
 text = "Bridge"
 horizontal_alignment = 1
 
@@ -265,6 +274,8 @@ offset_left = 380.0
 offset_top = 10.0
 offset_right = 428.0
 offset_bottom = 33.0
+tooltip_text = "Protects parts around it but cannot protect itself!"
+mouse_filter = 0
 text = "Shield"
 horizontal_alignment = 1
 
@@ -274,6 +285,8 @@ offset_left = 477.0
 offset_top = 10.0
 offset_right = 517.0
 offset_bottom = 33.0
+tooltip_text = "Bigger ship is better ship!"
+mouse_filter = 0
 text = "Hull"
 horizontal_alignment = 1
 
@@ -281,7 +294,7 @@ horizontal_alignment = 1
 
 [connection signal="pressed" from="Back" to="." method="_on_back_pressed"]
 [connection signal="timeout" from="Timer" to="." method="_on_timer_timeout"]
-[connection signal="area_exited" from="UI/Shop/ShopZone" to="." method="_on_shop_zone_area_exited"]
 [connection signal="area_exited" from="UI/Shop/ShopZone" to="." method="_on_area_2d_area_exited"]
+[connection signal="area_exited" from="UI/Shop/ShopZone" to="." method="_on_shop_zone_area_exited"]
 [connection signal="mouse_entered" from="UI/Shop/ShopZone" to="." method="_on_shop_zone_mouse_entered"]
 [connection signal="mouse_exited" from="UI/Shop/ShopZone" to="." method="_on_shop_zone_mouse_exited"]

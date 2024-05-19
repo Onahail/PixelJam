@@ -11,6 +11,17 @@ func _ready():
 	$PlayerShip.load_ship()
 	Globals.calc_collection_rates()
 	Globals.RESOURCES_COLLECTED = 0
+	var ScaledDiff = float((Globals.DIFFICULTY - Globals.DIFF_SCALE_START) / (Globals.DIFF_SCALE_END - Globals.DIFF_SCALE_START))
+	if(ScaledDiff <= 0.5):
+		$ParallaxBackground/ParallaxLayer/Level1BackgroundSecondLayerPlaceholder.show()
+		$ParallaxBackground/ParallaxLayer/Level2BackgroundSecondLayer.hide()
+		$ParallaxBackground/BackgroundLevel1Version1.show()
+		$ParallaxBackground/BackgroundLevel2.hide()
+	elif(ScaledDiff > 0.5):
+		$ParallaxBackground/ParallaxLayer/Level1BackgroundSecondLayerPlaceholder.hide()
+		$ParallaxBackground/ParallaxLayer/Level2BackgroundSecondLayer.show()
+		$ParallaxBackground/BackgroundLevel1Version1.hide()
+		$ParallaxBackground/BackgroundLevel2.show()
 
 func _physics_process(delta):
 	$Timer.wait_time = Globals.SPAWN_RATE

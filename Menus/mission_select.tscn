@@ -46,6 +46,9 @@ rotation = -3.14143
 min_value = 5000.0
 max_value = 10000.0
 value = 5000.0
+rounded = true
+tick_count = 4
+ticks_on_borders = true
 
 [node name="DepthDisplay" type="Label" parent="DepthSlider"]
 unique_name_in_owner = true
@@ -62,6 +65,14 @@ vertical_alignment = 1
 
 [node name="PlayerShip" parent="." instance=ExtResource("3_n1ivd")]
 position = Vector2(871, 420)
+
+[node name="DepthLabel" type="Label" parent="."]
+offset_left = 702.0
+offset_top = 519.0
+offset_right = 1048.0
+offset_bottom = 568.0
+text = "Lower Depths have more valueable resouces
+but spawn more and harder enemies!"
 
 [connection signal="pressed" from="Back" to="." method="_on_back_pressed"]
 [connection signal="pressed" from="MissionStart" to="." method="_on_mission_start_pressed"]
