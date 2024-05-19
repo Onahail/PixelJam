@@ -7,6 +7,7 @@ const BULLET = preload("res://Menus/ShipBuilder/ShipModules/Gun/bullet.tscn")
 func _ready():
 	if get_tree().current_scene.name == "ShipBuilder":
 		global_rotation = -0.6
+	self.z_index = 3
 		
 
 func _physics_process(_delta):
@@ -26,7 +27,7 @@ func _physics_process(_delta):
 			initial_shot = false
 			
 func shoot():
-	if get_tree().current_scene.name != "Game":
+	if get_tree().current_scene.name != "Game" or !Globals.MOUSE_ON_ENEMY:
 		return
 	var new_bullet = BULLET.instantiate()
 	new_bullet.global_position = $Gun/ShootPoint.global_position

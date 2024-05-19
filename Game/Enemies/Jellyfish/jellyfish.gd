@@ -1,21 +1,14 @@
-extends CharacterBody2D
+extends Enemy
 
-@onready var currentHP = Globals.ENEMY_HEALTH
-var dart_speed = Globals.SPEED + 100
-var normal_speed = Globals.SPEED
+
+
 var darting = false
-var left = Vector2(-1, 0)
-var down = Vector2(-1, 1)
-var up = Vector2(-1, -1)
+var dart_speed = Globals.SPEED * 2
 var random_directions = [left, left, down, up]
 var rand_num = 0
-var damaged = false
-var dead = false
-var collided_with_ship = false
 
-#TODO Set random collision layer per enemy so they only hit specific modules.
-
-func _physics_process(_delta):
+func _physics_process(delta):
+	
 	if collided_with_ship == true:
 		velocity = left * 100
 	elif not damaged:
@@ -31,36 +24,31 @@ func _physics_process(_delta):
 			velocity = left * normal_speed
 			if not $AnimatedSprite2D.is_playing():
 				$AnimatedSprite2D.play("idle")
-	move_and_slide()
-
-func take_damage(damage):
-	if dead == true:
-		return
-	currentHP -= damage
-	damaged = true
-	velocity = left * normal_speed
-	$AnimatedSprite2D.play("damaged")
-	if currentHP <= 0:
-		dead = true
-		$AnimatedSprite2D.play("death")
+	
+	super._physics_process(delta)
 
 func collided():
-	collided_with_ship = true
 	$AnimatedSprite2D.play("death")
-	move_and_slide()
-	dead = true
+	super.collided()
+	
+func take_damage(damage):
+	$AnimatedSprite2D.play("damaged")
+	if currentHP <= 0:
+		$AnimatedSprite2D.play("death")
+	super.take_damage(damage)
+
 
 func _on_animated_sprite_2d_animation_finished():
 	if damaged == true:
 		damaged = false
 	if darting == true:
 		rand_num = int(randf_range(0,5))
-		dart_speed = int(randf_range(Globals.SPEED+100,Globals.SPEED+300))
+		dart_speed = int(randf_range(Globals.SPEED * 2, Globals.SPEED * 3))
 		darting = false
 	elif darting == false:
 		if $Timer.time_left <= 0:
 			$AnimatedSprite2D.play("idle")
-			$Timer.wait_time = randf_range(0, 2)
+			$Timer.wait_time = randf_range(0.5, 2)
 			$Timer.start()
 	if dead == true:
 		queue_free()
@@ -68,3 +56,6 @@ func _on_animated_sprite_2d_animation_finished():
 
 func _on_timer_timeout():
 			darting = true
+
+
+

@@ -20,12 +20,15 @@ var modules = []
 		SCOOP: $UI/Shop/ScoopMarker.global_position,
 		BRIDGE: $UI/Shop/BridgeMarker.global_position,
 		SHIELD: $UI/Shop/ShieldMarker.global_position,
-		SHIP: $UI/Shop/ShipSpawnPoint.global_position
+		SHIP: $UI/Shop/ShipSpawnPoint.global_position,
+		HULL: $UI/Shop/HullMarker.global_position
 	}
 
 signal inventory_spawned
 
 func _ready():
+	Globals.INITIAL_LOAD = true
+	
 	#Dynamically build module list and load scenes
 	for module in ModuleStats.module_data:
 		modules.append(str(module))
@@ -37,47 +40,58 @@ func _ready():
 	EventBus.item_too_expensive.connect(_on_item_too_expensive)
 	EventBus.too_many_modules.connect(_on_too_many_modules)
 	EventBus.module_stacked.connect(_on_module_stacked)
+	EventBus.invalid_module_position.connect(_on_invalid_module_position)
+	EventBus.hull_placed_above_or_below_scoop.connect(_on_hull_placed_by_scoop)
+	EventBus.hull_placed_behind_propeller.connect(_on_hull_placed_behind_propeller)
 	
-	$UI/Information/TooManyModules.visible = false
-	$UI/Information/NotEnoughMoney.visible = false
+	$UI/Information/ErrorMessage.visible = false
 	SpawnInventory(inventory_positions)
 	SetPriceLabels()
 	
 	$PlayerShip.load_ship()
 	
+
+	
 func _process(_delta):
 	
 	$UI/Information/Currency.text = str("Available Money:\n", Globals.PLAYER_CURRENCY)
-	$UI/Information/ShipPartNumbers.text = str(
-		"Propellers: ", Globals.modulesOnShip["Propeller"], "\n",
-		"Weapons: ", Globals.modulesOnShip["Gun"], "\n",
-		"Storage: ", Globals.modulesOnShip["Storage"], "\n",
-		"Scoops: ", Globals.modulesOnShip["Scoop"], "\n",
-		"Bridge: ", Globals.modulesOnShip["Bridge"], "\n",
-		"Shields: ", Globals.modulesOnShip["Shield"], "\n"
-	)
+	var shipinfo = ""
+	for module in Globals.modulesOnShip:
+		shipinfo = str(shipinfo, module, ": ", Globals.modulesOnShip[module], "\n")
+	$UI/Information/ShipPartNumbers.text = shipinfo
+
+func _on_invalid_module_position(module):
+	match module:
+		"Propeller":
+			DisplayErrorMessage()
+			$UI/Information/ErrorMessage.text = str(module, " can only be placed on the back of the ship.")
+		"Scoop":
+			DisplayErrorMessage()
+			$UI/Information/ErrorMessage.text = str(module, " can only be placed on the top or the bottom of the ship.")
+		"Hull":
+			DisplayErrorMessage()
+			$UI/Information/ErrorMessage.text = str(module, " can only be placed next to a pre-existing hull.")
 
 func _on_item_sold(module):
 	$SoldModule.play()
 	Globals.modulesOnShip[module] -= 1
 	
 func _on_item_too_expensive():
-		$UI/Information/NotEnoughMoney.visible = true
-		$Timer.start()
+		DisplayErrorMessage()
+		$UI/Information/ErrorMessage.text = str("Not enough money to purchase that.")
+
 
 func _on_item_purchased(module):
 	Globals.modulesOnShip[module] += 1
 	
 func _on_too_many_modules(module):
-	$UI/Information/TooManyModules.visible = true
-	$UI/Information/TooManyModules.text = str("Exceeded maximum allowance of the ", module, " module.")
-	$Timer.start()
+	DisplayErrorMessage()
+	$UI/Information/ErrorMessage.text = str("Exceeded maximum allowance of the ", module, " module.")
+
 	
 func _on_module_stacked(module):
-	print("Module stacked")
-	$UI/Information/TooManyModules.visible = true
-	$UI/Information/TooManyModules.text = str("Unable to place ", module, " on top of another module.")
-	$Timer.start()
+	DisplayErrorMessage()
+	$UI/Information/ErrorMessage.text = str("Unable to place ", module, " on top of another module.")
 
 func _on_back_pressed():
 	get_tree().change_scene_to_file("res://Menus/main_menu.tscn")
@@ -85,9 +99,23 @@ func _on_back_pressed():
 	
 
 func _on_timer_timeout():
-	$UI/Information/NotEnoughMoney.visible = false
-	$UI/Information/TooManyModules.visible = false
+	$UI/Information/ErrorMessage.visible = false
 
+
+func _on_hull_placed_by_scoop():
+	print("Hull scoop function")
+	DisplayErrorMessage()
+	$UI/Information/ErrorMessage.text = str("Hull can not be placed directly above or below a scoop.")
+
+func _on_hull_placed_behind_propeller():
+	print("Hull propeller function")
+	DisplayErrorMessage()
+	$UI/Information/ErrorMessage.text = str("Hull can not be placed behind propellers.")
+
+func DisplayErrorMessage():
+	$UI/Information/ErrorMessage.visible = true
+	$Timer.start()
+	
 func SetPriceLabels():
 	for module_name in Globals.modulesOnShip:
 		$UI/Shop/ShopPrices.get_node(module_name + "Cost").text = str(ModuleStats.module_data[module_name]["price"], "$")
@@ -127,3 +155,4 @@ func _on_shop_zone_mouse_entered():
 
 func _on_shop_zone_mouse_exited():
 	Globals.MOUSE_IN_SHOP = false
+

@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://botb8rwotkjnb"
-path="res://.godot/imported/Pointy_Jelly_Spreadsheet_140x100.png-44887ef62d0a828f93e6256e8791b3d6.ctex"
+uid="uid://lncsl16ujkpb"
+path="res://.godot/imported/Shield_Power_Bar_Full.png-a9404c2a92d8c17bf64f3ecea98683bd.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://Game/Enemies/Pointy_Jelly_Spreadsheet_140x100.png"
-dest_files=["res://.godot/imported/Pointy_Jelly_Spreadsheet_140x100.png-44887ef62d0a828f93e6256e8791b3d6.ctex"]
+source_file="res://Menus/ShipBuilder/ShipModules/Shield/Shield_Power_Bar_Full.png"
+dest_files=["res://.godot/imported/Shield_Power_Bar_Full.png-a9404c2a92d8c17bf64f3ecea98683bd.ctex"]
 
 [params]
 

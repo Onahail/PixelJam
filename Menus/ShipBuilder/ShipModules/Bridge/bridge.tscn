@@ -1,19 +1,110 @@
-[gd_scene load_steps=7 format=3 uid="uid://dxkgwwaujmugp"]
+[gd_scene load_steps=21 format=3 uid="uid://dxkgwwaujmugp"]
 
 [ext_resource type="Script" path="res://Menus/ShipBuilder/ShipModules/Bridge/bridge.gd" id="1_eicod"]
-[ext_resource type="Texture2D" uid="uid://bwfybmlipdeg6" path="res://Placeholder Assets/Bridge_Module_Placeholder.png" id="2_nvqqs"]
 [ext_resource type="Texture2D" uid="uid://dv5kqq4cpev0t" path="res://UI_Elements/Power_bar_empty.PNG" id="3_2anky"]
 [ext_resource type="Texture2D" uid="uid://bisvr7tt8gtyp" path="res://UI_Elements/Power_Bar_full_upsidedown.png" id="4_0u1o8"]
 [ext_resource type="Texture2D" uid="uid://c8jhabk1jhk5o" path="res://UI_Elements/Repair_Progress_Bar_Empty.png" id="5_d387v"]
+[ext_resource type="Texture2D" uid="uid://dfcjc4w4bxsq3" path="res://Menus/ShipBuilder/ShipModules/Bridge/Bridge_Spreadsheet_108x64.png" id="6_dx7pf"]
 [ext_resource type="Texture2D" uid="uid://bhyufmy42kn4m" path="res://UI_Elements/Repair_Progress_Bar_Full.png" id="6_qpbc4"]
+[ext_resource type="Texture2D" uid="uid://c05ydeutn4b1s" path="res://Menus/ShipBuilder/ShipModules/Bridge/Bridge_Emergency_Spreadsheet_108x64.png" id="7_m8my3"]
+[ext_resource type="Texture2D" uid="uid://c02bfn8up3k2y" path="res://Menus/ShipBuilder/ShipModules/Bridge/Bridge.png" id="8_eu4i3"]
+[ext_resource type="Texture2D" uid="uid://bv0gmw3ydr7vm" path="res://Menus/ShipBuilder/ShipModules/Shield/Shield_Pulse_Spreadsheet_92x64.png" id="9_edouk"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_y3630"]
+atlas = ExtResource("6_dx7pf")
+region = Rect2(0, 0, 108, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_sh4bw"]
+atlas = ExtResource("6_dx7pf")
+region = Rect2(108, 0, 108, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_5gk0r"]
+atlas = ExtResource("6_dx7pf")
+region = Rect2(216, 0, 108, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_06jgi"]
+atlas = ExtResource("7_m8my3")
+region = Rect2(0, 0, 108, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_khctx"]
+atlas = ExtResource("7_m8my3")
+region = Rect2(108, 0, 108, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_yoyt2"]
+atlas = ExtResource("8_eu4i3")
+region = Rect2(0, 0, 108, 64)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_drfg0"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_y3630")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_sh4bw")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_5gk0r")
+}],
+"loop": true,
+"name": &"bridge_anim",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_06jgi")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_khctx")
+}],
+"loop": true,
+"name": &"bridge_emergency",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_yoyt2")
+}],
+"loop": true,
+"name": &"bridge_idle",
+"speed": 5.0
+}]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_ul0v3"]
+atlas = ExtResource("9_edouk")
+region = Rect2(0, 0, 92, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_pad43"]
+atlas = ExtResource("9_edouk")
+region = Rect2(92, 0, 92, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_rt2ri"]
+atlas = ExtResource("9_edouk")
+region = Rect2(184, 0, 92, 64)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_6skd8"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_ul0v3")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_pad43")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_rt2ri")
+}],
+"loop": true,
+"name": &"shields_on",
+"speed": 5.0
+}]
 
 [node name="Bridge" type="Node2D"]
 script = ExtResource("1_eicod")
 
-[node name="Sprite2D" type="Sprite2D" parent="."]
-texture = ExtResource("2_nvqqs")
-
 [node name="Area2D" type="Area2D" parent="."]
+collision_layer = 4
+collision_mask = 6
 
 [node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="Area2D"]
 position = Vector2(-1, -7)
@@ -40,6 +131,16 @@ step = 0.01
 fill_mode = 4
 texture_under = ExtResource("5_d387v")
 texture_progress = ExtResource("6_qpbc4")
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+position = Vector2(8, 0)
+sprite_frames = SubResource("SpriteFrames_drfg0")
+animation = &"bridge_anim"
+
+[node name="ShieldOverlay" type="AnimatedSprite2D" parent="."]
+visible = false
+sprite_frames = SubResource("SpriteFrames_6skd8")
+animation = &"shields_on"
 
 [connection signal="body_entered" from="Area2D" to="." method="_on_area_2d_body_entered"]
 [connection signal="body_exited" from="Area2D" to="." method="_on_area_2d_body_exited"]

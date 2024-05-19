@@ -1,6 +1,10 @@
 extends Node2D
 
+
+
+
 func _ready():
+	
 	var savefile = null
 	if(Globals.running == false):
 		Globals.running = true
@@ -24,17 +28,20 @@ func _ready():
 				Globals.ship_config[i].append("0")
 		#Load Default Ship if no ship file
 		if(savefile == null):
-			var centerheight:float = float(Globals.ship_max_height) / 2
-			var centerwidth:float = float(Globals.ship_max_width) / 2
+			var centerheight = Globals.ship_max_height / 2
+			var centerwidth = Globals.ship_max_width / 2 
+			#Top row left to right
+			Globals.ship_config[centerheight+1][centerwidth-1] = "Hull"
+			Globals.ship_config[centerheight+1][centerwidth] = "Hull"
+			Globals.ship_config[centerheight+1][centerwidth+1] = "Hull"
+			#Center row left to right
+			Globals.ship_config[centerheight][centerwidth-1] = "Propeller"
 			Globals.ship_config[centerheight][centerwidth] = "Bridge"
 			Globals.ship_config[centerheight][centerwidth+1] = "Gun"
-			Globals.ship_config[centerheight][centerwidth-1] = "Propeller"
-			Globals.ship_config[centerheight+1][centerwidth] = "Hull"
-			Globals.ship_config[centerheight-1][centerwidth] = "Hull"
-			Globals.ship_config[centerheight+1][centerwidth+1] = "Hull"
-			Globals.ship_config[centerheight-1][centerwidth+1] = "Hull"
-			Globals.ship_config[centerheight+1][centerwidth-1] = "Hull"
+			#Bottom row left to right
 			Globals.ship_config[centerheight-1][centerwidth-1] = "Hull"
+			Globals.ship_config[centerheight-1][centerwidth] = "Hull"
+			Globals.ship_config[centerheight-1][centerwidth+1] = "Hull"
 		else:
 			#load ship config from file
 			var saveline=true
@@ -45,7 +52,7 @@ func _ready():
 					for i in Globals.ship_max_width:
 						Globals.ship_config[int(saveline[1])][i] = saveline[i+2]
 				elif(saveline[0]=="cash"):
-					Globals.cash = int(saveline[1])
+					Globals.PLAYER_CURRENCY = int(saveline[1])
 					
 
 func _on_ship_builder_pressed():
@@ -79,7 +86,7 @@ func _on_exit_game_pressed():
 	#Save Cash
 	csvline = []
 	csvline.append("cash")
-	csvline.append(Globals.cash)
+	csvline.append(Globals.PLAYER_CURRENCY)
 	savefile.store_csv_line(csvline)
 	#Remove backup save if no errors
 	DirAccess.remove_absolute (Globals.backupsavelocation)

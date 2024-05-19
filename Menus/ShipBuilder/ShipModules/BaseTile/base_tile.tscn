@@ -1,59 +1,92 @@
-[gd_scene load_steps=9 format=3 uid="uid://de4j5pomdu57n"]
+[gd_scene load_steps=12 format=3 uid="uid://de4j5pomdu57n"]
 
-[ext_resource type="Texture2D" uid="uid://bcpxsucjim2ak" path="res://Menus/ShipBuilder/ShipModules/BaseTile/Empty_Room_Doors_Opening_Spreadsheet_92x64.png" id="1_jouv7"]
 [ext_resource type="Script" path="res://Menus/ShipBuilder/ShipModules/BaseTile/base_tile.gd" id="1_qxjh6"]
+[ext_resource type="PackedScene" uid="uid://cl15cxjbmox8d" path="res://Menus/ShipBuilder/ShipModules/BaseTile/hullbodytile.tscn" id="2_0s5ex"]
+[ext_resource type="Texture2D" uid="uid://dv5kqq4cpev0t" path="res://UI_Elements/Power_bar_empty.PNG" id="3_gxwgy"]
+[ext_resource type="Texture2D" uid="uid://bisvr7tt8gtyp" path="res://UI_Elements/Power_Bar_full_upsidedown.png" id="4_5gfuk"]
+[ext_resource type="Texture2D" uid="uid://c8jhabk1jhk5o" path="res://UI_Elements/Repair_Progress_Bar_Empty.png" id="5_sv862"]
+[ext_resource type="Texture2D" uid="uid://bhyufmy42kn4m" path="res://UI_Elements/Repair_Progress_Bar_Full.png" id="6_e8fyu"]
+[ext_resource type="Texture2D" uid="uid://bv0gmw3ydr7vm" path="res://Menus/ShipBuilder/ShipModules/Shield/Shield_Pulse_Spreadsheet_92x64.png" id="7_jtugh"]
 
-[sub_resource type="AtlasTexture" id="AtlasTexture_tccar"]
-atlas = ExtResource("1_jouv7")
+[sub_resource type="AtlasTexture" id="AtlasTexture_ul0v3"]
+atlas = ExtResource("7_jtugh")
 region = Rect2(0, 0, 92, 64)
 
-[sub_resource type="AtlasTexture" id="AtlasTexture_dje80"]
-atlas = ExtResource("1_jouv7")
+[sub_resource type="AtlasTexture" id="AtlasTexture_pad43"]
+atlas = ExtResource("7_jtugh")
 region = Rect2(92, 0, 92, 64)
 
-[sub_resource type="AtlasTexture" id="AtlasTexture_powyi"]
-atlas = ExtResource("1_jouv7")
+[sub_resource type="AtlasTexture" id="AtlasTexture_rt2ri"]
+atlas = ExtResource("7_jtugh")
 region = Rect2(184, 0, 92, 64)
 
-[sub_resource type="AtlasTexture" id="AtlasTexture_dwu1v"]
-atlas = ExtResource("1_jouv7")
-region = Rect2(276, 0, 92, 64)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_jadru"]
-atlas = ExtResource("1_jouv7")
-region = Rect2(368, 0, 92, 64)
-
-[sub_resource type="SpriteFrames" id="SpriteFrames_n1fdi"]
+[sub_resource type="SpriteFrames" id="SpriteFrames_hyvw4"]
 animations = [{
 "frames": [{
 "duration": 1.0,
-"texture": SubResource("AtlasTexture_tccar")
+"texture": SubResource("AtlasTexture_ul0v3")
 }, {
 "duration": 1.0,
-"texture": SubResource("AtlasTexture_dje80")
+"texture": SubResource("AtlasTexture_pad43")
 }, {
 "duration": 1.0,
-"texture": SubResource("AtlasTexture_powyi")
-}, {
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_dwu1v")
-}, {
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_jadru")
+"texture": SubResource("AtlasTexture_rt2ri")
 }],
 "loop": true,
-"name": &"base_tile_animation",
+"name": &"shields_on",
 "speed": 5.0
 }]
 
-[node name="BaseTile" type="StaticBody2D" groups=["droppable", "hull"]]
+[node name="Hull" type="Node2D" groups=["droppable", "hull"]]
 script = ExtResource("1_qxjh6")
 
-[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
-sprite_frames = SubResource("SpriteFrames_n1fdi")
-animation = &"base_tile_animation"
-frame_progress = 0.436827
+[node name="HullTile" parent="." instance=ExtResource("2_0s5ex")]
 
-[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="."]
+[node name="TextureHealthBar" type="TextureProgressBar" parent="."]
+offset_left = 46.0
+offset_top = 32.0
+offset_right = 138.0
+offset_bottom = 96.0
+rotation = -3.14186
+fill_mode = 8
+texture_under = ExtResource("3_gxwgy")
+texture_progress = ExtResource("4_5gfuk")
+
+[node name="RepairProgressBar" type="TextureProgressBar" parent="."]
+offset_left = -22.0
+offset_top = -22.0
+offset_right = 22.0
+offset_bottom = 22.0
+step = 0.01
+fill_mode = 4
+texture_under = ExtResource("5_sv862")
+texture_progress = ExtResource("6_e8fyu")
+
+[node name="RepairTimer" type="Timer" parent="."]
+
+[node name="Area2D" type="Area2D" parent="."]
+collision_layer = 5
+collision_mask = 24
+
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="Area2D"]
 position = Vector2(-1, -7)
 polygon = PackedVector2Array(-28, -23, 30, -23, 45, 7, 30, 37, -27, 37, -43, 7)
+
+[node name="ExplosionCheck" type="Area2D" parent="."]
+collision_layer = 0
+collision_mask = 128
+
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="ExplosionCheck"]
+position = Vector2(-1, -7)
+polygon = PackedVector2Array(-28, -23, 30, -23, 45, 7, 30, 37, -27, 37, -43, 7)
+
+[node name="ShieldOverlay" type="AnimatedSprite2D" parent="."]
+visible = false
+sprite_frames = SubResource("SpriteFrames_hyvw4")
+animation = &"shields_on"
+
+[connection signal="timeout" from="RepairTimer" to="." method="_on_repair_timer_timeout"]
+[connection signal="body_entered" from="Area2D" to="." method="_on_area_2d_body_entered"]
+[connection signal="body_exited" from="Area2D" to="." method="_on_area_2d_body_exited"]
+[connection signal="mouse_entered" from="Area2D" to="." method="_on_area_2d_mouse_entered"]
+[connection signal="mouse_exited" from="Area2D" to="." method="_on_area_2d_mouse_exited"]

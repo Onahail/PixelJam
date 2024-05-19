@@ -1,33 +1,55 @@
 extends Node2D
 
+const JELLYFISH = preload("res://Game/Enemies/Jellyfish/jellyfish.tscn")
+const BOMBSHARK = preload("res://Game/Enemies/Bomb_Shark/bombshark.tscn")
 
 signal fullResources
 
 func _ready():
-	$ProgressBar.value = Globals.RESOURCES_COLLECTED
-	$Victory.visible = false
 	Globals.VIEWPORT_CENTER = get_viewport().size * 0.5
-	$Timer.wait_time = Globals.SPAWN_RATE
+	$PlayerShip.load_ship()
+	Globals.calc_collection_rates()
+	Globals.RESOURCES_COLLECTED = 0
+	$ShieldPower.max_value = Globals.SHIELD_POWER
 
 func _physics_process(delta):
+	if Globals.modulesOnShip["Shield"] > 0:
+		$ShieldPower.value = Globals.SHIELD_POWER
+	else:
+		$ShieldPower.visible = false
+	$Timer.wait_time = Globals.SPAWN_RATE
 	Globals.RESOURCES_COLLECTED += Globals.COLLECTION_RATE * delta
-	$ProgressBar.value = Globals.RESOURCES_COLLECTED
+	$ProgressBar.value =  Globals.RESOURCES_COLLECTED / Globals.MAX_RESOURCES * 100
+	#print("Collected: ", Globals.RESOURCES_COLLECTED, " - Max Resources: ", Globals.MAX_RESOURCES)
+	#print("Progress Bar Value = ", $ProgressBar.value)
 	if Globals.RESOURCES_COLLECTED >= Globals.MAX_RESOURCES:
-		$Victory/ResourcesCollected.text = str("You collected ", Globals.MAX_RESOURCES, " resources worth ", Globals.MAX_RESOURCES,"$.")
-		$Victory.visible = true
-
-func _on_return_to_surface_pressed():
-	get_tree().change_scene_to_file("res://Menus/main_menu.tscn")
-
+		get_tree().change_scene_to_file("res://Game/end_game_screen.tscn")
+		#TODO Math for actual value per resource
+		Globals.GameWin()
+	if Globals.modulesOnShip["Propeller"] == 0 or Globals.modulesOnShip["Scoop"] == 0:
+		Globals.GameLoss()	
+		
 func spawn_enemy():
-	var new_enemy = preload("res://Game/Enemies/jellyfish.tscn").instantiate()
-	%JellyfishPath.progress_ratio = randf()
-	new_enemy.global_position = %JellyfishPath.global_position
-	add_child(new_enemy)
+	pass
 
+
+func SpawnJellyfish():
+	var new_jelly = JELLYFISH.instantiate()
+	%EnemyPath.progress_ratio = randf()
+	new_jelly.global_position = %EnemyPath.global_position
+	add_child(new_jelly)
+
+func SpawnShark():
+	var new_shark = BOMBSHARK.instantiate()
+	%EnemyPath.progress_ratio = randf()
+	new_shark.global_position = %EnemyPath.global_position
+	add_child(new_shark)
 
 func _on_timer_timeout():
-	spawn_enemy()
+	#spawn_enemy()
+	SpawnShark()
+	SpawnJellyfish()
+	pass
 
 
 func _on_kill_box_body_entered(body):

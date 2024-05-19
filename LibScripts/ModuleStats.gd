@@ -2,13 +2,13 @@ extends Node
 
 var module_data = {
 	"Propeller": {
-		"health": 50,
-		"price": 250,
+		"health": 15,
+		"price": 10,
 		"repair_time": 3,
 		"min_allowable": 1,
-		"max_allowable": 2,
+		"max_allowable": 6,
 		"misc": {
-			"speed_boost": 20,
+			"speed_boost": 100,
 			"energy_consumption": 5
 		},
 		"assets": {
@@ -16,7 +16,7 @@ var module_data = {
 		}
 	},
 	"Gun": {
-		"health": 50,
+		"health": 16,
 		"price": 2,
 		"repair_time": 3,
 		"min_allowable": 1,
@@ -32,7 +32,7 @@ var module_data = {
 		}
 	},
 	"Storage": {
-		"health": 25,
+		"health": 15,
 		"price": 3,
 		"repair_time": 3,
 		"min_allowable": 1,
@@ -46,7 +46,7 @@ var module_data = {
 		}
 	},    
 	"Bridge": {
-		"health": 25,
+		"health": 10,
 		"price": 4,
 		"repair_time": 3,
 		"min_allowable": 1,
@@ -58,20 +58,20 @@ var module_data = {
 		}
 	},
 	"Scoop": {
-		"health": 25,
+		"health": 10,
 		"price": 5,
 		"repair_time": 3,
 		"min_allowable": 1,
 		"max_allowable": 4,
 		"misc": {
-				"collection_rate": 50
+				"collection_rate": 1
 		},
 		"assets": {
 			"scene": "res://Menus/ShipBuilder/ShipModules/Scoop/scoop.tscn"
 		}
 	},
 	"Shield": {
-		"health": 25,
+		"health": 15,
 		"price": 6,
 		"repair_time": 3,
 		"min_allowable": 1,
@@ -83,7 +83,7 @@ var module_data = {
 		}
 	},
 	"Hull": {
-		"health": 10,
+		"health": 20,
 		"price": 7,
 		"repair_time": 3,
 		"min_allowable": 1,
@@ -91,7 +91,8 @@ var module_data = {
 		"misc": {
 		},
 		"assets": {
-			"scene": "res://Menus/ShipBuilder/ShipModules/BaseTile/base_tile.tscn"
+			"scene": "res://Menus/ShipBuilder/ShipModules/BaseTile/base_tile.tscn",
+			"expansion_marker": "res://Menus/ShipBuilder/ShipModules/BaseTile/expansion_marker.tscn"
 		}
 	}
 }

@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://cftisd14odmvl"
-path="res://.godot/imported/Pointy_Jelly_Getting_Hit_146x128.png-372c7516c3bf5733402fb9f7f7079bb2.ctex"
+uid="uid://bhcod682htff1"
+path="res://.godot/imported/Bomb_Shark.png-85a8f323dd5a4bb3b736ee6bffb94a5d.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://Game/Enemies/Pointy_Jelly_Getting_Hit_146x128.png"
-dest_files=["res://.godot/imported/Pointy_Jelly_Getting_Hit_146x128.png-372c7516c3bf5733402fb9f7f7079bb2.ctex"]
+source_file="res://Game/Enemies/Bomb_Shark/Bomb_Shark.png"
+dest_files=["res://.godot/imported/Bomb_Shark.png-85a8f323dd5a4bb3b736ee6bffb94a5d.ctex"]
 
 [params]
 
