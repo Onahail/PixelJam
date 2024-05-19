@@ -51,7 +51,9 @@ func _process(delta):
 	super._process(delta)
 
 func _on_hp_depleted():
-	#TODO Shield Destroyed
+	for module in surrounding_modules:
+		if module != null:
+			module.DeactivateShields(self)
 	super._on_hp_depleted()
 	pass
 

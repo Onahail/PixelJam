@@ -7,6 +7,9 @@ var dart_speed = Globals.SPEED * 2
 var random_directions = [left, left, down, up]
 var rand_num_jelly = 0
 
+func _ready():
+	enemy_name = "Jellyfish"
+
 func _physics_process(delta):
 	
 	if collided_with_ship == true:
@@ -31,25 +34,8 @@ func collided():
 	$AnimatedSprite2D.play("death")
 	$JellyThud.play()
 	super.collided()
-	
-"""
-func take_damage(damage):
-	if $AnimatedSprite2D.animation == "swimming":
-		$AnimatedSprite2D.stop()
-	currentHP -= damage
-	if currentHP <= 0:
-		dead = true
-		$AnimatedSprite2D.play("death")
-		self.set_collision_layer_value(4, false)
-	else:
-		damaged = true
-		velocity = left * normal_speed
-		$AnimatedSprite2D.play("damaged")	
-"""
 
 func _on_animated_sprite_2d_animation_finished():
-	if damaged == true:
-		damaged = false
 	if darting == true:
 		rand_num_jelly = int(randf_range(0,5))
 		dart_speed = int(randf_range(Globals.SPEED * 2, Globals.SPEED * 3))
@@ -59,9 +45,7 @@ func _on_animated_sprite_2d_animation_finished():
 			$AnimatedSprite2D.play("idle")
 			$Timer.wait_time = randf_range(0.5, 2)
 			$Timer.start()
-	if dead == true:
-		queue_free()
-		pass
+	super._on_animated_sprite_2d_animation_finished()
 
 
 func _on_timer_timeout():

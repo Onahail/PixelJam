@@ -167,7 +167,7 @@ animations = [{
 "duration": 1.0,
 "texture": SubResource("AtlasTexture_42mc3")
 }],
-"loop": true,
+"loop": false,
 "name": &"swimming",
 "speed": 5.0
 }]
@@ -189,8 +189,8 @@ script = ExtResource("1_jwndv")
 rotation = 0.000831833
 sprite_frames = SubResource("SpriteFrames_d14ik")
 animation = &"launching"
-frame = 1
-frame_progress = 0.542943
+frame = 2
+frame_progress = 0.414915
 flip_v = true
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
@@ -208,8 +208,9 @@ shape = SubResource("CircleShape2D_3wc81")
 debug_color = Color(0.945773, 0.0899449, 0.53687, 0.42)
 
 [node name="FirePoint" type="Marker2D" parent="."]
-position = Vector2(-32, 3)
+position = Vector2(85, 1)
 
 [connection signal="mouse_entered" from="." to="." method="_on_mouse_entered"]
 [connection signal="mouse_exited" from="." to="." method="_on_mouse_exited"]
+[connection signal="animation_finished" from="AnimatedSprite2D" to="." method="_on_animated_sprite_2d_animation_finished"]
 [connection signal="timeout" from="ShootTimer" to="." method="_on_shoot_timer_timeout"]

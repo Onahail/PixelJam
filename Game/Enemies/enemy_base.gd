@@ -2,7 +2,7 @@ extends CharacterBody2D
 class_name Enemy
 
 @onready var currentHP = Globals.ENEMY_HEALTH
-
+@export var enemy_name = "Default"
 
 var normal_speed = Globals.SPEED
 var left = Vector2(-1, 0)
@@ -46,6 +46,12 @@ func take_damage(damage):
 		velocity = left * normal_speed
 		$AnimatedSprite2D.play("damaged")	
 
+
+func _on_animated_sprite_2d_animation_finished():
+	if damaged == true:
+		damaged = false
+	if dead == true:
+		queue_free()
 
 func _on_mouse_entered():
 	#print("Mouse Entered")

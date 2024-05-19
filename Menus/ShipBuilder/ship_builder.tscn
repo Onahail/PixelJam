@@ -64,7 +64,9 @@ offset_left = 47.0
 offset_top = 132.0
 offset_right = 227.0
 offset_bottom = 285.0
-text = "Left click and drag on to the desired tile to purchase. Right click after placement to refund."
+text = "Left click and drag on to the desired tile to purchase. Right click after placement to refund.
+
+Mouse over the module name to view details."
 horizontal_alignment = 1
 vertical_alignment = 1
 autowrap_mode = 3

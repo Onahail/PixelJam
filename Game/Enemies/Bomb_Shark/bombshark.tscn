@@ -216,14 +216,6 @@ position = Vector2(72, 3)
 shape = SubResource("CircleShape2D_khwpk")
 debug_color = Color(0.869464, 0.000512111, 0.851496, 0.42)
 
-[node name="DeathAnimation" type="AnimatedSprite2D" parent="."]
-visible = false
-position = Vector2(27.974, -1.56709)
-scale = Vector2(1.53831, 1.47794)
-sprite_frames = SubResource("SpriteFrames_o5il4")
-animation = &"explosion"
-frame_progress = 0.855642
-
 [node name="ForwardExplosion" type="AnimatedSprite2D" parent="."]
 visible = false
 position = Vector2(59.8661, -7.21441)
@@ -238,5 +230,5 @@ stream = ExtResource("4_dsthh")
 [connection signal="mouse_entered" from="." to="." method="_on_mouse_entered"]
 [connection signal="mouse_exited" from="." to="." method="_on_mouse_exited"]
 [connection signal="animation_finished" from="AnimatedSprite2D" to="." method="_on_animated_sprite_2d_animation_finished"]
-[connection signal="animation_finished" from="DeathAnimation" to="." method="_on_explosion_animation_animation_finished"]
 [connection signal="animation_finished" from="ForwardExplosion" to="." method="_on_explosion_animation_animation_finished"]
+[connection signal="animation_finished" from="ForwardExplosion" to="." method="_on_forward_explosion_animation_finished"]

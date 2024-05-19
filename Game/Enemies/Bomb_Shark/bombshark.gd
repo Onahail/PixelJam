@@ -4,6 +4,7 @@ extends Enemy
 func _ready():
 	
 	$AnimatedSprite2D.play("swimming")
+	enemy_name = "Bombshark"
 	super._ready()
 	
 
@@ -21,8 +22,8 @@ func _physics_process(delta):
 		else:
 			velocity = global_position.direction_to(left) * normal_speed
 		
-	if not damaged:
-		$AnimatedSprite2D.play("swimming")
+		if not damaged:
+			$AnimatedSprite2D.play("swimming")
 		
 	#if dead == true:
 	#	queue_free()
@@ -45,23 +46,16 @@ func take_damage(damage):
 
 
 func collided():
-	PlayExplosion($ForwardExplosion)
+	PlayExplosion()
 	velocity = stopped * 0
 	super.collided()
 
-func PlayExplosion(explosion):
+func PlayExplosion():
 	$AnimatedSprite2D.visible = false
 	$ExplosionSound.play()
-	explosion.visible = true
-	explosion.play("explosion")
+	$ForwardExplosion.visible = true
+	$ForwardExplosion.play("explosion")
 
-
-func _on_explosion_animation_animation_finished():
-	if dead == true:
-		queue_free()
-
-
-func _on_animated_sprite_2d_animation_finished():
-	if damaged == true:
-		damaged = false
-	pass # Replace with function body.
+func _on_forward_explosion_animation_finished():
+		if dead == true:
+			queue_free()
