@@ -84,7 +84,6 @@ func _on_hp_depleted():
 
 func CheckShieldableModules():
 	print("CheckShieldableModules called")
-	print(global_position)
 
 	var shield_params = PhysicsPointQueryParameters2D.new()
 	
@@ -127,7 +126,7 @@ func CheckShieldableModules():
 
 
 func _on_charge_delay_timeout():
-	print("Shield Charge Started")
+	#print("Shield Charge Started")
 	if(shield_hp == 0):
 		shield_hp = ModuleStats.module_data["Shield"]["misc"]["shield_hp"]
 		$ChargeDelay.paused = true

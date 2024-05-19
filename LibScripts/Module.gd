@@ -2,6 +2,7 @@ extends Purchase
 class_name Module
 
 var repairable = preload("res://LibScripts/repairable.gd").new()
+var repair_sounds = preload("res://Sounds/construction-soundscape-with-reverb-32795.mp3")
 var currentlyRepairing = false
 
 #var repair = ModuleStats.module_data[module_name]["repair_time"]
@@ -42,6 +43,7 @@ func _physics_process(_delta):
 	var overlapping_bodies = $Area2D.get_overlapping_bodies()
 			
 	for body in overlapping_bodies:
+		#print(self.get_children())
 		body.collided()
 		EventBus.apply_explosive_damage.emit()
 		repairable.applyDamage(overlapping_bodies.size() * Globals.ENEMY_DAMAGE, self)
@@ -73,19 +75,23 @@ func _on_hp_depleted():
 	$Area2D.set_collision_mask_value(4, false)
 	Globals.modulesOnShip[module_name] -= 1
 	Globals.calc_collection_rates()
-	self.hide()
+	self.queue_free()
 
 func _on_repair_timer_timeout():
+	MenuMusic.stop()
 	Input.set_custom_mouse_cursor(Globals.DEFAULT_CURSOR)
 	repairable.repairDamage(health)
 	$RepairProgressBar.visible = false
 	
 func _on_repair_toggled():
 	Input.set_custom_mouse_cursor(Globals.REPAIR_CURSOR)
+	MenuMusic.stream = repair_sounds
+	MenuMusic.play()
 	currentlyRepairing = true
 	$RepairProgressBar.visible = true
 	
 func _on_repair_cancelled():
+	MenuMusic.stop()
 	Input.set_custom_mouse_cursor(Globals.DEFAULT_CURSOR)
 	$RepairTimer.stop()
 	$RepairProgressBar.visible = false

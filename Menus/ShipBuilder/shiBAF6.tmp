@@ -1,0 +1,295 @@
+[gd_scene load_steps=5 format=3 uid="uid://bispnc5n2jjek"]
+
+[ext_resource type="Script" path="res://Menus/ShipBuilder/ship_builder.gd" id="1_nsu8l"]
+[ext_resource type="AudioStream" uid="uid://ck6c3x2y4hkq1" path="res://Sounds/coin-and-money-bag-3-185264.mp3" id="4_i2e6w"]
+[ext_resource type="PackedScene" uid="uid://d0gti5ph2m6et" path="res://Menus/ShipBuilder/Ships/player_ship.tscn" id="4_mu5ef"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_ah087"]
+size = Vector2(760.75, 95)
+
+[node name="ShipBuilder" type="Node2D"]
+script = ExtResource("1_nsu8l")
+
+[node name="Back" type="Button" parent="."]
+offset_left = 32.0
+offset_top = 24.0
+offset_right = 99.0
+offset_bottom = 78.0
+text = "Back"
+
+[node name="Timer" type="Timer" parent="."]
+wait_time = 2.0
+
+[node name="SoldModule" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource("4_i2e6w")
+
+[node name="UI" type="Control" parent="."]
+layout_mode = 3
+anchors_preset = 0
+offset_right = 40.0
+offset_bottom = 40.0
+
+[node name="Information" type="Control" parent="UI"]
+layout_mode = 3
+anchors_preset = 0
+offset_right = 40.0
+offset_bottom = 40.0
+
+[node name="Currency" type="Label" parent="UI/Information"]
+layout_mode = 0
+offset_left = 643.0
+offset_top = 28.0
+offset_right = 831.0
+offset_bottom = 87.0
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="ErrorMessage" type="Label" parent="UI/Information"]
+layout_mode = 0
+offset_left = 680.0
+offset_top = 152.0
+offset_right = 1052.0
+offset_bottom = 205.0
+theme_override_colors/font_color = Color(1, 0, 0, 1)
+theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
+theme_override_constants/outline_size = 5
+text = "LOREM IPSUM"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Instructions" type="Label" parent="UI/Information"]
+layout_mode = 0
+offset_left = 47.0
+offset_top = 132.0
+offset_right = 227.0
+offset_bottom = 285.0
+text = "Left click and drag on to the desired tile to purchase. Right click after placement to refund."
+horizontal_alignment = 1
+vertical_alignment = 1
+autowrap_mode = 3
+
+[node name="Title" type="Label" parent="UI/Information"]
+layout_mode = 0
+offset_left = 239.0
+offset_top = 8.0
+offset_right = 648.0
+offset_bottom = 77.0
+theme_override_font_sizes/font_size = 50
+text = "Ship Builder
+"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="ShipPartNumbers" type="Label" parent="UI/Information"]
+layout_mode = 0
+offset_left = 1528.0
+offset_top = 36.0
+offset_right = 1678.0
+offset_bottom = 242.0
+
+[node name="Shop" type="Control" parent="UI"]
+layout_mode = 3
+anchors_preset = 0
+offset_left = 465.0
+offset_top = 470.0
+offset_right = 465.0
+offset_bottom = 470.0
+
+[node name="PropellerMarker" type="Marker2D" parent="UI/Shop"]
+position = Vector2(180, 430)
+
+[node name="GunMarker" type="Marker2D" parent="UI/Shop"]
+position = Vector2(275, 430)
+
+[node name="StorageMarker" type="Marker2D" parent="UI/Shop"]
+position = Vector2(371, 430)
+
+[node name="ScoopMarker" type="Marker2D" parent="UI/Shop"]
+position = Vector2(466, 430)
+
+[node name="BridgeMarker" type="Marker2D" parent="UI/Shop"]
+position = Vector2(739, 430)
+
+[node name="ShieldMarker" type="Marker2D" parent="UI/Shop"]
+position = Vector2(556, 430)
+
+[node name="HullMarker" type="Marker2D" parent="UI/Shop"]
+position = Vector2(648, 430)
+
+[node name="ShopZone" type="Area2D" parent="UI/Shop"]
+position = Vector2(-17, -5)
+collision_layer = 20
+collision_mask = 20
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="UI/Shop/ShopZone"]
+position = Vector2(484, 424)
+shape = SubResource("RectangleShape2D_ah087")
+
+[node name="ShipSpawnPoint" type="Marker2D" parent="UI/Shop"]
+position = Vector2(-1058, 1)
+
+[node name="ShopPrices" type="Control" parent="UI/Shop"]
+layout_mode = 3
+anchors_preset = 0
+offset_left = 149.0
+offset_top = 340.0
+offset_right = 687.0
+offset_bottom = 379.0
+
+[node name="PropellerCost" type="Label" parent="UI/Shop/ShopPrices"]
+layout_mode = 0
+offset_left = 11.0
+offset_top = 37.0
+offset_right = 51.0
+offset_bottom = 60.0
+text = "1
+"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="GunCost" type="Label" parent="UI/Shop/ShopPrices"]
+layout_mode = 0
+offset_left = 107.0
+offset_top = 37.0
+offset_right = 147.0
+offset_bottom = 60.0
+text = "2
+"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="StorageCost" type="Label" parent="UI/Shop/ShopPrices"]
+layout_mode = 0
+offset_left = 202.0
+offset_top = 37.0
+offset_right = 242.0
+offset_bottom = 60.0
+text = "3"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="ScoopCost" type="Label" parent="UI/Shop/ShopPrices"]
+layout_mode = 0
+offset_left = 297.0
+offset_top = 37.0
+offset_right = 337.0
+offset_bottom = 60.0
+text = "4"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="BridgeCost" type="Label" parent="UI/Shop/ShopPrices"]
+layout_mode = 0
+offset_left = 570.0
+offset_top = 37.0
+offset_right = 610.0
+offset_bottom = 60.0
+text = "5"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="ShieldCost" type="Label" parent="UI/Shop/ShopPrices"]
+layout_mode = 0
+offset_left = 386.0
+offset_top = 37.0
+offset_right = 426.0
+offset_bottom = 60.0
+text = "6"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="HullCost" type="Label" parent="UI/Shop/ShopPrices"]
+layout_mode = 0
+offset_left = 480.0
+offset_top = 37.0
+offset_right = 520.0
+offset_bottom = 60.0
+text = "7"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="PropellerLabel" type="Label" parent="UI/Shop/ShopPrices"]
+layout_mode = 0
+offset_left = -3.0
+offset_top = 10.0
+offset_right = 68.0
+offset_bottom = 33.0
+tooltip_text = "Add Propellers to speed up the ship and make the scoops collect faster! Be careful! Increased speed will encounter enemies faster!"
+mouse_filter = 0
+text = "Propeller"
+horizontal_alignment = 1
+
+[node name="GunLabel" type="Label" parent="UI/Shop/ShopPrices"]
+layout_mode = 0
+offset_left = 108.0
+offset_top = 10.0
+offset_right = 148.0
+offset_bottom = 33.0
+tooltip_text = "Defend Yourself!"
+mouse_filter = 0
+text = "Gun"
+horizontal_alignment = 1
+
+[node name="StorageLabel" type="Label" parent="UI/Shop/ShopPrices"]
+layout_mode = 0
+offset_left = 192.0
+offset_top = 10.0
+offset_right = 252.0
+offset_bottom = 33.0
+tooltip_text = "Stay down longer to collect more resources!"
+mouse_filter = 0
+text = "Storage"
+horizontal_alignment = 1
+
+[node name="ScoopLabel" type="Label" parent="UI/Shop/ShopPrices"]
+layout_mode = 0
+offset_left = 294.0
+offset_top = 10.0
+offset_right = 341.0
+offset_bottom = 33.0
+tooltip_text = "Collect resources faster!"
+mouse_filter = 0
+text = "Scoop"
+horizontal_alignment = 1
+
+[node name="BridgeLabel" type="Label" parent="UI/Shop/ShopPrices"]
+layout_mode = 0
+offset_left = 563.0
+offset_top = 10.0
+offset_right = 614.0
+offset_bottom = 33.0
+tooltip_text = "You need somewhere to pilot the ship."
+mouse_filter = 0
+text = "Bridge"
+horizontal_alignment = 1
+
+[node name="ShieldLabel" type="Label" parent="UI/Shop/ShopPrices"]
+layout_mode = 0
+offset_left = 380.0
+offset_top = 10.0
+offset_right = 428.0
+offset_bottom = 33.0
+tooltip_text = "Protects parts around it but cannot protect itself!"
+mouse_filter = 0
+text = "Shield"
+horizontal_alignment = 1
+
+[node name="HullLabel" type="Label" parent="UI/Shop/ShopPrices"]
+layout_mode = 0
+offset_left = 477.0
+offset_top = 10.0
+offset_right = 517.0
+offset_bottom = 33.0
+tooltip_text = "Bigger ship is better ship!"
+mouse_filter = 0
+text = "Hull"
+horizontal_alignment = 1
+
+[node name="PlayerShip" parent="." instance=ExtResource("4_mu5ef")]
+
+[connection signal="pressed" from="Back" to="." method="_on_back_pressed"]
+[connection signal="timeout" from="Timer" to="." method="_on_timer_timeout"]
+[connection signal="area_exited" from="UI/Shop/ShopZone" to="." method="_on_area_2d_area_exited"]
+[connection signal="area_exited" from="UI/Shop/ShopZone" to="." method="_on_shop_zone_area_exited"]
+[connection signal="mouse_entered" from="UI/Shop/ShopZone" to="." method="_on_shop_zone_mouse_entered"]
+[connection signal="mouse_exited" from="UI/Shop/ShopZone" to="." method="_on_shop_zone_mouse_exited"]

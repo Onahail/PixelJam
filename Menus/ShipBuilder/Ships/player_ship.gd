@@ -21,6 +21,7 @@ func save_ship():
 
 
 func load_ship():
+	print("Load ship called")
 	Globals.HULLS = []
 	#Calculate Screen Center
 	var centerx = ($".".get_viewport().get_visible_rect().size.x) / 2

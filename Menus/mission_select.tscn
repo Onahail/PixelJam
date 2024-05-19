@@ -1,7 +1,6 @@
-[gd_scene load_steps=4 format=3 uid="uid://cwyaji7wn7snp"]
+[gd_scene load_steps=3 format=3 uid="uid://cwyaji7wn7snp"]
 
 [ext_resource type="Script" path="res://Menus/mission_select.gd" id="1_xk8tw"]
-[ext_resource type="AudioStream" uid="uid://chq56rpyr1g8b" path="res://Music/Mainmenu.mp3" id="2_xlygh"]
 [ext_resource type="PackedScene" uid="uid://d0gti5ph2m6et" path="res://Menus/ShipBuilder/Ships/player_ship.tscn" id="3_n1ivd"]
 
 [node name="MissionSelect" type="Node2D"]
@@ -31,10 +30,6 @@ text = "Launch Depth
 "
 horizontal_alignment = 1
 vertical_alignment = 1
-
-[node name="AudioStreamPlayer2D" type="AudioStreamPlayer2D" parent="."]
-stream = ExtResource("2_xlygh")
-autoplay = true
 
 [node name="DepthSlider" type="VSlider" parent="."]
 unique_name_in_owner = true

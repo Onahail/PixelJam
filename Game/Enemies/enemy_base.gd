@@ -13,10 +13,11 @@ var damaged = false
 var dead = false
 var collided_with_ship = false
 var rand_collision = 9
+var rand_num = 0
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
-	pass # Replace with function body.
+	rand_num = int(randf_range(0,Globals.HULLS.size()))
 
 func _physics_process(_delta):
 	if Input.is_action_pressed("leftclick") and Globals.MOUSE_ON_ENEMY:

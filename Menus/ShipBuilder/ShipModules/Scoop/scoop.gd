@@ -21,7 +21,6 @@ func _on_hp_depleted():
 	pass
 
 func FlipScoopOnLoad():
-		print("FlipScoopOnLoad Called")
 		$DownScoop.visible = false
 		$UpScoop.visible = true
 

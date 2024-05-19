@@ -10,7 +10,16 @@ func _ready():
 func _physics_process(delta):
 	
 	if not dead:
-		velocity = global_position.direction_to(Globals.VIEWPORT_CENTER) * normal_speed
+		if Globals.HULLS.size() >= 0:
+			if Globals.HULLS[rand_num] == null:
+				rand_num = int(randf_range(0,Globals.HULLS.size()))
+			if Globals.HULLS[rand_num] != null:
+				velocity = global_position.direction_to(Globals.HULLS[rand_num].global_position) * normal_speed
+				look_at(Globals.HULLS[rand_num].global_position)
+			else:
+				velocity = global_position.direction_to(left) * normal_speed
+		else:
+			velocity = global_position.direction_to(left) * normal_speed
 		
 	if not damaged:
 		$AnimatedSprite2D.play("swimming")

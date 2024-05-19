@@ -17,6 +17,7 @@ var mouseOverBody = false
 var mousedOverModule = null
 var hull_marker
 var params = PhysicsPointQueryParameters2D.new()
+var removed_droppable_under_me = false
 
 var testCount = 0
 
@@ -141,8 +142,9 @@ func CheckDropPositionEligibility(point: Vector2) -> bool:
 			var collision_check = area.intersect_point(params)
 			if(collision_check.size() > 0):
 				for thing in collision_check:
-					if(thing["collider"] == self.get_node("HullTile")):
-						count += 1
+					if self.module_name == "Hull":
+						if(thing["collider"] == self.get_node("HullTile")):
+							count += 1
 				if(count == 0):
 					results.append({
 						"check": collision_check,
@@ -265,10 +267,15 @@ func _on_area_2d_mouse_exited():
 			scale = Vector2(1,1)
 
 func _on_area_2d_body_entered(body):
-	if Globals.INITIAL_LOAD == true:
-		if module_name != "Hull":
-			drop_point = body
-			drop_point.remove_from_group('droppable')
+	if get_tree().current_scene.name == "ShipBuilder":
+		print(module_name, " : ", body)
+		print(body.get_parent().module_name, " : ", body.is_in_group('droppable'))
+		if removed_droppable_under_me != true:
+			if module_name != "Hull":
+				drop_point = body
+				drop_point.remove_from_group('droppable')
+				print(body, " : ", body.is_in_group('droppable'))
+				removed_droppable_under_me = true
 	if body.is_in_group('droppable'):
 		drop_points.append(body)
 		is_inside_droppable = true

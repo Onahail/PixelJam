@@ -7,6 +7,7 @@ const LAUNCHERFISH = preload("res://Game/Enemies/Launcherfish/launcherfish.tscn"
 signal fullResources
 
 func _ready():
+	MenuMusic.stop()
 	Globals.VIEWPORT_CENTER = get_viewport().size * 0.5
 	$PlayerShip.load_ship()
 	Globals.calc_collection_rates()
@@ -61,7 +62,7 @@ func SpawnLauncherFish():
 
 func _on_timer_timeout():
 	var ScaledDiff = float((Globals.DIFFICULTY - Globals.DIFF_SCALE_START) / (Globals.DIFF_SCALE_END - Globals.DIFF_SCALE_START))
-	print(ScaledDiff)
+	#print(ScaledDiff)
 	var rng = RandomNumberGenerator.new()
 	var rando = rng.randf_range(0, 1)
 	if(ScaledDiff < 0.3):

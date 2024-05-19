@@ -5,7 +5,7 @@ extends Enemy
 var darting = false
 var dart_speed = Globals.SPEED * 2
 var random_directions = [left, left, down, up]
-var rand_num = 0
+var rand_num_jelly = 0
 
 func _physics_process(delta):
 	
@@ -13,12 +13,12 @@ func _physics_process(delta):
 		velocity = left * 100
 	elif not damaged:
 		if darting:
-			if rand_num == 4 and self.global_position.x > Globals.VIEWPORT_CENTER.x:
+			if rand_num_jelly == 4 and self.global_position.x > Globals.VIEWPORT_CENTER.x:
 				velocity = global_position.direction_to(Globals.VIEWPORT_CENTER) * dart_speed
-			elif rand_num == 4 and self.global_position.x < Globals.VIEWPORT_CENTER.x:
+			elif rand_num_jelly == 4 and self.global_position.x < Globals.VIEWPORT_CENTER.x:
 				velocity = random_directions[0] * dart_speed
 			else: 
-				velocity = random_directions[rand_num] * dart_speed
+				velocity = random_directions[rand_num_jelly] * dart_speed
 			$AnimatedSprite2D.play("movement")
 		else:
 			velocity = left * normal_speed
@@ -49,7 +49,7 @@ func _on_animated_sprite_2d_animation_finished():
 	if damaged == true:
 		damaged = false
 	if darting == true:
-		rand_num = int(randf_range(0,5))
+		rand_num_jelly = int(randf_range(0,5))
 		dart_speed = int(randf_range(Globals.SPEED * 2, Globals.SPEED * 3))
 		darting = false
 	elif darting == false:

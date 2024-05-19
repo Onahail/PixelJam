@@ -1,9 +1,12 @@
 extends Node2D
 
-
+const MUSIC = preload("res://Music/MenuMusic.wav")
 
 
 func _ready():
+	if !MenuMusic.playing:
+		MenuMusic.stream = MUSIC
+		MenuMusic.play()
 	
 	var savefile = null
 	if(Globals.running == false):

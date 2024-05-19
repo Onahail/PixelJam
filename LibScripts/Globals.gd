@@ -10,6 +10,8 @@ var savelocation = "user://savegame.csv"
 var backupsavelocation = "user://backupsavegame.csv"
 var running = false
 
+var SHIP_PIECES = []
+
 #CURSORS
 var REPAIR_CURSOR = preload("res://UI_Elements/Repair_Cursor.png")
 var CROSSHAIR_CURSOR = preload("res://UI_Elements/Crosshair_Cursor.png")
@@ -18,7 +20,7 @@ var DEFAULT_CURSOR = preload("res://UI_Elements/Default_Cursor.png")
 #GAME STATS
 var PLAYER_WIN = false
 var DEPTH = 100
-var DIFFICULTY = 0
+var DIFFICULTY :float = 0
 var DIFF_SCALE_START = 1
 var DIFF_SCALE_END = 10
 var CURRENCY_SCALE_START = 0.2
@@ -48,7 +50,7 @@ var MOUSE_ON_ENEMY = false
 
 var LAUNCHERFISH_FIRE_RATE = 1
 var LAUNCHERFISH_PROJECTILE_DAMAGE = 2
-var LAUNCHERFISH_RANGE = 1200
+var LAUNCHERFISH_RANGE = 5000
 var LAUNCHERFISH_PROJECTILE_VELOCITY = 1000
 
 

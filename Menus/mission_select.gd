@@ -4,13 +4,15 @@ var SCALE_START = Globals.DIFF_SCALE_START
 var SCALE_END = Globals.DIFF_SCALE_END
 
 func _ready():
+	print(Globals.DEPTH)
+
 	$PlayerShip.load_ship()
 	$PlayerShip.scale = Vector2(.6,.6)
-	if(Globals.DEPTH >= %DepthSlider.min_value and Globals.DEPTH <= %DepthSlider.max_value):
+	if(Globals.DEPTH > %DepthSlider.min_value and Globals.DEPTH <= %DepthSlider.max_value):
+		%DepthSlider.value = Globals.DEPTH
 		var scalesize = %DepthSlider.max_value - %DepthSlider.min_value
 		var scalepoint = %DepthSlider.value - %DepthSlider.min_value
 		var difficulty = (float(scalepoint / scalesize) * (SCALE_END - SCALE_START)) + SCALE_START
-		%DepthSlider.value = Globals.DEPTH
 		Globals.DIFFICULTY = difficulty
 	else:
 		Globals.DIFFICULTY = SCALE_START

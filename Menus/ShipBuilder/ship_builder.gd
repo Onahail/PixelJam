@@ -9,6 +9,7 @@ const BRIDGE = preload("res://Menus/ShipBuilder/ShipModules/Bridge/bridge.tscn")
 const SHIELD = preload("res://Menus/ShipBuilder/ShipModules/Shield/shield.tscn")
 const HULL = preload("res://Menus/ShipBuilder/ShipModules/BaseTile/base_tile.tscn")
 const SHIP = preload("res://Menus/ShipBuilder/Ships/starter_ship.tscn")
+const MUSIC = preload("res://Music/078 Heartbound OST Gearworks.mp3")
 
 # TODO: Dynamic selection of positions
 var modules = []
@@ -27,7 +28,7 @@ var modules = []
 signal inventory_spawned
 
 func _ready():
-	Globals.INITIAL_LOAD = true
+	MenuMusic.stop()
 	
 	#Dynamically build module list and load scenes
 	for module in ModuleStats.module_data:
