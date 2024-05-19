@@ -48,33 +48,6 @@ func _process(delta):
 		else:
 			$Recharger.paused = true
 			$Recharger.start()
-		"""
-		if Input.is_action_pressed("Activate Shields"):
-			$ShieldsActive.visible = true
-			Globals.SHIELD_POWER -= Globals.SHIELD_DRAIN * delta
-			for module in surrounding_modules:
-				if module != null:
-					if Globals.SHIELD_POWER > 0:
-						module.ActivateShields(self)
-		if Input.is_action_just_released("Activate Shields"):
-			$ShieldsActive.visible = false
-			for module in surrounding_modules:
-				if module != null:
-					module.DeactivateShields(self)
-							
-		if !Input.is_action_pressed("Activate Shields"):
-			if Globals.SHIELD_POWER < Globals.MAX_SHIELD_POWER:
-				Globals.SHIELD_POWER += Globals.SHIELD_RECHARGE_RATE * delta
-
-		if Globals.SHIELD_POWER <= 0:
-			Globals.SHIELD_POWER = 0
-			
-	
-	
-	if surrounding_modules.size() == 0:
-		CheckShieldableModules()
-	
-"""
 	super._process(delta)
 
 func _on_hp_depleted():

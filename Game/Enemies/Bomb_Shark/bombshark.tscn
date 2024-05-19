@@ -1,4 +1,4 @@
-[gd_scene load_steps=23 format=3 uid="uid://c1pi2qxtq7jq5"]
+[gd_scene load_steps=31 format=3 uid="uid://c1pi2qxtq7jq5"]
 
 [ext_resource type="Texture2D" uid="uid://ls1kfserybjc" path="res://Game/Enemies/Bomb_Shark/Bomb_Shark_Spreadsheet_110x94.png" id="1_1mfi3"]
 [ext_resource type="Script" path="res://Game/Enemies/Bomb_Shark/bombshark.gd" id="1_7tu34"]
@@ -9,6 +9,38 @@
 [sub_resource type="AtlasTexture" id="AtlasTexture_d7yv5"]
 atlas = ExtResource("2_wkuwm")
 region = Rect2(0, 0, 104, 72)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_33s5r"]
+atlas = ExtResource("2_afcyr")
+region = Rect2(0, 0, 124, 136)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_xln5q"]
+atlas = ExtResource("2_afcyr")
+region = Rect2(124, 0, 124, 136)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_e2yjs"]
+atlas = ExtResource("2_afcyr")
+region = Rect2(248, 0, 124, 136)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_qo8w2"]
+atlas = ExtResource("2_afcyr")
+region = Rect2(372, 0, 124, 136)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_j2g2t"]
+atlas = ExtResource("2_afcyr")
+region = Rect2(496, 0, 124, 136)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_wv3sh"]
+atlas = ExtResource("2_afcyr")
+region = Rect2(620, 0, 124, 136)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_fgr7y"]
+atlas = ExtResource("2_afcyr")
+region = Rect2(744, 0, 124, 136)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_kbgbl"]
+atlas = ExtResource("2_afcyr")
+region = Rect2(868, 0, 124, 136)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_r8b87"]
 atlas = ExtResource("1_1mfi3")
@@ -37,6 +69,35 @@ animations = [{
 }],
 "loop": false,
 "name": &"damaged",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_33s5r")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_xln5q")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_e2yjs")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_qo8w2")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_j2g2t")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_wv3sh")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_fgr7y")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_kbgbl")
+}],
+"loop": false,
+"name": &"death",
 "speed": 5.0
 }, {
 "frames": [{
@@ -139,7 +200,7 @@ script = ExtResource("1_7tu34")
 position = Vector2(-20, 3)
 rotation = -0.189866
 sprite_frames = SubResource("SpriteFrames_1e5ay")
-animation = &"damaged"
+animation = &"swimming"
 flip_v = true
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]

@@ -19,7 +19,7 @@ func _physics_process(delta):
 				velocity = random_directions[0] * dart_speed
 			else: 
 				velocity = random_directions[rand_num_jelly] * dart_speed
-			$AnimatedSprite2D.play("movement")
+			$AnimatedSprite2D.play("swimming")
 		else:
 			velocity = left * normal_speed
 			if not $AnimatedSprite2D.is_playing():
@@ -32,9 +32,9 @@ func collided():
 	$JellyThud.play()
 	super.collided()
 	
-
+"""
 func take_damage(damage):
-	if $AnimatedSprite2D.animation == "movement":
+	if $AnimatedSprite2D.animation == "swimming":
 		$AnimatedSprite2D.stop()
 	currentHP -= damage
 	if currentHP <= 0:
@@ -45,7 +45,7 @@ func take_damage(damage):
 		damaged = true
 		velocity = left * normal_speed
 		$AnimatedSprite2D.play("damaged")	
-
+"""
 
 func _on_animated_sprite_2d_animation_finished():
 	if damaged == true:

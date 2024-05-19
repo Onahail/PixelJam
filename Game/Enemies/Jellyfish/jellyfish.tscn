@@ -133,7 +133,7 @@ animations = [{
 "texture": SubResource("AtlasTexture_mbg3f")
 }],
 "loop": false,
-"name": &"movement",
+"name": &"swimming",
 "speed": 5.0
 }]
 
@@ -150,7 +150,7 @@ script = ExtResource("1_i7doo")
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
 position = Vector2(32, 0)
 sprite_frames = SubResource("SpriteFrames_03625")
-animation = &"death"
+animation = &"swimming"
 flip_h = true
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]

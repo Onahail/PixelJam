@@ -1,7 +1,58 @@
-[gd_scene load_steps=14 format=3 uid="uid://djruf2q7aeqcu"]
+[gd_scene load_steps=29 format=3 uid="uid://djruf2q7aeqcu"]
 
 [ext_resource type="Script" path="res://Game/Enemies/Launcherfish/launcherfish.gd" id="1_jwndv"]
 [ext_resource type="Texture2D" uid="uid://b7acmyjk373wt" path="res://Game/Enemies/Launcherfish/Launchfish_Spritesheet_166x106.png" id="2_gq54m"]
+[ext_resource type="Texture2D" uid="uid://b3q5o00yxy0nf" path="res://Game/Enemies/Launcherfish/Launchfish_Hurt.png" id="2_sd0mc"]
+[ext_resource type="Texture2D" uid="uid://3h2kwv5sm11d" path="res://Game/Enemies/Launcherfish/Launchfish_Death_Spritesheet_164x120.png" id="3_uw3jr"]
+[ext_resource type="Texture2D" uid="uid://l8iv8bij2o2" path="res://Game/Enemies/Launcherfish/Launcherfish_Throw_Recharge_Spritesheet_180x141.png" id="4_2xvow"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_la0do"]
+atlas = ExtResource("2_sd0mc")
+region = Rect2(0, 0, 120, 142)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_uiypy"]
+atlas = ExtResource("3_uw3jr")
+region = Rect2(0, 0, 164, 120)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_0h8b4"]
+atlas = ExtResource("3_uw3jr")
+region = Rect2(164, 0, 164, 120)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_5xgit"]
+atlas = ExtResource("3_uw3jr")
+region = Rect2(328, 0, 164, 120)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_xrpqs"]
+atlas = ExtResource("3_uw3jr")
+region = Rect2(492, 0, 164, 120)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_bnjdn"]
+atlas = ExtResource("4_2xvow")
+region = Rect2(0, 0, 180, 141)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_84fks"]
+atlas = ExtResource("4_2xvow")
+region = Rect2(180, 0, 180, 141)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_akh4d"]
+atlas = ExtResource("4_2xvow")
+region = Rect2(360, 0, 180, 141)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_vu1dl"]
+atlas = ExtResource("4_2xvow")
+region = Rect2(540, 0, 180, 141)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_musda"]
+atlas = ExtResource("4_2xvow")
+region = Rect2(720, 0, 180, 141)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_xc1ar"]
+atlas = ExtResource("4_2xvow")
+region = Rect2(900, 0, 180, 141)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_urk0x"]
+atlas = ExtResource("4_2xvow")
+region = Rect2(1080, 0, 180, 141)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_wn8ly"]
 atlas = ExtResource("2_gq54m")
@@ -37,6 +88,60 @@ region = Rect2(1162, 0, 166, 106)
 
 [sub_resource type="SpriteFrames" id="SpriteFrames_d14ik"]
 animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_la0do")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_la0do")
+}],
+"loop": false,
+"name": &"damaged",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_uiypy")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_0h8b4")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_5xgit")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_xrpqs")
+}],
+"loop": false,
+"name": &"death",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_bnjdn")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_84fks")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_akh4d")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_vu1dl")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_musda")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_xc1ar")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_urk0x")
+}],
+"loop": true,
+"name": &"launching",
+"speed": 5.0
+}, {
 "frames": [{
 "duration": 1.0,
 "texture": SubResource("AtlasTexture_wn8ly")
@@ -83,8 +188,9 @@ script = ExtResource("1_jwndv")
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
 rotation = 0.000831833
 sprite_frames = SubResource("SpriteFrames_d14ik")
-animation = &"swimming"
-frame_progress = 0.413814
+animation = &"launching"
+frame = 1
+frame_progress = 0.542943
 flip_v = true
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
