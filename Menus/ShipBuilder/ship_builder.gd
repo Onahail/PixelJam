@@ -29,7 +29,7 @@ signal inventory_spawned
 
 func _ready():
 	MenuMusic.stop()
-	
+	Globals.INITIAL_LOAD = true
 	#Dynamically build module list and load scenes
 	for module in ModuleStats.module_data:
 		modules.append(str(module))
