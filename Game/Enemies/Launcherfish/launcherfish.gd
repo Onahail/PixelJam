@@ -29,9 +29,7 @@ func _physics_process(delta):
 				initial_shot = true
 				$ShootTimer.start()
 				
-	if original_position_set == true:
-		print(position.y)
-		position.y = original_position.y + amplitude * sin(frequency * Time.get_ticks_msec() / 1000.0)
+	position.y = original_position.y + amplitude * sin(frequency * Time.get_ticks_msec() / 1000.0)
 	
 	super._physics_process(delta)
 
@@ -41,6 +39,7 @@ func take_damage(damage):
 		dead = true
 		#$AnimatedSprite2D.play("death")
 		self.set_collision_layer_value(4, false)
+		queue_free()
 	else:
 		damaged = true
 		velocity = left * normal_speed

@@ -12,6 +12,9 @@ func _physics_process(delta):
 	if not dead:
 		velocity = global_position.direction_to(Globals.VIEWPORT_CENTER) * normal_speed
 		
+	if not damaged:
+		$AnimatedSprite2D.play("swimming")
+		
 	#if dead == true:
 	#	queue_free()
 	
@@ -38,6 +41,7 @@ func collided():
 
 func PlayExplosion(explosion):
 	$AnimatedSprite2D.visible = false
+	$ExplosionSound.play()
 	explosion.visible = true
 	explosion.play("explosion")
 
@@ -45,3 +49,9 @@ func PlayExplosion(explosion):
 func _on_explosion_animation_animation_finished():
 	if dead == true:
 		queue_free()
+
+
+func _on_animated_sprite_2d_animation_finished():
+	if damaged == true:
+		damaged = false
+	pass # Replace with function body.

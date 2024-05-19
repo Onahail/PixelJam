@@ -21,17 +21,22 @@ func _ready():
 	#CALL ORIGINAL
 	super._ready()
 
-func _process(delta):
+func _process(delta):		
+
+	if get_tree().current_scene.name == "ShipBuilder":
+		$ShieldsActive.visible = true
 
 	if get_tree().current_scene.name == "Game":
 		if(surrounding_modules.size() == 0):
 			$ShieldsActive.visible = true
 			CheckShieldableModules()
+			$ShieldSound.play()
 			for module in surrounding_modules:
 				if module != null:
 					module.ActivateShields(self)
 		if(shield_hp <= 0):
 			$ShieldsActive.visible = false
+			$ShieldSound.stop()
 			for module in surrounding_modules:
 				if module != null:
 					module.DeactivateShields(self)

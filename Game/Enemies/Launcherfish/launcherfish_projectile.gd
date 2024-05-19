@@ -14,3 +14,6 @@ func _physics_process(delta):
 	
 func collided():
 	queue_free()
+
+func take_damge(damage):
+	pass

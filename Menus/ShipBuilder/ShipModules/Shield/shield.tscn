@@ -1,4 +1,4 @@
-[gd_scene load_steps=19 format=3 uid="uid://dggbslj7xvh07"]
+[gd_scene load_steps=21 format=3 uid="uid://dggbslj7xvh07"]
 
 [ext_resource type="Script" path="res://Menus/ShipBuilder/ShipModules/Shield/shield.gd" id="1_vnblg"]
 [ext_resource type="Texture2D" uid="uid://dv5kqq4cpev0t" path="res://UI_Elements/Power_bar_empty.PNG" id="3_nb05q"]
@@ -7,6 +7,8 @@
 [ext_resource type="Texture2D" uid="uid://3vihsyi4r2ue" path="res://Menus/ShipBuilder/ShipModules/Shield/Shields_Deck_Spreadsheet_92x64.png" id="6_2ucgk"]
 [ext_resource type="Texture2D" uid="uid://bhyufmy42kn4m" path="res://UI_Elements/Repair_Progress_Bar_Full.png" id="6_smlt4"]
 [ext_resource type="Texture2D" uid="uid://bfycmeon7n0n8" path="res://Menus/ShipBuilder/ShipModules/Shield/Shields_Off_92x64.png" id="7_7yw4s"]
+[ext_resource type="AudioStream" uid="uid://nnm440gah4ai" path="res://Sounds/forcefield-ambience-67572.mp3" id="9_geb5i"]
+[ext_resource type="AudioStream" uid="uid://2kgkura1gvo5" path="res://Sounds/air-impact-wrench-82141.wav" id="10_co53e"]
 [ext_resource type="Texture2D" uid="uid://bv0gmw3ydr7vm" path="res://Menus/ShipBuilder/ShipModules/Shield/Shield_Pulse_Spreadsheet_92x64.png" id="10_f0db3"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_kj817"]
@@ -133,6 +135,13 @@ frame_progress = 0.219273
 [node name="ChargeDelay" type="Timer" parent="."]
 
 [node name="Recharger" type="Timer" parent="."]
+
+[node name="ShieldSound" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource("9_geb5i")
+volume_db = -12.18
+
+[node name="InstallModule" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource("10_co53e")
 
 [connection signal="body_entered" from="Area2D" to="." method="_on_area_2d_body_entered"]
 [connection signal="body_exited" from="Area2D" to="." method="_on_area_2d_body_exited"]

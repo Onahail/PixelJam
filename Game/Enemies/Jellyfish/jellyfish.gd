@@ -29,6 +29,7 @@ func _physics_process(delta):
 
 func collided():
 	$AnimatedSprite2D.play("death")
+	$JellyThud.play()
 	super.collided()
 	
 

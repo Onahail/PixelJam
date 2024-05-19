@@ -1,4 +1,4 @@
-[gd_scene load_steps=20 format=3 uid="uid://bfeoqql17huda"]
+[gd_scene load_steps=21 format=3 uid="uid://bfeoqql17huda"]
 
 [ext_resource type="Script" path="res://Menus/ShipBuilder/ShipModules/Scoop/scoop.gd" id="1_uqme5"]
 [ext_resource type="Texture2D" uid="uid://dv5kqq4cpev0t" path="res://UI_Elements/Power_bar_empty.PNG" id="2_c3np8"]
@@ -7,6 +7,7 @@
 [ext_resource type="Texture2D" uid="uid://c8jhabk1jhk5o" path="res://UI_Elements/Repair_Progress_Bar_Empty.png" id="5_rwifl"]
 [ext_resource type="Texture2D" uid="uid://bhyufmy42kn4m" path="res://UI_Elements/Repair_Progress_Bar_Full.png" id="6_vhlxx"]
 [ext_resource type="Texture2D" uid="uid://bv0gmw3ydr7vm" path="res://Menus/ShipBuilder/ShipModules/Shield/Shield_Pulse_Spreadsheet_92x64.png" id="7_22pjg"]
+[ext_resource type="AudioStream" uid="uid://2kgkura1gvo5" path="res://Sounds/air-impact-wrench-82141.wav" id="8_kdmwj"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_3fped"]
 atlas = ExtResource("2_faomo")
@@ -147,6 +148,9 @@ texture_progress = ExtResource("6_vhlxx")
 visible = false
 sprite_frames = SubResource("SpriteFrames_hi5mk")
 animation = &"shields_on"
+
+[node name="InstallModule" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource("8_kdmwj")
 
 [connection signal="body_entered" from="Area2D" to="." method="_on_area_2d_body_entered"]
 [connection signal="body_exited" from="Area2D" to="." method="_on_area_2d_body_exited"]
