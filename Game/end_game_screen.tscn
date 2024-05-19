@@ -1,6 +1,7 @@
-[gd_scene load_steps=2 format=3 uid="uid://cqtiqc8uj4gas"]
+[gd_scene load_steps=3 format=3 uid="uid://cqtiqc8uj4gas"]
 
 [ext_resource type="Script" path="res://Game/end_game_screen.gd" id="1_fh7rg"]
+[ext_resource type="Texture2D" uid="uid://dnqn5fwhkb1w8" path="res://Backgrounds/Background_Level_1_Version_1.png" id="2_pr60s"]
 
 [node name="EndGameScreen" type="Node2D"]
 script = ExtResource("1_fh7rg")
@@ -10,6 +11,7 @@ offset_left = 642.0
 offset_top = 159.0
 offset_right = 1014.0
 offset_bottom = 358.0
+theme_override_colors/font_color = Color(0.243137, 0.278431, 0.54902, 1)
 text = "LOREM IPSUM"
 horizontal_alignment = 1
 vertical_alignment = 1
@@ -28,6 +30,12 @@ offset_top = 253.0
 offset_right = 387.0
 offset_bottom = 359.0
 text = "Ship Builder"
+
+[node name="BackgroundLevel1Version1" type="Sprite2D" parent="."]
+z_index = -4
+position = Vector2(864, 486)
+scale = Vector2(1.5, 1.5)
+texture = ExtResource("2_pr60s")
 
 [connection signal="pressed" from="ReturnToMenu" to="." method="_on_return_to_menu_pressed"]
 [connection signal="pressed" from="ReturnToShipBuilder" to="." method="_on_return_to_ship_builder_pressed"]

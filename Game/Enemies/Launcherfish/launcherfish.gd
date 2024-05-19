@@ -25,13 +25,15 @@ func _physics_process(delta):
 			if Globals.HULLS.size() >= 0:
 				if Globals.HULLS[rand_num] == null:
 					rand_num = int(randf_range(0,Globals.HULLS.size()))
-				if Globals.HULLS[rand_num] != null:
+				if Globals.HULLS[rand_num] != null and Globals.HULLS[rand_num].get_node("GameLossExplosion").visible == false and Globals.HULLS[rand_num].get_node("TextureHealthBar").visible == true:
 					velocity = global_position.direction_to(Globals.HULLS[rand_num].global_position) * normal_speed
 					look_at(Globals.HULLS[rand_num].global_position)
 				else:
 					velocity = global_position.direction_to(left) * normal_speed
+					look_at(self.get_parent().get_node("KillBox").get_node("CollisionShape2D").global_position)
 			else:
 				velocity = global_position.direction_to(left) * normal_speed
+				look_at(self.get_parent().get_node("KillBox").get_node("CollisionShape2D").global_position)
 		
 		if $Range.get_overlapping_areas().size() > 0:
 			in_firing_range = true
