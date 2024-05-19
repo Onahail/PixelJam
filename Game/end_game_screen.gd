@@ -2,7 +2,7 @@ extends Node2D
 
 func _ready():
 	if Globals.PLAYER_WIN == true:
-		var earnings = (((Globals.DIFFICULTY / (Globals.DIFF_SCALE_START - Globals.DIFF_SCALE_END)) * (Globals.CURRENCY_SCALE_START - Globals.CURRENCY_SCALE_END)) + Globals.CURRENCY_SCALE_START) * Globals.RESOURCES_COLLECTED
+		var earnings = ((((Globals.DIFFICULTY - Globals.DIFF_SCALE_START) / (Globals.DIFF_SCALE_START - Globals.DIFF_SCALE_END)) * (Globals.CURRENCY_SCALE_START - Globals.CURRENCY_SCALE_END)) + Globals.CURRENCY_SCALE_START) * Globals.RESOURCES_COLLECTED
 		Globals.PLAYER_CURRENCY += int(earnings)
 		$Stats.text = str("You collected ", int(Globals.RESOURCES_COLLECTED), " resources worth ", int(earnings), "$.")
 	else:

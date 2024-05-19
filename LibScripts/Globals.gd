@@ -21,9 +21,9 @@ var DEFAULT_CURSOR = preload("res://UI_Elements/Default_Cursor.png")
 var PLAYER_WIN = false
 var DEPTH = 100
 var DIFFICULTY :float = 0
-var DIFF_SCALE_START = 1
+var DIFF_SCALE_START = 3
 var DIFF_SCALE_END = 10
-var CURRENCY_SCALE_START = 0.2
+var CURRENCY_SCALE_START = 0.1
 var CURRENCY_SCALE_END = 1
 
 #COLLECTION
@@ -31,7 +31,7 @@ var COLLECTION_RATE = 0
 var RESOURCES_COLLECTED = 0
 var MAX_RESOURCES = 100
 #CURRENCY
-var PLAYER_CURRENCY = 200
+var PLAYER_CURRENCY = 100
 
 #PURCHASING
 var purchased_module = false
@@ -87,7 +87,7 @@ var HULLS = []
 var COUNT = 0
 
 func calc_collection_rates():
-	Globals.MAX_RESOURCES = (Globals.modulesOnShip["Storage"] + 1) * ModuleStats.module_data["Storage"]["misc"]["capacity"]
+	Globals.MAX_RESOURCES = (Globals.modulesOnShip["Storage"] + 0.4) * ModuleStats.module_data["Storage"]["misc"]["capacity"]
 	Globals.COLLECTION_RATE = Globals.modulesOnShip["Propeller"] * Globals.modulesOnShip["Scoop"] * ModuleStats.module_data["Scoop"]["misc"]["collection_rate"]
 	SPAWN_RATE = float((BASE_SPAWN_RATE/modulesOnShip["Propeller"])/DIFFICULTY)
 	#print(SPAWN_RATE)

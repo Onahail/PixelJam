@@ -3,7 +3,7 @@ extends Node
 var module_data = {
 	"Propeller": {
 		"health": 15,
-		"price": 10,
+		"price": 250,
 		"repair_time": 3,
 		"min_allowable": 1,
 		"max_allowable": 6,
@@ -17,7 +17,7 @@ var module_data = {
 	},
 	"Gun": {
 		"health": 16,
-		"price": 2,
+		"price": 25,
 		"repair_time": 3,
 		"min_allowable": 1,
 		"max_allowable": 4,
@@ -33,7 +33,7 @@ var module_data = {
 	},
 	"Storage": {
 		"health": 15,
-		"price": 3,
+		"price": 40,
 		"repair_time": 3,
 		"min_allowable": 1,
 		"max_allowable": 3,
@@ -47,7 +47,7 @@ var module_data = {
 	},    
 	"Bridge": {
 		"health": 10,
-		"price": 4,
+		"price": 0,
 		"repair_time": 3,
 		"min_allowable": 1,
 		"max_allowable": 1,
@@ -59,12 +59,12 @@ var module_data = {
 	},
 	"Scoop": {
 		"health": 10,
-		"price": 5,
+		"price": 150,
 		"repair_time": 3,
 		"min_allowable": 1,
 		"max_allowable": 4,
 		"misc": {
-				"collection_rate": 100
+				"collection_rate": 20
 		},
 		"assets": {
 			"scene": "res://Menus/ShipBuilder/ShipModules/Scoop/scoop.tscn"
@@ -72,7 +72,7 @@ var module_data = {
 	},
 	"Shield": {
 		"health": 15,
-		"price": 6,
+		"price": 300,
 		"repair_time": 3,
 		"min_allowable": 1,
 		"max_allowable": 2,
@@ -87,7 +87,7 @@ var module_data = {
 	},
 	"Hull": {
 		"health": 20,
-		"price": 7,
+		"price": 75,
 		"repair_time": 3,
 		"min_allowable": 1,
 		"max_allowable": 100,

@@ -69,6 +69,14 @@ offset_bottom = 924.0
 theme_override_styles/fill = SubResource("StyleBoxFlat_51ino")
 step = 1.0
 
+[node name="Label" type="Label" parent="ProgressBar"]
+layout_mode = 0
+offset_left = 19.0
+offset_top = -30.0
+offset_right = 392.0
+offset_bottom = -7.0
+text = "Resources Collected: Total Storage:  "
+
 [node name="BackgroundMusic" type="AudioStreamPlayer2D" parent="."]
 stream = ExtResource("7_126kc")
 autoplay = true

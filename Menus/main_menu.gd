@@ -34,17 +34,17 @@ func _ready():
 			var centerheight = Globals.ship_max_height / 2
 			var centerwidth = Globals.ship_max_width / 2 
 			#Top row left to right
-			Globals.ship_config[centerheight-1][centerwidth-1] = "Hull"
-			Globals.ship_config[centerheight-1][centerwidth] = "Hull"
-			Globals.ship_config[centerheight-1][centerwidth+1] = "Gun"
+			#Globals.ship_config[centerheight-1][centerwidth-1] = "Hull"
+			Globals.ship_config[centerheight-1][centerwidth] = "Scoop"
+			#Globals.ship_config[centerheight-1][centerwidth+1] = "Hull"
 			#Center row left to right
 			Globals.ship_config[centerheight][centerwidth-1] = "Propeller"
-			Globals.ship_config[centerheight][centerwidth] = "Hull"
+			Globals.ship_config[centerheight][centerwidth] = "Gun"
 			Globals.ship_config[centerheight][centerwidth+1] = "Bridge"
 			#Bottom row left to right
-			Globals.ship_config[centerheight+1][centerwidth-1] = "Hull"
-			Globals.ship_config[centerheight+1][centerwidth] = "Scoop"
-			Globals.ship_config[centerheight+1][centerwidth+1] = "Hull"
+			#Globals.ship_config[centerheight+1][centerwidth-1] = "Hull"
+			#Globals.ship_config[centerheight+1][centerwidth] = "Hull"
+			#Globals.ship_config[centerheight+1][centerwidth+1] = "Hull"
 		else:
 			#load ship config from file
 			var saveline=true
