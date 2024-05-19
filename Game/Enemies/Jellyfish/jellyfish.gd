@@ -31,11 +31,17 @@ func collided():
 	$AnimatedSprite2D.play("death")
 	super.collided()
 	
+
 func take_damage(damage):
-	$AnimatedSprite2D.play("damaged")
+	currentHP -= damage
 	if currentHP <= 0:
+		dead = true
 		$AnimatedSprite2D.play("death")
-	super.take_damage(damage)
+		self.set_collision_layer_value(4, false)
+	else:
+		damaged = true
+		velocity = left * normal_speed
+		$AnimatedSprite2D.play("damaged")	
 
 
 func _on_animated_sprite_2d_animation_finished():
@@ -52,10 +58,11 @@ func _on_animated_sprite_2d_animation_finished():
 			$Timer.start()
 	if dead == true:
 		queue_free()
+		pass
 
 
 func _on_timer_timeout():
-			darting = true
+	darting = true
 
 
 

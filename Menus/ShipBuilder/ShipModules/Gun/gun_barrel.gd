@@ -27,7 +27,7 @@ func _physics_process(_delta):
 			initial_shot = false
 			
 func shoot():
-	if get_tree().current_scene.name != "Game" or !Globals.MOUSE_ON_ENEMY:
+	if get_tree().current_scene.name != "Game" :
 		return
 	var new_bullet = BULLET.instantiate()
 	new_bullet.global_position = $Gun/ShootPoint.global_position

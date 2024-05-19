@@ -5,9 +5,10 @@ var travelled_distance = 0
 func _physics_process(delta):
 	look_at(Globals.VIEWPORT_CENTER)
 	var direction = Vector2.RIGHT.rotated(rotation)
-	global_position += direction * Globals.LAUNCHERFISH_PROJECTILE_VELOCITY * delta
+	var step = Globals.LAUNCHERFISH_PROJECTILE_VELOCITY * delta
+	global_position += direction * step
 	
-	travelled_distance += Globals.LAUNCHERFISH_RANGE * delta
+	travelled_distance += step
 	if travelled_distance > Globals.LAUNCHERFISH_RANGE:
 		queue_free()
 	

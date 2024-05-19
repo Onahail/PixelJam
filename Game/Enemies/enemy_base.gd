@@ -32,16 +32,6 @@ func collided():
 	self.set_collision_layer_value(4, false)
 	dead = true
 
-func take_damage(damage):
-	print(currentHP)
-	if dead == true:
-		return
-	currentHP -= damage
-	damaged = true
-	velocity = left * normal_speed
-	if currentHP <= 0:
-		dead = true
-
 
 func _on_mouse_entered():
 	#print("Mouse Entered")
