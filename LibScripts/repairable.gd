@@ -24,7 +24,7 @@ func applyDamage(damage, module, ishullcalling:bool = false):
 						currentHP = 0
 				else:
 					#If module still has HP, apply damage to the module and check for overkill
-					print("Current HP: ", mod.repairable.currentHP, ". Damage Taken: ", damage, ". Module: ", mod)
+					#print("Current HP: ", mod.repairable.currentHP, ". Damage Taken: ", damage, ". Module: ", mod)
 					var overkill = mod.repairable.applyDamage(damage, mod, true)
 					#If enemies did more damage to the module than it has HP, apply that damage to the hull
 					if(overkill > 0):
@@ -43,7 +43,7 @@ func applyDamage(damage, module, ishullcalling:bool = false):
 		currentHP -= damage
 		#Trigger Module Death
 		if currentHP <= 0:
-			print("Current HP less than or equals 0")
+			#print("Current HP less than or equals 0")
 			hp_depleted.emit()
 			var overkill = 0 - currentHP
 			currentHP = 0
@@ -52,7 +52,7 @@ func applyDamage(damage, module, ishullcalling:bool = false):
 	#No overkill damage is detected
 	return 0
 func repairDamage(repairValue):
-	print("Repair Value: ", repairValue)
+	#print("Repair Value: ", repairValue)
 	currentHP += repairValue
 	if currentHP > maxHP:
 		currentHP = maxHP

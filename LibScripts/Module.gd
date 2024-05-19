@@ -7,9 +7,12 @@ var currentlyRepairing = false
 #var repair = ModuleStats.module_data[module_name]["repair_time"]
 var health = null
 var repair_time = null
+var shielded = false
 
 func _ready():
 	
+	
+	$ShieldOverlay.play("shields_on")
 	moduleInit()
 	$TextureHealthBar.z_index = 2
 	
@@ -18,7 +21,7 @@ func _ready():
 	
 	
 	#shopPos = global_position
-	
+
 func _physics_process(_delta):
 	if get_tree().current_scene.name != "Game":
 		return
@@ -34,14 +37,24 @@ func _physics_process(_delta):
 	#print(currentlyRepairing)
 	if currentlyRepairing == true:
 		$RepairProgressBar.value = $RepairTimer.wait_time - $RepairTimer.time_left
-		
+	
 	var overlapping_bodies = $Area2D.get_overlapping_bodies()
+			
 	for body in overlapping_bodies:
-		repairable.applyDamage(overlapping_bodies.size() * Globals.ENEMY_DAMAGE, self)
 		body.collided()
-		body.set_collision_layer_value(4, false)
+		EventBus.apply_explosive_damage.emit()
+		if shielded == false:
+			repairable.applyDamage(overlapping_bodies.size() * Globals.ENEMY_DAMAGE, self)
 			
 	$TextureHealthBar.value = repairable.currentHP
+
+func ActivateShields():
+	shielded = true
+	$ShieldOverlay.visible = true
+	
+func DeactivateShields():
+	shielded = false
+	$ShieldOverlay.visible = false
 
 func _on_area_2d_mouse_exited():
 	if currentlyRepairing == true:

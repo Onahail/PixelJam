@@ -1,28 +1,13 @@
-extends CharacterBody2D
+extends Enemy
 
-@onready var currentHP = Globals.ENEMY_HEALTH
-var dart_speed = Globals.SPEED * 2
-var normal_speed = Globals.SPEED
+
+
 var darting = false
-var left = Vector2(-1, 0)
-var down = Vector2(-1, 1)
-var up = Vector2(-1, -1)
+var dart_speed = Globals.SPEED * 2
 var random_directions = [left, left, down, up]
 var rand_num = 0
-var damaged = false
-var dead = false
-var collided_with_ship = false
-var rand_collision = 9
 
-#TODO Set random collision layer per enemy so they only hit specific modules.
-
-
-func _physics_process(_delta):
-	if Input.is_action_pressed("leftclick") and Globals.MOUSE_ON_ENEMY:
-		Input.set_custom_mouse_cursor(Globals.CROSSHAIR_CURSOR)
-	if Input.is_action_just_released("leftclick") and Globals.MOUSE_ON_ENEMY:
-		Input.set_custom_mouse_cursor(Globals.DEFAULT_CURSOR)
-	
+func _physics_process(delta):
 	
 	if collided_with_ship == true:
 		velocity = left * 100
@@ -39,24 +24,20 @@ func _physics_process(_delta):
 			velocity = left * normal_speed
 			if not $AnimatedSprite2D.is_playing():
 				$AnimatedSprite2D.play("idle")
-	move_and_slide()
-
-func take_damage(damage):
-	if dead == true:
-		return
-	currentHP -= damage
-	damaged = true
-	velocity = left * normal_speed
-	$AnimatedSprite2D.play("damaged")
-	if currentHP <= 0:
-		dead = true
-		$AnimatedSprite2D.play("death")
+	
+	super._physics_process(delta)
 
 func collided():
-	collided_with_ship = true
 	$AnimatedSprite2D.play("death")
-	self.set_collision_layer_value(4, false)
-	dead = true
+	super.collided()
+	
+func take_damage(damage):
+	if damaged == true:
+		$AnimatedSprite2D.play("damaged")
+	if currentHP <= 0:
+		$AnimatedSprite2D.play("death")
+	super.take_damage(damage)
+
 
 func _on_animated_sprite_2d_animation_finished():
 	if damaged == true:
@@ -68,7 +49,7 @@ func _on_animated_sprite_2d_animation_finished():
 	elif darting == false:
 		if $Timer.time_left <= 0:
 			$AnimatedSprite2D.play("idle")
-			$Timer.wait_time = randf_range(0.2, 2)
+			$Timer.wait_time = randf_range(0.5, 2)
 			$Timer.start()
 	if dead == true:
 		queue_free()
@@ -78,10 +59,4 @@ func _on_timer_timeout():
 			darting = true
 
 
-func _on_mouse_entered():
-	Globals.MOUSE_ON_ENEMY = true
 
-
-func _on_mouse_exited():
-	Globals.MOUSE_ON_ENEMY = false
-	Input.set_custom_mouse_cursor(Globals.DEFAULT_CURSOR)

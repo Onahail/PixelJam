@@ -6,6 +6,8 @@ func _ready():
 	
 	#CHANGE VALUES
 	module_name = "Scoop"
+	$DownScoop.play("suction")
+	$UpScoop.play("suction")
 	#CALL ORIGINAL
 	super._ready()
 	

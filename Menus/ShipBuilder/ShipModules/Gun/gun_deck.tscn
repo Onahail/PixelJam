@@ -1,4 +1,4 @@
-[gd_scene load_steps=8 format=3 uid="uid://g6j6gqdq64h3"]
+[gd_scene load_steps=13 format=3 uid="uid://g6j6gqdq64h3"]
 
 [ext_resource type="Texture2D" uid="uid://bxcaydfrd4cne" path="res://Menus/ShipBuilder/ShipModules/Gun/Gun_Deck_Sans_Gun.png" id="1_hv26i"]
 [ext_resource type="Script" path="res://Menus/ShipBuilder/ShipModules/Gun/gun_deck.gd" id="1_ugqvi"]
@@ -7,6 +7,36 @@
 [ext_resource type="Texture2D" uid="uid://bisvr7tt8gtyp" path="res://UI_Elements/Power_Bar_full_upsidedown.png" id="4_5xlyv"]
 [ext_resource type="Texture2D" uid="uid://c8jhabk1jhk5o" path="res://UI_Elements/Repair_Progress_Bar_Empty.png" id="6_a52vn"]
 [ext_resource type="Texture2D" uid="uid://bhyufmy42kn4m" path="res://UI_Elements/Repair_Progress_Bar_Full.png" id="7_owtmk"]
+[ext_resource type="Texture2D" uid="uid://bv0gmw3ydr7vm" path="res://Menus/ShipBuilder/ShipModules/Shield/Shield_Pulse_Spreadsheet_92x64.png" id="8_pro0m"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_ul0v3"]
+atlas = ExtResource("8_pro0m")
+region = Rect2(0, 0, 92, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_pad43"]
+atlas = ExtResource("8_pro0m")
+region = Rect2(92, 0, 92, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_rt2ri"]
+atlas = ExtResource("8_pro0m")
+region = Rect2(184, 0, 92, 64)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_bwa0s"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_ul0v3")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_pad43")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_rt2ri")
+}],
+"loop": true,
+"name": &"shields_on",
+"speed": 5.0
+}]
 
 [node name="Gun" type="Node2D"]
 script = ExtResource("1_ugqvi")
@@ -49,14 +79,13 @@ fill_mode = 4
 texture_under = ExtResource("6_a52vn")
 texture_progress = ExtResource("7_owtmk")
 
-[node name="Init" type="Timer" parent="."]
-wait_time = 0.1
-one_shot = true
-autostart = true
+[node name="ShieldOverlay" type="AnimatedSprite2D" parent="."]
+visible = false
+sprite_frames = SubResource("SpriteFrames_bwa0s")
+animation = &"shields_on"
 
 [connection signal="body_entered" from="Area2D" to="." method="_on_area_2d_body_entered"]
 [connection signal="body_exited" from="Area2D" to="." method="_on_area_2d_body_exited"]
 [connection signal="mouse_entered" from="Area2D" to="." method="_on_area_2d_mouse_entered"]
 [connection signal="mouse_exited" from="Area2D" to="." method="_on_area_2d_mouse_exited"]
 [connection signal="timeout" from="RepairTimer" to="." method="_on_repair_timer_timeout"]
-[connection signal="timeout" from="Init" to="." method="_on_init_timeout"]

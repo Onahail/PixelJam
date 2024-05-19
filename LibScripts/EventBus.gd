@@ -9,3 +9,4 @@ signal module_stacked
 signal invalid_module_position
 signal hull_placed_behind_propeller
 signal hull_placed_above_or_below_scoop
+signal apply_explosive_damage

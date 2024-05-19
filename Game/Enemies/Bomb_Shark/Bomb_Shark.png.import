@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://botb8rwotkjnb"
-path="res://.godot/imported/Pointy_Jelly_Spreadsheet_140x100.png-44887ef62d0a828f93e6256e8791b3d6.ctex"
+uid="uid://bhcod682htff1"
+path="res://.godot/imported/Bomb_Shark.png-85a8f323dd5a4bb3b736ee6bffb94a5d.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://Game/Enemies/Pointy_Jelly_Spreadsheet_140x100.png"
-dest_files=["res://.godot/imported/Pointy_Jelly_Spreadsheet_140x100.png-44887ef62d0a828f93e6256e8791b3d6.ctex"]
+source_file="res://Game/Enemies/Bomb_Shark/Bomb_Shark.png"
+dest_files=["res://.godot/imported/Bomb_Shark.png-85a8f323dd5a4bb3b736ee6bffb94a5d.ctex"]
 
 [params]
 
