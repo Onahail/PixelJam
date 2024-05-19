@@ -16,6 +16,10 @@ wait_time = 4.0
 [node name="LossAnimation" type="Timer" parent="."]
 wait_time = 3.0
 
+[node name="Floating" type="Timer" parent="."]
+autostart = true
+
 [connection signal="timeout" from="Init" to="." method="_on_init_timeout"]
 [connection signal="timeout" from="WinAnimation" to="." method="_on_win_animation_timeout"]
 [connection signal="timeout" from="LossAnimation" to="." method="_on_loss_animation_timeout"]
+[connection signal="timeout" from="Floating" to="." method="_on_floating_timeout"]

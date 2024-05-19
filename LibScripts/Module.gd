@@ -87,6 +87,7 @@ func _on_repair_toggled():
 	Input.set_custom_mouse_cursor(Globals.REPAIR_CURSOR)
 	MenuMusic.stream = repair_sounds
 	MenuMusic.play()
+	MenuMusic.volume_db = 20
 	currentlyRepairing = true
 	$RepairProgressBar.visible = true
 	

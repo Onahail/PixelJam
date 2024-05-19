@@ -36,15 +36,16 @@ func collided():
 	super.collided()
 
 func _on_animated_sprite_2d_animation_finished():
-	if darting == true:
-		rand_num_jelly = int(randf_range(0,5))
-		dart_speed = int(randf_range(Globals.SPEED * 2, Globals.SPEED * 3))
-		darting = false
-	elif darting == false:
-		if $Timer.time_left <= 0:
-			$AnimatedSprite2D.play("idle")
-			$Timer.wait_time = randf_range(0.5, 2)
-			$Timer.start()
+	if not dead:
+		if darting == true:
+			rand_num_jelly = int(randf_range(0,5))
+			dart_speed = int(randf_range(Globals.SPEED * 2, Globals.SPEED * 3))
+			darting = false
+		elif darting == false:
+			if $Timer.time_left <= 0:
+				$AnimatedSprite2D.play("idle")
+				$Timer.wait_time = randf_range(0.5, 2)
+				$Timer.start()
 	super._on_animated_sprite_2d_animation_finished()
 
 
