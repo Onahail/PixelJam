@@ -1,4 +1,4 @@
-[gd_scene load_steps=13 format=3 uid="uid://de4j5pomdu57n"]
+[gd_scene load_steps=23 format=3 uid="uid://de4j5pomdu57n"]
 
 [ext_resource type="Script" path="res://Menus/ShipBuilder/ShipModules/BaseTile/base_tile.gd" id="1_qxjh6"]
 [ext_resource type="PackedScene" uid="uid://cl15cxjbmox8d" path="res://Menus/ShipBuilder/ShipModules/BaseTile/hullbodytile.tscn" id="2_0s5ex"]
@@ -8,6 +8,7 @@
 [ext_resource type="Texture2D" uid="uid://bhyufmy42kn4m" path="res://UI_Elements/Repair_Progress_Bar_Full.png" id="6_e8fyu"]
 [ext_resource type="Texture2D" uid="uid://bv0gmw3ydr7vm" path="res://Menus/ShipBuilder/ShipModules/Shield/Shield_Pulse_Spreadsheet_92x64.png" id="7_jtugh"]
 [ext_resource type="AudioStream" uid="uid://2kgkura1gvo5" path="res://Sounds/air-impact-wrench-82141.wav" id="8_jxynj"]
+[ext_resource type="Texture2D" uid="uid://crkhas752mr15" path="res://Game/Enemies/Bomb_Shark/Explode_Spreadsheet_124x136.png" id="9_6bnhe"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_ul0v3"]
 atlas = ExtResource("7_jtugh")
@@ -35,6 +36,70 @@ animations = [{
 }],
 "loop": true,
 "name": &"shields_on",
+"speed": 5.0
+}]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_htxc7"]
+atlas = ExtResource("9_6bnhe")
+region = Rect2(0, 0, 124, 136)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_t8yor"]
+atlas = ExtResource("9_6bnhe")
+region = Rect2(124, 0, 124, 136)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_ghn1q"]
+atlas = ExtResource("9_6bnhe")
+region = Rect2(248, 0, 124, 136)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_wj7yw"]
+atlas = ExtResource("9_6bnhe")
+region = Rect2(372, 0, 124, 136)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_t2e66"]
+atlas = ExtResource("9_6bnhe")
+region = Rect2(496, 0, 124, 136)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_8d7mo"]
+atlas = ExtResource("9_6bnhe")
+region = Rect2(620, 0, 124, 136)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_hukie"]
+atlas = ExtResource("9_6bnhe")
+region = Rect2(744, 0, 124, 136)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_ndst7"]
+atlas = ExtResource("9_6bnhe")
+region = Rect2(868, 0, 124, 136)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_fg7wd"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_htxc7")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_t8yor")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_ghn1q")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_wj7yw")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_t2e66")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_8d7mo")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_hukie")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_ndst7")
+}],
+"loop": false,
+"name": &"explosion",
 "speed": 5.0
 }]
 
@@ -89,8 +154,14 @@ animation = &"shields_on"
 [node name="InstallModule" type="AudioStreamPlayer2D" parent="."]
 stream = ExtResource("8_jxynj")
 
+[node name="GameLossExplosion" type="AnimatedSprite2D" parent="."]
+visible = false
+sprite_frames = SubResource("SpriteFrames_fg7wd")
+animation = &"explosion"
+
 [connection signal="timeout" from="RepairTimer" to="." method="_on_repair_timer_timeout"]
 [connection signal="body_entered" from="Area2D" to="." method="_on_area_2d_body_entered"]
 [connection signal="body_exited" from="Area2D" to="." method="_on_area_2d_body_exited"]
 [connection signal="mouse_entered" from="Area2D" to="." method="_on_area_2d_mouse_entered"]
 [connection signal="mouse_exited" from="Area2D" to="." method="_on_area_2d_mouse_exited"]
+[connection signal="animation_finished" from="GameLossExplosion" to="." method="_on_game_loss_explosion_animation_finished"]

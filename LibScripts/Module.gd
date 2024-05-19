@@ -100,7 +100,8 @@ func _on_repair_cancelled():
 func moduleInit():
 	health = ModuleStats.module_data[module_name]["health"]
 	price = ModuleStats.module_data[module_name]["price"]
-	repair_time = ModuleStats.module_data[module_name]["repair_time"]
+	repair_time = Globals.REPAIR_TIME
+	#repair_time = ModuleStats.module_data[module_name]["repair_time"]
 	
 	$TextureHealthBar.max_value = health
 	$TextureHealthBar.value = health

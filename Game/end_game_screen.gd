@@ -17,6 +17,7 @@ func _ready():
 				else:
 					$Stats.text = str("Unfortunately all your ", module, "s were destroyed and your exepedition under the sea ended in failure.\nTry again?")
 	
+	Globals.PLAYER_WIN = null
 
 func _on_return_to_menu_pressed():
 	get_tree().change_scene_to_file("res://Menus/main_menu.tscn")

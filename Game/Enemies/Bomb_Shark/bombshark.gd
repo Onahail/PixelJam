@@ -6,6 +6,7 @@ func _ready():
 	$AnimatedSprite2D.play("swimming")
 	enemy_name = "Bombshark"
 	super._ready()
+	currentHP = int(currentHP * 1.3)
 	
 
 func _physics_process(delta):

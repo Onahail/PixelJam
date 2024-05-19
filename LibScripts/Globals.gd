@@ -18,7 +18,7 @@ var CROSSHAIR_CURSOR = preload("res://UI_Elements/Crosshair_Cursor.png")
 var DEFAULT_CURSOR = preload("res://UI_Elements/Default_Cursor.png")
 
 #GAME STATS
-var PLAYER_WIN = false
+var PLAYER_WIN
 var DEPTH = 100
 var DIFFICULTY :float = 0
 var DIFF_SCALE_START = 2
@@ -40,13 +40,12 @@ var insufficient_money = false
 
 #ENEMIES
 var ENEMY_MOVE_SPEED = 220
-var ENEMY_HEALTH = 5
+var ENEMY_HEALTH = 8
 var SPAWN_RATE : float = 1
 var BASE_SPAWN_RATE : float = 6
 var ENEMY_DAMAGE = 3
 var EXPLOSION_DAMAGE = 1
 var MOUSE_ON_ENEMY = false
-
 
 var LAUNCHERFISH_FIRE_RATE = 1
 var LAUNCHERFISH_PROJECTILE_DAMAGE = 2
@@ -57,7 +56,7 @@ var LAUNCHERFISH_PROJECTILE_VELOCITY = 1000
 
 #SHIP STATS
 var SPEED = 200
-var REPAIR_TIME = 2
+var REPAIR_TIME = 1
 var MAX_SHIELD_POWER = 100
 var SHIELD_POWER = 100
 var SHIELD_DRAIN = 0
@@ -91,13 +90,11 @@ func calc_collection_rates():
 	Globals.MAX_RESOURCES = (Globals.modulesOnShip["Storage"] + 0.8) * ModuleStats.module_data["Storage"]["misc"]["capacity"]
 	Globals.COLLECTION_RATE = float(Globals.modulesOnShip["Propeller"] * (8/float(Globals.modulesOnShip["Hull"]))) * Globals.modulesOnShip["Scoop"] * ModuleStats.module_data["Scoop"]["misc"]["collection_rate"]
 	SPAWN_RATE = float(BASE_SPAWN_RATE/(float(Globals.modulesOnShip["Propeller"] * (8/float(Globals.modulesOnShip["Hull"]))))/DIFFICULTY)
+
 func GameLoss():
 	PLAYER_WIN = false
-	print("Game Loss called")
 	Input.set_custom_mouse_cursor(Globals.DEFAULT_CURSOR)
-	get_tree().change_scene_to_file("res://Game/end_game_screen.tscn")
 	
 func GameWin():
 	PLAYER_WIN = true
 	Input.set_custom_mouse_cursor(Globals.DEFAULT_CURSOR)
-	get_tree().change_scene_to_file("res://Game/end_game_screen.tscn")

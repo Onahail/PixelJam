@@ -1,6 +1,35 @@
 extends Node2D
 
 #var hulls = [] #Reference to all hulls, and thus their child modules
+var shuffled = false
+
+func _ready():
+	$WinAnimation.start()
+	$WinAnimation.paused = true
+	$LossAnimation.start()
+	$LossAnimation.paused = true
+
+func _process(delta):
+	if get_tree().current_scene.name == "EndGameScreen":
+		$WinAnimation.paused = true
+		$WinAnimation.start()
+	if get_tree().current_scene.name == "Game":
+		if Globals.PLAYER_WIN == true:
+			var direction = Vector2.UP
+			global_position += direction * 200 * delta
+			$WinAnimation.paused = false
+			
+	if get_tree().current_scene.name == "Game":
+		if Globals.PLAYER_WIN == false:
+			if shuffled == false:
+				shuffled = true
+				Globals.HULLS.shuffle()
+			for hull in Globals.HULLS:
+				hull.LostGame()
+				await get_tree().create_timer(0.5).timeout
+			$LossAnimation.paused = false
+				
+
 
 func save_ship():
 	#Zero out the ship config before saving where the modules are
@@ -104,3 +133,12 @@ func load_ship():
 					
 func _on_init_timeout():
 	Globals.INITIAL_LOAD = false
+
+
+func _on_win_animation_timeout():
+	print("Win Animation timeout called")
+	get_tree().change_scene_to_file("res://Game/end_game_screen.tscn")
+
+
+func _on_loss_animation_timeout():
+	get_tree().change_scene_to_file("res://Game/end_game_screen.tscn")

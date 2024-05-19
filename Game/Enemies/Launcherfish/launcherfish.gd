@@ -15,6 +15,8 @@ var movement_direction = Vector2()
 func _ready():
 	$ShootTimer.wait_time = Globals.LAUNCHERFISH_FIRE_RATE
 	enemy_name = "Launcherfish"
+	super._ready()
+	currentHP = int(currentHP * 1.5)
 	
 
 func _physics_process(delta):

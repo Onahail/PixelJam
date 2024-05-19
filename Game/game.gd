@@ -41,9 +41,10 @@ func _physics_process(delta):
 	#print("Collected: ", Globals.RESOURCES_COLLECTED, " - Max Resources: ", Globals.MAX_RESOURCES)
 	#print("Progress Bar Value = ", $ProgressBar.value)
 	if Globals.RESOURCES_COLLECTED >= Globals.MAX_RESOURCES:
-		get_tree().change_scene_to_file("res://Game/end_game_screen.tscn")
 		#TODO Math for actual value per resource
 		Globals.GameWin()
+		Globals.COLLECTION_RATE = 0
+		Globals.RESOURCES_COLLECTED = Globals.MAX_RESOURCES
 	if Globals.modulesOnShip["Propeller"] == 0 or Globals.modulesOnShip["Scoop"] == 0:
 		Globals.GameLoss()
 	$ProgressBar/Label.text = str("Resources Collected: ", int(Globals.RESOURCES_COLLECTED),"    Total Storage: ", Globals.MAX_RESOURCES)
