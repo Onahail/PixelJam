@@ -98,6 +98,7 @@ func CalculateDropPosition():
 			Globals.PLAYER_CURRENCY -= price
 			purchased = true
 			drop_point.remove_from_group("droppable")
+			$InstallModule.play()
 			EventBus.item_purchased.emit(module_name)
 			if module_name == "Hull":
 				self.x = drop_point.x

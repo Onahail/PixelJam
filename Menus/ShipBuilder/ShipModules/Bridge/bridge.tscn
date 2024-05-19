@@ -1,4 +1,4 @@
-[gd_scene load_steps=21 format=3 uid="uid://dxkgwwaujmugp"]
+[gd_scene load_steps=22 format=3 uid="uid://dxkgwwaujmugp"]
 
 [ext_resource type="Script" path="res://Menus/ShipBuilder/ShipModules/Bridge/bridge.gd" id="1_eicod"]
 [ext_resource type="Texture2D" uid="uid://dv5kqq4cpev0t" path="res://UI_Elements/Power_bar_empty.PNG" id="3_2anky"]
@@ -9,6 +9,7 @@
 [ext_resource type="Texture2D" uid="uid://c05ydeutn4b1s" path="res://Menus/ShipBuilder/ShipModules/Bridge/Bridge_Emergency_Spreadsheet_108x64.png" id="7_m8my3"]
 [ext_resource type="Texture2D" uid="uid://c02bfn8up3k2y" path="res://Menus/ShipBuilder/ShipModules/Bridge/Bridge.png" id="8_eu4i3"]
 [ext_resource type="Texture2D" uid="uid://bv0gmw3ydr7vm" path="res://Menus/ShipBuilder/ShipModules/Shield/Shield_Pulse_Spreadsheet_92x64.png" id="9_edouk"]
+[ext_resource type="AudioStream" uid="uid://2kgkura1gvo5" path="res://Sounds/air-impact-wrench-82141.wav" id="10_03o2w"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_y3630"]
 atlas = ExtResource("6_dx7pf")
@@ -141,6 +142,9 @@ animation = &"bridge_anim"
 visible = false
 sprite_frames = SubResource("SpriteFrames_6skd8")
 animation = &"shields_on"
+
+[node name="InstallModule" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource("10_03o2w")
 
 [connection signal="body_entered" from="Area2D" to="." method="_on_area_2d_body_entered"]
 [connection signal="body_exited" from="Area2D" to="." method="_on_area_2d_body_exited"]

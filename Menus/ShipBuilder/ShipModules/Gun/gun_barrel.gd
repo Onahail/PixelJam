@@ -33,9 +33,11 @@ func shoot():
 	new_bullet.global_position = $Gun/ShootPoint.global_position
 	new_bullet.global_rotation = $Gun/ShootPoint.global_rotation
 	$Gun/ShootPoint.add_child(new_bullet)
+	$GunShot.play()
 	
 func _on_hp_depleted():
 	disabled = true
+	$Timer.stop()
 	
 func _on_repair_cancelled():
 	disabled = false

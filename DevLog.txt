@@ -3,3 +3,13 @@ Add code to set up resources being gathered. Once resource bar is full, show vic
 5/13/2024: Added Save Functionality
 5/14/2024: Implemented propeller and storage modules as well as a repair functionality
 5/14/2024: Almost done with the shop. 2 MAJOR BUGS that need to be fixed. You can sell items from the shop, can't sell items after placing another item.
+
+
+SOUND EFFECTS CREDIT:
+Floraphonic - Coin and Money Bag : https://pixabay.com/sound-effects/search/coin%20and%20money%20bag/
+DavidDumaisAudio - Underwater Explosion : https://pixabay.com/sound-effects/search/underwater%20explosion/
+Floraphonic - Metal Slam 5 : https://pixabay.com/sound-effects/search/metal%20thud/
+Pixabay - Boom_C_06 : https://pixabay.com/sound-effects/search/game%20gun/
+Pixabay - Forcefield Ambiance : https://pixabay.com/sound-effects/search/forcefield/
+Pixabay - Air Impact Wrench : https://pixabay.com/sound-effects/search/pneumatic%20wrench/
+Pirate Software - Heartbound OST Gearworks

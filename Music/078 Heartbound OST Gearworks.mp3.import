@@ -1,0 +1,19 @@
+[remap]
+
+importer="mp3"
+type="AudioStreamMP3"
+uid="uid://bv8nvd6gahqbh"
+path="res://.godot/imported/078 Heartbound OST Gearworks.mp3-dab48f5a4168ad060db734480781fe58.mp3str"
+
+[deps]
+
+source_file="res://Music/078 Heartbound OST Gearworks.mp3"
+dest_files=["res://.godot/imported/078 Heartbound OST Gearworks.mp3-dab48f5a4168ad060db734480781fe58.mp3str"]
+
+[params]
+
+loop=false
+loop_offset=0
+bpm=0
+beat_count=0
+bar_beats=4

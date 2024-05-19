@@ -1,9 +1,9 @@
 [gd_scene load_steps=6 format=3 uid="uid://bispnc5n2jjek"]
 
 [ext_resource type="Script" path="res://Menus/ShipBuilder/ship_builder.gd" id="1_nsu8l"]
+[ext_resource type="AudioStream" uid="uid://bv8nvd6gahqbh" path="res://Music/078 Heartbound OST Gearworks.mp3" id="2_68q7y"]
 [ext_resource type="AudioStream" uid="uid://ck6c3x2y4hkq1" path="res://Sounds/coin-and-money-bag-3-185264.mp3" id="4_i2e6w"]
 [ext_resource type="PackedScene" uid="uid://d0gti5ph2m6et" path="res://Menus/ShipBuilder/Ships/player_ship.tscn" id="4_mu5ef"]
-[ext_resource type="AudioStream" uid="uid://d0du7ubyvmbjv" path="res://Music/Shipbuilding.mp3" id="5_8upf1"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_ah087"]
 size = Vector2(760.75, 95)
@@ -18,8 +18,8 @@ offset_right = 99.0
 offset_bottom = 78.0
 text = "Back"
 
-[node name="AudioStreamPlayer2D" type="AudioStreamPlayer2D" parent="."]
-stream = ExtResource("5_8upf1")
+[node name="BackgroundMusic" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource("2_68q7y")
 autoplay = true
 
 [node name="Timer" type="Timer" parent="."]
@@ -127,7 +127,7 @@ collision_layer = 20
 collision_mask = 20
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="UI/Shop/ShopZone"]
-position = Vector2(488, 411)
+position = Vector2(484, 424)
 shape = SubResource("RectangleShape2D_ah087")
 
 [node name="ShipSpawnPoint" type="Marker2D" parent="UI/Shop"]

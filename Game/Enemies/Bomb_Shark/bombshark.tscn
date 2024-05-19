@@ -1,8 +1,14 @@
-[gd_scene load_steps=20 format=3 uid="uid://c1pi2qxtq7jq5"]
+[gd_scene load_steps=23 format=3 uid="uid://c1pi2qxtq7jq5"]
 
 [ext_resource type="Texture2D" uid="uid://ls1kfserybjc" path="res://Game/Enemies/Bomb_Shark/Bomb_Shark_Spreadsheet_110x94.png" id="1_1mfi3"]
 [ext_resource type="Script" path="res://Game/Enemies/Bomb_Shark/bombshark.gd" id="1_7tu34"]
 [ext_resource type="Texture2D" uid="uid://crkhas752mr15" path="res://Game/Enemies/Bomb_Shark/Explode_Spreadsheet_124x136.png" id="2_afcyr"]
+[ext_resource type="Texture2D" uid="uid://c3yey10653xww" path="res://Game/Enemies/Bomb_Shark/Bomb_Shark_Hurt.png" id="2_wkuwm"]
+[ext_resource type="AudioStream" uid="uid://bqtm4bs747usj" path="res://Sounds/large-underwater-explosion-190270.mp3" id="4_dsthh"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_d7yv5"]
+atlas = ExtResource("2_wkuwm")
+region = Rect2(0, 0, 104, 72)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_r8b87"]
 atlas = ExtResource("1_1mfi3")
@@ -22,6 +28,17 @@ region = Rect2(330, 0, 110, 94)
 
 [sub_resource type="SpriteFrames" id="SpriteFrames_1e5ay"]
 animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_d7yv5")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_d7yv5")
+}],
+"loop": false,
+"name": &"damaged",
+"speed": 5.0
+}, {
 "frames": [{
 "duration": 1.0,
 "texture": SubResource("AtlasTexture_r8b87")
@@ -119,8 +136,7 @@ script = ExtResource("1_7tu34")
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
 sprite_frames = SubResource("SpriteFrames_1e5ay")
-animation = &"swimming"
-frame_progress = 0.156726
+animation = &"damaged"
 flip_h = true
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
@@ -152,7 +168,11 @@ sprite_frames = SubResource("SpriteFrames_o5il4")
 animation = &"explosion"
 frame_progress = 0.855642
 
+[node name="ExplosionSound" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource("4_dsthh")
+
 [connection signal="mouse_entered" from="." to="." method="_on_mouse_entered"]
 [connection signal="mouse_exited" from="." to="." method="_on_mouse_exited"]
+[connection signal="animation_finished" from="AnimatedSprite2D" to="." method="_on_animated_sprite_2d_animation_finished"]
 [connection signal="animation_finished" from="DeathAnimation" to="." method="_on_explosion_animation_animation_finished"]
 [connection signal="animation_finished" from="ForwardExplosion" to="." method="_on_explosion_animation_animation_finished"]

@@ -56,7 +56,7 @@ func ActivateShields(caller = null):
 	
 func DeactivateShields(caller = null):
 	shieldmod.erase(caller)
-	print("deactivate shield called, array size is now ",shieldmod.size())
+	#print("deactivate shield called, array size is now ",shieldmod.size())
 	shielded = false
 	if(shieldmod.size() == 0):
 		$ShieldOverlay.visible = false

@@ -1,7 +1,8 @@
-[gd_scene load_steps=3 format=3 uid="uid://dydspxhktcbcx"]
+[gd_scene load_steps=4 format=3 uid="uid://dydspxhktcbcx"]
 
 [ext_resource type="Script" path="res://Menus/ShipBuilder/ShipModules/Gun/gun_barrel.gd" id="1_gjrub"]
 [ext_resource type="Texture2D" uid="uid://cd4me2rdqa2px" path="res://Menus/ShipBuilder/ShipModules/Gun/Gun.png" id="2_sa4ga"]
+[ext_resource type="AudioStream" uid="uid://bjdgyvyffnl1b" path="res://Sounds/boom_c_06-102838.mp3" id="3_m3ik4"]
 
 [node name="GunBarrel" type="Node2D"]
 script = ExtResource("1_gjrub")
@@ -19,5 +20,8 @@ position = Vector2(-0.167662, -28.0002)
 rotation = -1.57424
 
 [node name="Timer" type="Timer" parent="."]
+
+[node name="GunShot" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource("3_m3ik4")
 
 [connection signal="timeout" from="Timer" to="." method="_on_timer_timeout"]
