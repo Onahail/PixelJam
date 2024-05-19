@@ -39,6 +39,8 @@ func take_damage(damage):
 	currentHP -= damage
 	if currentHP <= 0:
 		dead = true
+		if $AnimatedSprite2D.animation != "death":
+			$AnimatedSprite2D.stop()
 		$AnimatedSprite2D.play("death")
 		self.set_collision_layer_value(4, false)
 	else:

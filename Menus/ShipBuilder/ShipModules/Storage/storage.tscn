@@ -139,8 +139,7 @@ script = ExtResource("1_vy5sq")
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
 sprite_frames = SubResource("SpriteFrames_tr4se")
-animation = &"fill_stage_4"
-frame_progress = 0.502498
+animation = &"fill_stage_1"
 
 [node name="Area2D" type="Area2D" parent="."]
 collision_layer = 4

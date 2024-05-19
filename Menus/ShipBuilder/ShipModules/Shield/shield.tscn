@@ -124,6 +124,7 @@ sprite_frames = SubResource("SpriteFrames_oj1oq")
 animation = &"shields_off"
 
 [node name="ShieldOverlay" type="AnimatedSprite2D" parent="."]
+visible = false
 sprite_frames = SubResource("SpriteFrames_2qk6e")
 animation = &"shields_on"
 
