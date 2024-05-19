@@ -22,11 +22,17 @@ func _ready():
 	super._ready()
 
 func _process(delta):		
-
 	if get_tree().current_scene.name == "ShipBuilder":
 		$ShieldsActive.visible = true
 
 	if get_tree().current_scene.name == "Game":
+		if shield_hp > 0:
+			$ShieldHealth.max_value = ModuleStats.module_data["Shield"]["misc"]["shield_hp"]
+			$ShieldHealth.value = shield_hp
+		else:
+			$ShieldHealth.max_value = $ChargeDelay.wait_time
+			$ShieldHealth.value = recharge_delay / $ChargeDelay.time_left
+		
 		if(surrounding_modules.size() == 0):
 			$ShieldsActive.visible = true
 			CheckShieldableModules()
