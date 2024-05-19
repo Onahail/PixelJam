@@ -30,7 +30,7 @@ func take_damage(damage):
 	else:
 		damaged = true
 		velocity = left * normal_speed
-		$AnimatedSprite2D.play("damaged")	
+		$AnimatedSprite2D.play("damaged")
 
 
 

@@ -54,10 +54,10 @@ func _ready():
 	
 func _process(_delta):
 	
-	$UI/Information/Currency.text = str("Available Money:\n", Globals.PLAYER_CURRENCY)
+	$UI/Information/Currency.text = str("Available Money:\n $", Globals.PLAYER_CURRENCY)
 	var shipinfo = ""
 	for module in Globals.modulesOnShip:
-		shipinfo = str(shipinfo, module, ": ", Globals.modulesOnShip[module], "\n")
+		shipinfo = str(shipinfo, module, ": ", Globals.modulesOnShip[module],"/",ModuleStats.module_data[module]["max_allowable"], "\n")
 	$UI/Information/ShipPartNumbers.text = shipinfo
 
 func _on_hull_placed_right_of_bridge():

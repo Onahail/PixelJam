@@ -1,10 +1,12 @@
-[gd_scene load_steps=13 format=3 uid="uid://l35y1g5j685o"]
+[gd_scene load_steps=15 format=3 uid="uid://l35y1g5j685o"]
 
 [ext_resource type="Script" path="res://Game/game.gd" id="1_ru1o3"]
 [ext_resource type="Script" path="res://Game/ParallaxBackground.gd" id="2_nh28l"]
 [ext_resource type="Texture2D" uid="uid://dnqn5fwhkb1w8" path="res://Backgrounds/Background_Level_1_Version_1.png" id="2_qwy0g"]
 [ext_resource type="AudioStream" uid="uid://dtmww5tol5oth" path="res://Music/Submarine_Rush.mp3" id="3_qn60e"]
 [ext_resource type="Texture2D" uid="uid://wkrgmy5gdtbq" path="res://Backgrounds/Level_1_Background_Second_Layer_Placeholder.png" id="3_vwv2g"]
+[ext_resource type="Texture2D" uid="uid://byti4slpwbe51" path="res://Backgrounds/Level_2_Background.png" id="4_mq1pi"]
+[ext_resource type="Texture2D" uid="uid://ctp4ig6sb8vi2" path="res://Backgrounds/Level_2_Parallax_Background.png" id="6_2tvtc"]
 [ext_resource type="PackedScene" uid="uid://d0gti5ph2m6et" path="res://Menus/ShipBuilder/Ships/player_ship.tscn" id="8_y7o76"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_51ino"]
@@ -42,6 +44,10 @@ position = Vector2(872, 486)
 scale = Vector2(1.51302, 1.50154)
 texture = ExtResource("2_qwy0g")
 
+[node name="BackgroundLevel2" type="Sprite2D" parent="ParallaxBackground"]
+position = Vector2(864, 486)
+texture = ExtResource("4_mq1pi")
+
 [node name="ParallaxLayer" type="ParallaxLayer" parent="ParallaxBackground"]
 position = Vector2(0, 2)
 motion_offset = Vector2(-40, 0)
@@ -50,6 +56,10 @@ motion_mirroring = Vector2(3456, 0)
 [node name="Level1BackgroundSecondLayerPlaceholder" type="Sprite2D" parent="ParallaxBackground/ParallaxLayer"]
 position = Vector2(1728, 485)
 texture = ExtResource("3_vwv2g")
+
+[node name="Level2BackgroundSecondLayer" type="Sprite2D" parent="ParallaxBackground/ParallaxLayer"]
+position = Vector2(864, 729)
+texture = ExtResource("6_2tvtc")
 
 [node name="ProgressBar" type="ProgressBar" parent="."]
 offset_left = 628.0
