@@ -20,7 +20,7 @@ var module_data = {
 		"price": 30,
 		"repair_time": 3,
 		"min_allowable": 0,
-		"max_allowable": 10,
+		"max_allowable": 6,
 		"misc": {
 			"damage": 1,
 			"fire_rate": 0.2,

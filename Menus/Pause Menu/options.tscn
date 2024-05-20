@@ -24,6 +24,7 @@ script = ExtResource("1_dk3jn")
 
 [node name="Menu" type="Panel" parent="."]
 z_index = 4
+layout_mode = 0
 offset_left = -1.0
 offset_right = 214.0
 offset_bottom = 219.0
