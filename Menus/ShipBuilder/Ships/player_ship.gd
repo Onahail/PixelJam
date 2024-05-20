@@ -35,8 +35,12 @@ func _process(delta):
 				shuffled = true
 				Globals.HULLS.shuffle()
 			for hull in Globals.HULLS:
-				hull.LostGame()
-				await get_tree().create_timer(0.5).timeout
+				if(hull != null):
+					hull.get_node("Area2D").set_collision_mask_value(4, false)
+			for hull in Globals.HULLS:
+				if(hull != null):
+					hull.LostGame()
+					await get_tree().create_timer(0.5).timeout
 			$LossAnimation.paused = false
 				
 

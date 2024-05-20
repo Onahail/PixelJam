@@ -1,9 +1,10 @@
-[gd_scene load_steps=6 format=3 uid="uid://bispnc5n2jjek"]
+[gd_scene load_steps=7 format=3 uid="uid://bispnc5n2jjek"]
 
 [ext_resource type="Script" path="res://Menus/ShipBuilder/ship_builder.gd" id="1_nsu8l"]
 [ext_resource type="AudioStream" uid="uid://bv8nvd6gahqbh" path="res://Music/078 Heartbound OST Gearworks.mp3" id="2_68q7y"]
 [ext_resource type="AudioStream" uid="uid://ck6c3x2y4hkq1" path="res://Sounds/coin-and-money-bag-3-185264.mp3" id="4_i2e6w"]
 [ext_resource type="PackedScene" uid="uid://d0gti5ph2m6et" path="res://Menus/ShipBuilder/Ships/player_ship.tscn" id="4_mu5ef"]
+[ext_resource type="Texture2D" uid="uid://byti4slpwbe51" path="res://Backgrounds/Level_2_Background.png" id="5_ivxts"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_ah087"]
 size = Vector2(760.75, 95)
@@ -108,25 +109,25 @@ offset_right = 465.0
 offset_bottom = 470.0
 
 [node name="PropellerMarker" type="Marker2D" parent="UI/Shop"]
-position = Vector2(180, 430)
+position = Vector2(146, 430)
 
 [node name="GunMarker" type="Marker2D" parent="UI/Shop"]
-position = Vector2(275, 430)
+position = Vector2(241, 430)
 
 [node name="StorageMarker" type="Marker2D" parent="UI/Shop"]
-position = Vector2(371, 430)
+position = Vector2(337, 430)
 
 [node name="ScoopMarker" type="Marker2D" parent="UI/Shop"]
-position = Vector2(466, 430)
+position = Vector2(432, 430)
 
 [node name="BridgeMarker" type="Marker2D" parent="UI/Shop"]
-position = Vector2(739, 430)
+position = Vector2(705, 430)
 
 [node name="ShieldMarker" type="Marker2D" parent="UI/Shop"]
-position = Vector2(556, 430)
+position = Vector2(522, 430)
 
 [node name="HullMarker" type="Marker2D" parent="UI/Shop"]
-position = Vector2(648, 430)
+position = Vector2(614, 430)
 
 [node name="ShopZone" type="Area2D" parent="UI/Shop"]
 position = Vector2(-17, -5)
@@ -134,7 +135,7 @@ collision_layer = 20
 collision_mask = 20
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="UI/Shop/ShopZone"]
-position = Vector2(484, 424)
+position = Vector2(444, 405)
 shape = SubResource("RectangleShape2D_ah087")
 
 [node name="ShipSpawnPoint" type="Marker2D" parent="UI/Shop"]
@@ -143,9 +144,9 @@ position = Vector2(-1058, 1)
 [node name="ShopPrices" type="Control" parent="UI/Shop"]
 layout_mode = 3
 anchors_preset = 0
-offset_left = 149.0
+offset_left = 115.0
 offset_top = 340.0
-offset_right = 687.0
+offset_right = 752.0
 offset_bottom = 379.0
 
 [node name="PropellerCost" type="Label" parent="UI/Shop/ShopPrices"]
@@ -302,6 +303,11 @@ horizontal_alignment = 1
 [node name="BackgroundMusic" type="AudioStreamPlayer2D" parent="."]
 stream = ExtResource("2_68q7y")
 autoplay = true
+
+[node name="Level2Background" type="Sprite2D" parent="."]
+z_index = -4
+position = Vector2(864, 486)
+texture = ExtResource("5_ivxts")
 
 [connection signal="pressed" from="Back" to="." method="_on_back_pressed"]
 [connection signal="timeout" from="Timer" to="." method="_on_timer_timeout"]
