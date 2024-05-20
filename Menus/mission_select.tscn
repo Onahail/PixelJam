@@ -82,3 +82,4 @@ texture = ExtResource("3_4yhhk")
 [connection signal="pressed" from="Back" to="." method="_on_back_pressed"]
 [connection signal="pressed" from="MissionStart" to="." method="_on_mission_start_pressed"]
 [connection signal="drag_ended" from="DepthSlider" to="." method="_on_v_slider_drag_ended"]
+[connection signal="value_changed" from="DepthSlider" to="." method="_on_depth_slider_value_changed"]

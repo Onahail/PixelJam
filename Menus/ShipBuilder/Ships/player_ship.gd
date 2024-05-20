@@ -6,7 +6,6 @@ var floating_direction = Vector2.UP
 
 var amplitude = 40  # Maximum height of the movement above and below the starting position
 var frequency = 0.2  # How many seconds it takes to complete one cycle
-var scale_factor = 0.1
 var original_y = 0.0  # Starting vertical position
 
 func _ready():
@@ -20,9 +19,6 @@ func _process(delta):
 	if get_tree().current_scene.name == "MainMenu" or  get_tree().current_scene.name == "MissionSelect":
 		var time = Time.get_ticks_msec() / 1000.0  # Current time in seconds
 		global_position.y = original_y + amplitude * sin(2 * PI * frequency * time)
-		var derivative = amplitude * 2 * PI * frequency * cos(2 * PI * frequency * time)
-		var angle = atan(derivative) * scale_factor
-		rotation = angle  # Set the rotation of the node
 	
 	if get_tree().current_scene.name == "EndGameScreen":
 		$WinAnimation.paused = true
