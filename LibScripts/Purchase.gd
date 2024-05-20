@@ -66,10 +66,11 @@ func _process(_delta):
 				GenerateMarker()
 				Globals.ship_config[self.x][self.y] = "0"
 				Globals.HULLS.erase(self)
+				drop_points.erase(self)
 				DeleteItem()
-				
 			
 func GenerateMarker():
+	
 	var marker = load(ModuleStats.module_data["Hull"]["assets"]["expansion_marker"])
 	hull_marker = marker.instantiate()
 	hull_marker.global_position = global_position
@@ -197,7 +198,6 @@ func CheckDropPositionEligibility(point: Vector2) -> bool:
 				return false
 	else:
 		pass
-
 	return true 
 	
 
@@ -205,7 +205,7 @@ func ChangeParent():
 	self.get_parent().remove_child(self)
 	if module_name == "Hull":
 		drop_point.get_parent().add_child(self)
-		#drop_point.queue_free()
+		drop_point.queue_free()
 	else:
 		drop_point.add_child(self)
 		global_position = drop_point.global_position
@@ -274,12 +274,11 @@ func _on_area_2d_body_entered(body):
 		drop_points.append(body)
 		is_inside_droppable = true
 	else:
-		
 		var test = false
 		for thing in body.get_children():
 			if(thing is Module):
 				test = true
-		if((not test) and (not Globals.INITIAL_LOAD)):
+		if((not test) and (not Globals.INITIAL_LOAD) and body.body_name != "expansion_marker"):
 			body.add_to_group('droppable')
 			print("EMPTY HULL NOT DROPPABLE - FIXING NOW - Group status is now ", body.is_in_group('droppable'), ", Group size = ", get_tree().get_nodes_in_group('droppable').size(), ", Initial load = ", Globals.INITIAL_LOAD)
 			_on_area_2d_body_entered(body)
