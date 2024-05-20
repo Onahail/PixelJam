@@ -1,44 +1,133 @@
-[gd_scene load_steps=4 format=3 uid="uid://cwyaji7wn7snp"]
+[gd_scene load_steps=15 format=3 uid="uid://cwyaji7wn7snp"]
 
 [ext_resource type="Script" path="res://Menus/mission_select.gd" id="1_xk8tw"]
+[ext_resource type="Texture2D" uid="uid://bj420m3j65uhq" path="res://UI_Elements/Back_Button.png" id="2_lkh64"]
+[ext_resource type="Texture2D" uid="uid://cf8w3o0tfjebu" path="res://UI_Elements/Dive_Button_Spritesheet_Up.png" id="2_ry22w"]
 [ext_resource type="Texture2D" uid="uid://dnqn5fwhkb1w8" path="res://Backgrounds/Background_Level_1_Version_1.png" id="3_4yhhk"]
+[ext_resource type="Texture2D" uid="uid://b5sbe0pp2jbx" path="res://UI_Elements/Back_Button_Hover.png" id="3_c3vlx"]
+[ext_resource type="Texture2D" uid="uid://byti4slpwbe51" path="res://Backgrounds/Level_2_Background.png" id="3_l0p8w"]
+[ext_resource type="Texture2D" uid="uid://bewjqunipq882" path="res://UI_Elements/Dive_Button_Spritesheet_Down.png" id="3_ly8r7"]
 [ext_resource type="PackedScene" uid="uid://d0gti5ph2m6et" path="res://Menus/ShipBuilder/Ships/player_ship.tscn" id="3_n1ivd"]
+[ext_resource type="Texture2D" uid="uid://bqio0wupusl6m" path="res://Backgrounds/Level_3_Background.png" id="4_fi8xb"]
+[ext_resource type="FontFile" uid="uid://bcj8jvcq2qp7q" path="res://UI_Elements/VCR_OSD_MONO_1.001.ttf" id="10_j2oa7"]
+[ext_resource type="Texture2D" uid="uid://q2y02tn2ssgy" path="res://UI_Elements/Launch_Depth_Title_Blue_Spritesheet_500x134.png" id="13_o4t8v"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_tx1u1"]
+atlas = ExtResource("13_o4t8v")
+region = Rect2(0, 0, 500, 134)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_napig"]
+atlas = ExtResource("13_o4t8v")
+region = Rect2(500, 0, 500, 134)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_rdk7o"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_tx1u1")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_tx1u1")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_tx1u1")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_tx1u1")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_tx1u1")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_tx1u1")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_tx1u1")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_tx1u1")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_tx1u1")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_tx1u1")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_tx1u1")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_tx1u1")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_tx1u1")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_tx1u1")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_napig")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_tx1u1")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_tx1u1")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_napig")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_tx1u1")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_napig")
+}],
+"loop": true,
+"name": &"sign_purple",
+"speed": 5.0
+}]
 
 [node name="MissionSelect" type="Node2D"]
 script = ExtResource("1_xk8tw")
 
-[node name="Back" type="Button" parent="."]
+[node name="BackgroundLevel1Version1" type="Sprite2D" parent="."]
+position = Vector2(872, 486)
+scale = Vector2(1.51302, 1.50154)
+texture = ExtResource("3_4yhhk")
+
+[node name="BackgroundLevel2" type="Sprite2D" parent="."]
+visible = false
+position = Vector2(864, 486)
+texture = ExtResource("3_l0p8w")
+
+[node name="BackgroundLevel3" type="Sprite2D" parent="."]
+visible = false
+position = Vector2(864, 486)
+texture = ExtResource("4_fi8xb")
+
+[node name="Back" type="TextureButton" parent="."]
 offset_left = 30.0
 offset_top = 25.0
 offset_right = 93.0
 offset_bottom = 88.0
-text = "Back"
+texture_normal = ExtResource("2_lkh64")
+texture_hover = ExtResource("3_c3vlx")
 
-[node name="MissionStart" type="Button" parent="."]
-offset_left = 694.0
-offset_top = 400.0
-offset_right = 1048.0
-offset_bottom = 505.0
-text = "DIVE!"
-
-[node name="Label" type="Label" parent="."]
-offset_left = 660.0
-offset_top = 222.0
-offset_right = 1069.0
-offset_bottom = 291.0
-theme_override_colors/font_color = Color(0.243137, 0.278431, 0.54902, 1)
-theme_override_font_sizes/font_size = 50
-text = "Launch Depth
-"
-horizontal_alignment = 1
-vertical_alignment = 1
+[node name="MissionStart" type="TextureButton" parent="."]
+offset_left = 726.0
+offset_top = 395.0
+offset_right = 996.0
+offset_bottom = 501.0
+texture_normal = ExtResource("2_ry22w")
+texture_pressed = ExtResource("3_ly8r7")
 
 [node name="DepthSlider" type="VSlider" parent="."]
 unique_name_in_owner = true
-offset_left = 1109.0
-offset_top = 570.0
-offset_right = 1125.0
-offset_bottom = 800.0
+offset_left = 1083.0
+offset_top = 578.0
+offset_right = 1124.0
+offset_bottom = 832.0
 rotation = -3.14143
 min_value = 5000.0
 max_value = 10000.0
@@ -55,7 +144,11 @@ offset_top = 166.001
 offset_right = 94.0274
 offset_bottom = 218.001
 rotation = 3.14159
-theme_override_colors/font_color = Color(0.243137, 0.278431, 0.54902, 1)
+theme_override_colors/font_color = Color(1, 0.266667, 0.266667, 1)
+theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
+theme_override_constants/outline_size = 7
+theme_override_fonts/font = ExtResource("10_j2oa7")
+theme_override_font_sizes/font_size = 34
 text = "DEPTH
 "
 horizontal_alignment = 1
@@ -65,19 +158,25 @@ vertical_alignment = 1
 position = Vector2(871, 420)
 
 [node name="DepthLabel" type="Label" parent="."]
-offset_left = 702.0
-offset_top = 519.0
-offset_right = 1048.0
-offset_bottom = 568.0
-theme_override_colors/font_color = Color(0.243137, 0.278431, 0.54902, 1)
+offset_left = 605.0
+offset_top = 614.0
+offset_right = 1150.0
+offset_bottom = 679.0
+theme_override_colors/font_color = Color(1, 0.267467, 0.265432, 1)
+theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
+theme_override_constants/outline_size = 6
+theme_override_fonts/font = ExtResource("10_j2oa7")
+theme_override_font_sizes/font_size = 22
 text = "Lower Depths have more valueable resouces
 but spawn more and harder enemies!"
+horizontal_alignment = 1
+autowrap_mode = 3
 
-[node name="BackgroundLevel1Version1" type="Sprite2D" parent="."]
-z_index = -4
-position = Vector2(864, 486)
-scale = Vector2(1.5, 1.5)
-texture = ExtResource("3_4yhhk")
+[node name="LaunchSign" type="AnimatedSprite2D" parent="."]
+position = Vector2(854, 222)
+sprite_frames = SubResource("SpriteFrames_rdk7o")
+animation = &"sign_purple"
+frame_progress = 0.355232
 
 [connection signal="pressed" from="Back" to="." method="_on_back_pressed"]
 [connection signal="pressed" from="MissionStart" to="." method="_on_mission_start_pressed"]

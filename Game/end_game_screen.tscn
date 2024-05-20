@@ -1,8 +1,14 @@
-[gd_scene load_steps=4 format=3 uid="uid://cqtiqc8uj4gas"]
+[gd_scene load_steps=10 format=3 uid="uid://cqtiqc8uj4gas"]
 
 [ext_resource type="Script" path="res://Game/end_game_screen.gd" id="1_fh7rg"]
+[ext_resource type="Texture2D" uid="uid://c87w1br0okcaa" path="res://UI_Elements/Ship_Builder_Button_Up.png" id="2_mpkq5"]
 [ext_resource type="Texture2D" uid="uid://dnqn5fwhkb1w8" path="res://Backgrounds/Background_Level_1_Version_1.png" id="2_pr60s"]
-[ext_resource type="Texture2D" uid="uid://bqio0wupusl6m" path="res://Backgrounds/Level_3_Background.png" id="3_mf0h6"]
+[ext_resource type="FontFile" uid="uid://bcj8jvcq2qp7q" path="res://UI_Elements/VCR_OSD_MONO_1.001.ttf" id="2_wagtx"]
+[ext_resource type="Texture2D" uid="uid://dji6oowhks0y2" path="res://UI_Elements/Ship_Builder_Button_Down.png" id="3_qjsj8"]
+[ext_resource type="Texture2D" uid="uid://dauo4vduo4fq8" path="res://Backgrounds/Game_Over.png" id="4_qw2m8"]
+[ext_resource type="Texture2D" uid="uid://y7mk8ra7k7d" path="res://UI_Elements/Main_Menu_Button_Up.png" id="4_y57rg"]
+[ext_resource type="Texture2D" uid="uid://cupbm8mhybede" path="res://UI_Elements/Main_Menu_Button_Down.png" id="5_wv08o"]
+[ext_resource type="PackedScene" uid="uid://d0gti5ph2m6et" path="res://Menus/ShipBuilder/Ships/player_ship.tscn" id="8_dhd7o"]
 
 [node name="EndGameScreen" type="Node2D"]
 script = ExtResource("1_fh7rg")
@@ -13,24 +19,11 @@ offset_top = 159.0
 offset_right = 1014.0
 offset_bottom = 358.0
 theme_override_colors/font_color = Color(0.243137, 0.278431, 0.54902, 1)
+theme_override_fonts/font = ExtResource("2_wagtx")
 text = "LOREM IPSUM"
 horizontal_alignment = 1
 vertical_alignment = 1
 autowrap_mode = 3
-
-[node name="ReturnToMenu" type="Button" parent="."]
-offset_left = 188.0
-offset_top = 101.0
-offset_right = 388.0
-offset_bottom = 207.0
-text = "Main Menu"
-
-[node name="ReturnToShipBuilder" type="Button" parent="."]
-offset_left = 187.0
-offset_top = 253.0
-offset_right = 387.0
-offset_bottom = 359.0
-text = "Ship Builder"
 
 [node name="SuccessBackground" type="Sprite2D" parent="."]
 z_index = -4
@@ -39,10 +32,28 @@ scale = Vector2(1.5, 1.5)
 texture = ExtResource("2_pr60s")
 
 [node name="FailBackground" type="Sprite2D" parent="."]
-visible = false
 z_index = -5
 position = Vector2(864, 486)
-texture = ExtResource("3_mf0h6")
+texture = ExtResource("4_qw2m8")
 
-[connection signal="pressed" from="ReturnToMenu" to="." method="_on_return_to_menu_pressed"]
-[connection signal="pressed" from="ReturnToShipBuilder" to="." method="_on_return_to_ship_builder_pressed"]
+[node name="VBoxContainer" type="VBoxContainer" parent="."]
+offset_left = 1297.0
+offset_top = 678.0
+offset_right = 1567.0
+offset_bottom = 894.0
+
+[node name="ReturnToMenu" type="TextureButton" parent="VBoxContainer"]
+layout_mode = 2
+texture_normal = ExtResource("4_y57rg")
+texture_pressed = ExtResource("5_wv08o")
+
+[node name="ReturnToShipBuilder" type="TextureButton" parent="VBoxContainer"]
+layout_mode = 2
+texture_normal = ExtResource("2_mpkq5")
+texture_pressed = ExtResource("3_qjsj8")
+
+[node name="PlayerShip" parent="." instance=ExtResource("8_dhd7o")]
+position = Vector2(835, 397)
+
+[connection signal="pressed" from="VBoxContainer/ReturnToMenu" to="." method="_on_return_to_menu_pressed"]
+[connection signal="pressed" from="VBoxContainer/ReturnToShipBuilder" to="." method="_on_return_to_ship_builder_pressed"]

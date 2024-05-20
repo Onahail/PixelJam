@@ -14,7 +14,6 @@ autostart = true
 wait_time = 4.0
 
 [node name="LossAnimation" type="Timer" parent="."]
-wait_time = 3.0
 
 [node name="Floating" type="Timer" parent="."]
 autostart = true

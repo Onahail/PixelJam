@@ -17,10 +17,10 @@ var module_data = {
 	},
 	"Gun": {
 		"health": 16,
-		"price": 25,
+		"price": 30,
 		"repair_time": 3,
 		"min_allowable": 0,
-		"max_allowable": 4,
+		"max_allowable": 10,
 		"misc": {
 			"damage": 1,
 			"fire_rate": 0.2,
@@ -46,7 +46,7 @@ var module_data = {
 		}
 	},    
 	"Bridge": {
-		"health": 10,
+		"health": 20,
 		"price": 0,
 		"repair_time": 3,
 		"min_allowable": 1,
@@ -64,7 +64,7 @@ var module_data = {
 		"min_allowable": 1,
 		"max_allowable": 4,
 		"misc": {
-				"collection_rate": 100
+				"collection_rate": 15
 		},
 		"assets": {
 			"scene": "res://Menus/ShipBuilder/ShipModules/Scoop/scoop.tscn"

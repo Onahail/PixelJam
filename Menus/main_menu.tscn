@@ -1,57 +1,152 @@
-[gd_scene load_steps=4 format=3 uid="uid://bfwnhju0lpjof"]
+[gd_scene load_steps=17 format=3 uid="uid://bfwnhju0lpjof"]
 
 [ext_resource type="Script" path="res://Menus/main_menu.gd" id="1_tm4h6"]
-[ext_resource type="Texture2D" uid="uid://dnqn5fwhkb1w8" path="res://Backgrounds/Background_Level_1_Version_1.png" id="3_afiwl"]
+[ext_resource type="PackedScene" uid="uid://d1vvv8dgho67w" path="res://Menus/Pause Menu/options.tscn" id="2_1wb1a"]
+[ext_resource type="Texture2D" uid="uid://bqio0wupusl6m" path="res://Backgrounds/Level_3_Background.png" id="2_klqoj"]
 [ext_resource type="PackedScene" uid="uid://d0gti5ph2m6et" path="res://Menus/ShipBuilder/Ships/player_ship.tscn" id="3_dktnb"]
+[ext_resource type="Texture2D" uid="uid://ddor1isrquxvx" path="res://UI_Elements/Hive_Dive_Logo.png" id="4_cq3ko"]
+[ext_resource type="Texture2D" uid="uid://c87w1br0okcaa" path="res://UI_Elements/Ship_Builder_Button_Up.png" id="6_3541j"]
+[ext_resource type="Texture2D" uid="uid://dji6oowhks0y2" path="res://UI_Elements/Ship_Builder_Button_Down.png" id="7_k0kwp"]
+[ext_resource type="Texture2D" uid="uid://bmuig2cb1ftl" path="res://UI_Elements/Mission_Select_Button_Up.png" id="8_lbbdy"]
+[ext_resource type="Texture2D" uid="uid://dtaa5y0u7r2cq" path="res://UI_Elements/Mission_Select_Button_Down.png" id="9_y514h"]
+[ext_resource type="Texture2D" uid="uid://bjp6wkeueymd2" path="res://UI_Elements/Options_Button_Spritesheet_Up.png" id="10_r6spk"]
+[ext_resource type="Texture2D" uid="uid://bnli2dsk5i3p1" path="res://UI_Elements/Exit_Sign_V2.png" id="10_vkld5"]
+[ext_resource type="Texture2D" uid="uid://dfwupjfw402s1" path="res://UI_Elements/Options_Button_Spritesheet_Down.png" id="11_mlaxn"]
+[ext_resource type="Texture2D" uid="uid://pm0tgngyoseu" path="res://UI_Elements/Exit_Hover.png" id="11_ypqgc"]
+[ext_resource type="Texture2D" uid="uid://c3r1lv3w3ma58" path="res://UI_Elements/Texture_Panel_Rectangle_Big.png" id="14_db5o7"]
+[ext_resource type="Texture2D" uid="uid://clpa5ahqlenhr" path="res://UI_Elements/Text_Box_Square.png" id="14_l1h1v"]
+[ext_resource type="FontFile" uid="uid://bcj8jvcq2qp7q" path="res://UI_Elements/VCR_OSD_MONO_1.001.ttf" id="15_1u341"]
 
 [node name="MainMenu" type="Node2D"]
 position = Vector2(440, 252)
 script = ExtResource("1_tm4h6")
 
-[node name="ShipBuilder" type="Button" parent="."]
-offset_left = 256.0
-offset_top = 135.0
-offset_right = 610.0
-offset_bottom = 240.0
-text = "Ship Builder
-"
+[node name="Background" type="Sprite2D" parent="."]
+position = Vector2(425, 236)
+texture = ExtResource("2_klqoj")
 
-[node name="ExitGame" type="Button" parent="."]
-offset_left = -407.0
-offset_top = -217.0
-offset_right = -344.0
-offset_bottom = -154.0
-text = "Exit 
-Game"
-
-[node name="MissionSelect" type="Button" parent="."]
-offset_left = 256.0
-offset_top = 271.0
-offset_right = 610.0
-offset_bottom = 376.0
-text = "Mission Select
-"
-
-[node name="Label" type="Label" parent="."]
-offset_left = 233.0
-offset_top = 8.0
-offset_right = 642.0
-offset_bottom = 77.0
-theme_override_colors/font_color = Color(0.243137, 0.278431, 0.54902, 1)
-theme_override_font_sizes/font_size = 50
-text = "Hive Dive"
-horizontal_alignment = 1
-vertical_alignment = 1
+[node name="Options" parent="." instance=ExtResource("2_1wb1a")]
+visible = false
+offset_left = 309.0
+offset_top = 119.0
+offset_right = 309.0
+offset_bottom = 119.0
 
 [node name="PlayerShip" parent="." instance=ExtResource("3_dktnb")]
+process_mode = 3
 position = Vector2(431, 168)
 
-[node name="BackgroundLevel1Version1" type="Sprite2D" parent="."]
-z_index = -4
-position = Vector2(424, 234)
-scale = Vector2(1.5, 1.5)
-texture = ExtResource("3_afiwl")
+[node name="Title" type="Sprite2D" parent="."]
+position = Vector2(445, 53)
+texture = ExtResource("4_cq3ko")
 
-[connection signal="pressed" from="ShipBuilder" to="." method="_on_ship_builder_pressed"]
-[connection signal="pressed" from="ExitGame" to="." method="_on_exit_game_pressed"]
-[connection signal="pressed" from="MissionSelect" to="." method="_on_mission_select_pressed"]
+[node name="Control" type="Control" parent="."]
+layout_mode = 3
+anchors_preset = 0
+offset_left = 299.0
+offset_top = 344.0
+offset_right = 339.0
+offset_bottom = 384.0
+
+[node name="MenuBar" type="MenuBar" parent="Control"]
+layout_mode = 0
+offset_left = 37.0
+offset_top = 118.0
+offset_right = 77.0
+offset_bottom = 158.0
+
+[node name="VBoxContainer" type="VBoxContainer" parent="Control/MenuBar"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -39.0
+offset_top = -161.0
+offset_right = 191.0
+offset_bottom = 125.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="ShipBuilder" type="TextureButton" parent="Control/MenuBar/VBoxContainer"]
+layout_mode = 2
+texture_normal = ExtResource("6_3541j")
+texture_pressed = ExtResource("7_k0kwp")
+
+[node name="MissionSelect" type="TextureButton" parent="Control/MenuBar/VBoxContainer"]
+layout_mode = 2
+texture_normal = ExtResource("8_lbbdy")
+texture_pressed = ExtResource("9_y514h")
+
+[node name="OpenOptions" type="TextureButton" parent="Control/MenuBar/VBoxContainer"]
+layout_mode = 2
+texture_normal = ExtResource("10_r6spk")
+texture_pressed = ExtResource("11_mlaxn")
+
+[node name="Quit" type="TextureButton" parent="Control"]
+layout_mode = 2
+offset_left = -689.0
+offset_top = -544.0
+offset_right = -618.0
+offset_bottom = -497.0
+texture_normal = ExtResource("10_vkld5")
+texture_hover = ExtResource("11_ypqgc")
+
+[node name="StoryBackground" type="TextureRect" parent="."]
+offset_left = -417.0
+offset_top = 57.0
+offset_right = 97.0
+offset_bottom = 699.0
+texture = ExtResource("14_db5o7")
+
+[node name="Story" type="Label" parent="StoryBackground"]
+layout_mode = 0
+offset_left = 34.0
+offset_top = 49.0
+offset_right = 473.0
+offset_bottom = 738.0
+theme_override_colors/font_color = Color(0.707967, 0.707967, 0.707967, 1)
+theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
+theme_override_constants/outline_size = 6
+theme_override_fonts/font = ExtResource("15_1u341")
+theme_override_font_sizes/font_size = 18
+text = "Beneath the tumultuous waves of the Mariana Trench, the depths hold secrets shrouded in darkness and danger. You are the pilot of the HDS Venturer, a state-of-the-art submarine, tasked with exploring this alien underwater world. Your mission: to harvest Hydrium, a rare and powerful resource that glows with the potential to revolutionize energy on the surface.
+
+But the deeper realms of the ocean are guarded by creatures as mysterious as they are lethal, evolved to thrive where sunlight dares not reach. Customize your submarine with weaponry, engines, and scoops to delve further into the abyss, outsmart predators, and claim the riches that lie below.
+
+Each dive tests your courage, cunning, and craftsmanship. Will you rise with treasures untold, or will you succumb to the dangers of the deep? The abyss calls, diver—venture forth and let the depths reveal their secrets.
+
+Welcome to Hive Dive"
+horizontal_alignment = 1
+autowrap_mode = 3
+
+[node name="CreditsBackground" type="TextureRect" parent="."]
+offset_left = 1118.0
+offset_top = -236.0
+offset_right = 1272.0
+offset_bottom = -108.0
+texture = ExtResource("14_l1h1v")
+
+[node name="Credits" type="Label" parent="CreditsBackground"]
+layout_mode = 0
+offset_left = -16.0
+offset_top = 10.0
+offset_right = 174.0
+offset_bottom = 140.0
+theme_override_colors/font_color = Color(0.707967, 0.707967, 0.707967, 1)
+theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
+theme_override_constants/outline_size = 6
+theme_override_fonts/font = ExtResource("15_1u341")
+theme_override_font_sizes/font_size = 13
+text = "Game Design and Programming:
+Matthew Havemann
+Matthew Davidson
+
+Art and Animation:
+Paulina Olejnik"
+horizontal_alignment = 1
+autowrap_mode = 3
+
+[connection signal="pressed" from="Control/MenuBar/VBoxContainer/ShipBuilder" to="." method="_on_ship_builder_pressed"]
+[connection signal="pressed" from="Control/MenuBar/VBoxContainer/MissionSelect" to="." method="_on_mission_select_pressed"]
+[connection signal="pressed" from="Control/MenuBar/VBoxContainer/OpenOptions" to="." method="_on_open_options_pressed"]
+[connection signal="pressed" from="Control/Quit" to="." method="_on_exit_game_pressed"]

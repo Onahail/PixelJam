@@ -7,6 +7,7 @@ var grabber_area_stylebox = StyleBoxFlat
 var grabber_area_highlight_stylebox = StyleBoxFlat
 
 func _ready():
+	$LaunchSign.play("sign_purple")
 	print(Globals.DEPTH)
 	%DepthSlider.add_theme_stylebox_override("grabber", StyleBoxFlat.new())
 	%DepthSlider.add_theme_stylebox_override("grabber_area", StyleBoxFlat.new())
@@ -62,5 +63,19 @@ func _on_depth_slider_value_changed(value):
 	#%DepthSlider.add_theme_stylebox_override("slider", slider_stylebox)
 	%DepthSlider.add_theme_stylebox_override("grabber_area", grabber_area_stylebox)
 	%DepthSlider.add_theme_stylebox_override("grabber_area_highlight", grabber_area_highlight_stylebox)
+	
+	if value >= %DepthSlider.min_value and value <= 6700:
+		$BackgroundLevel1Version1.visible = true
+		$BackgroundLevel2.visible = false
+		$BackgroundLevel3.visible = false
+	elif value > 6700 and value <= 8400:
+		$BackgroundLevel1Version1.visible = false
+		$BackgroundLevel2.visible = true
+		$BackgroundLevel3.visible = false
+	elif value > 8400:
+		$BackgroundLevel1Version1.visible = false
+		$BackgroundLevel2.visible = false
+		$BackgroundLevel3.visible = true
+	
 	
 	

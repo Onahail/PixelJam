@@ -16,7 +16,7 @@ func _ready():
 	original_y = global_position.y
 
 func _process(delta):
-	if get_tree().current_scene.name == "MainMenu" or  get_tree().current_scene.name == "MissionSelect":
+	if get_tree().current_scene.name == "MainMenu" or get_tree().current_scene.name == "MissionSelect" or get_tree().current_scene.name == "EndGameScreen":
 		var time = Time.get_ticks_msec() / 1000.0  # Current time in seconds
 		global_position.y = original_y + amplitude * sin(2 * PI * frequency * time)
 	

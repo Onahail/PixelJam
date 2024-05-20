@@ -64,6 +64,14 @@ func _on_ship_builder_pressed():
 	
 func _on_mission_select_pressed():
 	get_tree().change_scene_to_file("res://Menus/mission_select.tscn")
+	
+func _on_open_options_pressed():
+	if $Options.visible == true:
+		$Options.visible = false
+	else:
+		$Options.visible = true
+	
+
 
 func _on_exit_game_pressed():
 	#Save Game State
@@ -95,3 +103,4 @@ func _on_exit_game_pressed():
 	#Remove backup save if no errors
 	DirAccess.remove_absolute (Globals.backupsavelocation)
 	get_tree().quit()
+

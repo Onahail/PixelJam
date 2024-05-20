@@ -4,5 +4,6 @@
 [ext_resource type="AudioStream" uid="uid://c4kqsj7wyvemf" path="res://Music/MenuMusic.wav" id="1_tobmm"]
 
 [node name="MenuMusic" type="AudioStreamPlayer2D"]
+process_mode = 3
 stream = ExtResource("1_tobmm")
 script = ExtResource("1_nsf2k")

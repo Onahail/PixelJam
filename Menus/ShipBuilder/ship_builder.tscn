@@ -1,10 +1,17 @@
-[gd_scene load_steps=7 format=3 uid="uid://bispnc5n2jjek"]
+[gd_scene load_steps=14 format=3 uid="uid://bispnc5n2jjek"]
 
 [ext_resource type="Script" path="res://Menus/ShipBuilder/ship_builder.gd" id="1_nsu8l"]
+[ext_resource type="Texture2D" uid="uid://bj420m3j65uhq" path="res://UI_Elements/Back_Button.png" id="2_2ncb7"]
+[ext_resource type="Texture2D" uid="uid://c367sgrvxjdii" path="res://UI_Elements/Texture_Panel_Rectangle.png" id="2_3i3cl"]
 [ext_resource type="AudioStream" uid="uid://bv8nvd6gahqbh" path="res://Music/078 Heartbound OST Gearworks.mp3" id="2_68q7y"]
+[ext_resource type="Texture2D" uid="uid://b5sbe0pp2jbx" path="res://UI_Elements/Back_Button_Hover.png" id="3_fvopj"]
 [ext_resource type="AudioStream" uid="uid://ck6c3x2y4hkq1" path="res://Sounds/coin-and-money-bag-3-185264.mp3" id="4_i2e6w"]
 [ext_resource type="PackedScene" uid="uid://d0gti5ph2m6et" path="res://Menus/ShipBuilder/Ships/player_ship.tscn" id="4_mu5ef"]
 [ext_resource type="Texture2D" uid="uid://byti4slpwbe51" path="res://Backgrounds/Level_2_Background.png" id="5_ivxts"]
+[ext_resource type="FontFile" uid="uid://bcj8jvcq2qp7q" path="res://UI_Elements/VCR_OSD_MONO_1.001.ttf" id="5_m6nm5"]
+[ext_resource type="Texture2D" uid="uid://c3r1lv3w3ma58" path="res://UI_Elements/Texture_Panel_Rectangle_Big.png" id="6_16ahm"]
+[ext_resource type="Texture2D" uid="uid://clpa5ahqlenhr" path="res://UI_Elements/Text_Box_Square.png" id="7_6dyuh"]
+[ext_resource type="Texture2D" uid="uid://bdog5atj74f6k" path="res://UI_Elements/Ship_Builder_Title_V2.png" id="12_gb2qw"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_ah087"]
 size = Vector2(760.75, 95)
@@ -12,19 +19,18 @@ size = Vector2(760.75, 95)
 [node name="ShipBuilder" type="Node2D"]
 script = ExtResource("1_nsu8l")
 
-[node name="Storage Label" type="Label" parent="."]
-offset_left = 1014.0
-offset_top = 49.0
-offset_right = 1348.0
-offset_bottom = 72.0
-text = "Storage label"
+[node name="TexturePanelRectangle" type="Sprite2D" parent="."]
+position = Vector2(868.5, 888)
+scale = Vector2(4.005, 1.46)
+texture = ExtResource("2_3i3cl")
 
-[node name="Back" type="Button" parent="."]
+[node name="Back" type="TextureButton" parent="."]
 offset_left = 32.0
 offset_top = 24.0
 offset_right = 99.0
 offset_bottom = 78.0
-text = "Back"
+texture_normal = ExtResource("2_2ncb7")
+texture_hover = ExtResource("3_fvopj")
 
 [node name="Timer" type="Timer" parent="."]
 wait_time = 2.0
@@ -44,35 +50,73 @@ anchors_preset = 0
 offset_right = 40.0
 offset_bottom = 40.0
 
+[node name="Control" type="Control" parent="UI/Information"]
+anchors_preset = 0
+offset_right = 40.0
+offset_bottom = 40.0
+
+[node name="InstructionsPanel" type="TextureRect" parent="UI/Information/Control"]
+layout_mode = 0
+offset_left = 139.0
+offset_top = 685.0
+offset_right = 653.0
+offset_bottom = 1327.0
+scale = Vector2(0.383268, 0.367601)
+texture = ExtResource("6_16ahm")
+
+[node name="PartsPanel" type="TextureRect" parent="UI/Information/Control"]
+layout_mode = 0
+offset_left = 1416.0
+offset_top = 26.0
+offset_right = 2118.0
+offset_bottom = 657.0
+scale = Vector2(0.383268, 0.367601)
+texture = ExtResource("7_6dyuh")
+
+[node name="StoragePanel" type="TextureRect" parent="UI/Information/Control"]
+layout_mode = 0
+offset_left = 1441.0
+offset_top = 297.0
+offset_right = 1661.0
+offset_bottom = 397.0
+texture = ExtResource("2_3i3cl")
+
 [node name="Currency" type="Label" parent="UI/Information"]
 layout_mode = 0
-offset_left = 643.0
-offset_top = 28.0
-offset_right = 831.0
-offset_bottom = 87.0
+offset_left = 1460.0
+offset_top = 336.0
+offset_right = 1648.0
+offset_bottom = 395.0
+theme_override_colors/font_shadow_color = Color(0, 0, 0, 1)
+theme_override_fonts/font = ExtResource("5_m6nm5")
 text = "Money"
 horizontal_alignment = 1
 vertical_alignment = 1
 
 [node name="ErrorMessage" type="Label" parent="UI/Information"]
-layout_mode = 0
-offset_left = 680.0
-offset_top = 152.0
-offset_right = 1052.0
-offset_bottom = 205.0
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 17.0
+anchor_top = 3.8
+anchor_right = 26.3
+anchor_bottom = 5.125
 theme_override_colors/font_color = Color(1, 0, 0, 1)
 theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
 theme_override_constants/outline_size = 5
+theme_override_fonts/font = ExtResource("5_m6nm5")
 text = "LOREM IPSUM"
 horizontal_alignment = 1
 vertical_alignment = 1
 
 [node name="Instructions" type="Label" parent="UI/Information"]
 layout_mode = 0
-offset_left = 47.0
-offset_top = 132.0
-offset_right = 227.0
-offset_bottom = 285.0
+offset_left = 148.0
+offset_top = 689.0
+offset_right = 328.0
+offset_bottom = 920.0
+theme_override_colors/font_shadow_color = Color(0, 0, 0, 1)
+theme_override_fonts/font = ExtResource("5_m6nm5")
+theme_override_font_sizes/font_size = 0
 text = "Left click and drag on to the desired tile to purchase. Right click after placement to refund.
 
 Mouse over the module name to view details."
@@ -80,24 +124,25 @@ horizontal_alignment = 1
 vertical_alignment = 1
 autowrap_mode = 3
 
-[node name="Title" type="Label" parent="UI/Information"]
+[node name="Storage Label" type="Label" parent="UI/Information"]
 layout_mode = 0
-offset_left = 239.0
-offset_top = 8.0
-offset_right = 648.0
-offset_bottom = 77.0
-theme_override_font_sizes/font_size = 50
-text = "Ship Builder
-"
-horizontal_alignment = 1
-vertical_alignment = 1
+offset_left = 1463.0
+offset_top = 314.0
+offset_right = 1797.0
+offset_bottom = 337.0
+theme_override_colors/font_shadow_color = Color(0, 0, 0, 1)
+theme_override_fonts/font = ExtResource("5_m6nm5")
+text = "Storage label"
 
 [node name="ShipPartNumbers" type="Label" parent="UI/Information"]
 layout_mode = 0
-offset_left = 1528.0
-offset_top = 36.0
-offset_right = 1678.0
-offset_bottom = 242.0
+offset_left = 1441.0
+offset_top = 46.0
+offset_right = 1659.0
+offset_bottom = 351.0
+theme_override_colors/font_shadow_color = Color(0, 0, 0, 1)
+theme_override_fonts/font = ExtResource("5_m6nm5")
+theme_override_font_sizes/font_size = 27
 text = "Parts"
 
 [node name="Shop" type="Control" parent="UI"]
@@ -109,25 +154,25 @@ offset_right = 465.0
 offset_bottom = 470.0
 
 [node name="PropellerMarker" type="Marker2D" parent="UI/Shop"]
-position = Vector2(146, 430)
+position = Vector2(125.5, 430)
 
 [node name="GunMarker" type="Marker2D" parent="UI/Shop"]
-position = Vector2(241, 430)
+position = Vector2(220.5, 430)
 
 [node name="StorageMarker" type="Marker2D" parent="UI/Shop"]
-position = Vector2(337, 430)
+position = Vector2(316.5, 430)
 
 [node name="ScoopMarker" type="Marker2D" parent="UI/Shop"]
-position = Vector2(432, 430)
+position = Vector2(411.5, 430)
 
 [node name="BridgeMarker" type="Marker2D" parent="UI/Shop"]
-position = Vector2(705, 430)
+position = Vector2(684.5, 430)
 
 [node name="ShieldMarker" type="Marker2D" parent="UI/Shop"]
-position = Vector2(522, 430)
+position = Vector2(501.5, 430)
 
 [node name="HullMarker" type="Marker2D" parent="UI/Shop"]
-position = Vector2(614, 430)
+position = Vector2(593.5, 430)
 
 [node name="ShopZone" type="Area2D" parent="UI/Shop"]
 position = Vector2(-17, -5)
@@ -135,7 +180,7 @@ collision_layer = 20
 collision_mask = 20
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="UI/Shop/ShopZone"]
-position = Vector2(444, 405)
+position = Vector2(423.5, 405)
 shape = SubResource("RectangleShape2D_ah087")
 
 [node name="ShipSpawnPoint" type="Marker2D" parent="UI/Shop"]
@@ -144,17 +189,19 @@ position = Vector2(-1058, 1)
 [node name="ShopPrices" type="Control" parent="UI/Shop"]
 layout_mode = 3
 anchors_preset = 0
-offset_left = 115.0
+offset_left = 94.5
 offset_top = 340.0
-offset_right = 752.0
+offset_right = 731.5
 offset_bottom = 379.0
 
 [node name="PropellerCost" type="Label" parent="UI/Shop/ShopPrices"]
 layout_mode = 0
 offset_left = 11.0
-offset_top = 37.0
+offset_top = 32.0
 offset_right = 51.0
-offset_bottom = 60.0
+offset_bottom = 55.0
+theme_override_colors/font_shadow_color = Color(0, 0, 0, 1)
+theme_override_fonts/font = ExtResource("5_m6nm5")
 text = "1
 "
 horizontal_alignment = 1
@@ -163,9 +210,11 @@ vertical_alignment = 1
 [node name="GunCost" type="Label" parent="UI/Shop/ShopPrices"]
 layout_mode = 0
 offset_left = 107.0
-offset_top = 37.0
+offset_top = 32.0
 offset_right = 147.0
-offset_bottom = 60.0
+offset_bottom = 55.0
+theme_override_colors/font_shadow_color = Color(0, 0, 0, 1)
+theme_override_fonts/font = ExtResource("5_m6nm5")
 text = "2
 "
 horizontal_alignment = 1
@@ -174,9 +223,11 @@ vertical_alignment = 1
 [node name="StorageCost" type="Label" parent="UI/Shop/ShopPrices"]
 layout_mode = 0
 offset_left = 202.0
-offset_top = 37.0
+offset_top = 32.0
 offset_right = 242.0
-offset_bottom = 60.0
+offset_bottom = 55.0
+theme_override_colors/font_shadow_color = Color(0, 0, 0, 1)
+theme_override_fonts/font = ExtResource("5_m6nm5")
 text = "3"
 horizontal_alignment = 1
 vertical_alignment = 1
@@ -184,9 +235,11 @@ vertical_alignment = 1
 [node name="ScoopCost" type="Label" parent="UI/Shop/ShopPrices"]
 layout_mode = 0
 offset_left = 297.0
-offset_top = 37.0
+offset_top = 32.0
 offset_right = 337.0
-offset_bottom = 60.0
+offset_bottom = 55.0
+theme_override_colors/font_shadow_color = Color(0, 0, 0, 1)
+theme_override_fonts/font = ExtResource("5_m6nm5")
 text = "4"
 horizontal_alignment = 1
 vertical_alignment = 1
@@ -194,9 +247,11 @@ vertical_alignment = 1
 [node name="BridgeCost" type="Label" parent="UI/Shop/ShopPrices"]
 layout_mode = 0
 offset_left = 570.0
-offset_top = 37.0
+offset_top = 32.0
 offset_right = 610.0
-offset_bottom = 60.0
+offset_bottom = 55.0
+theme_override_colors/font_shadow_color = Color(0, 0, 0, 1)
+theme_override_fonts/font = ExtResource("5_m6nm5")
 text = "5"
 horizontal_alignment = 1
 vertical_alignment = 1
@@ -204,9 +259,11 @@ vertical_alignment = 1
 [node name="ShieldCost" type="Label" parent="UI/Shop/ShopPrices"]
 layout_mode = 0
 offset_left = 386.0
-offset_top = 37.0
+offset_top = 32.0
 offset_right = 426.0
-offset_bottom = 60.0
+offset_bottom = 55.0
+theme_override_colors/font_shadow_color = Color(0, 0, 0, 1)
+theme_override_fonts/font = ExtResource("5_m6nm5")
 text = "6"
 horizontal_alignment = 1
 vertical_alignment = 1
@@ -214,9 +271,11 @@ vertical_alignment = 1
 [node name="HullCost" type="Label" parent="UI/Shop/ShopPrices"]
 layout_mode = 0
 offset_left = 480.0
-offset_top = 37.0
+offset_top = 32.0
 offset_right = 520.0
-offset_bottom = 60.0
+offset_bottom = 55.0
+theme_override_colors/font_shadow_color = Color(0, 0, 0, 1)
+theme_override_fonts/font = ExtResource("5_m6nm5")
 text = "7"
 horizontal_alignment = 1
 vertical_alignment = 1
@@ -224,79 +283,100 @@ vertical_alignment = 1
 [node name="PropellerLabel" type="Label" parent="UI/Shop/ShopPrices"]
 layout_mode = 0
 offset_left = -3.0
-offset_top = 10.0
-offset_right = 68.0
-offset_bottom = 33.0
+offset_top = -13.0
+offset_right = 82.0
+offset_bottom = 28.0
 tooltip_text = "Add Propellers to speed up the ship and make the scoops collect faster! Be careful! Increased speed will encounter enemies faster!"
 mouse_filter = 0
+theme_override_colors/font_shadow_color = Color(0, 0, 0, 1)
+theme_override_fonts/font = ExtResource("5_m6nm5")
 text = "Propeller"
 horizontal_alignment = 1
+vertical_alignment = 2
 
 [node name="GunLabel" type="Label" parent="UI/Shop/ShopPrices"]
 layout_mode = 0
 offset_left = 108.0
-offset_top = 10.0
+offset_top = -15.0
 offset_right = 148.0
-offset_bottom = 33.0
+offset_bottom = 28.0
 tooltip_text = "Defend Yourself!"
 mouse_filter = 0
+theme_override_colors/font_shadow_color = Color(0, 0, 0, 1)
+theme_override_fonts/font = ExtResource("5_m6nm5")
 text = "Gun"
 horizontal_alignment = 1
+vertical_alignment = 2
 
 [node name="StorageLabel" type="Label" parent="UI/Shop/ShopPrices"]
 layout_mode = 0
 offset_left = 192.0
-offset_top = 10.0
-offset_right = 252.0
-offset_bottom = 33.0
+offset_top = -25.0
+offset_right = 258.0
+offset_bottom = 28.0
 tooltip_text = "Stay down longer to collect more resources!"
 mouse_filter = 0
+theme_override_colors/font_shadow_color = Color(0, 0, 0, 1)
+theme_override_fonts/font = ExtResource("5_m6nm5")
 text = "Storage"
 horizontal_alignment = 1
+vertical_alignment = 2
 
 [node name="ScoopLabel" type="Label" parent="UI/Shop/ShopPrices"]
 layout_mode = 0
 offset_left = 294.0
-offset_top = 10.0
+offset_top = -26.0
 offset_right = 341.0
-offset_bottom = 33.0
+offset_bottom = 28.0
 tooltip_text = "Collect resources faster!"
 mouse_filter = 0
+theme_override_colors/font_shadow_color = Color(0, 0, 0, 1)
+theme_override_fonts/font = ExtResource("5_m6nm5")
 text = "Scoop"
 horizontal_alignment = 1
+vertical_alignment = 2
 
 [node name="BridgeLabel" type="Label" parent="UI/Shop/ShopPrices"]
 layout_mode = 0
 offset_left = 563.0
-offset_top = 10.0
-offset_right = 614.0
-offset_bottom = 33.0
+offset_top = -29.0
+offset_right = 620.0
+offset_bottom = 28.0
 tooltip_text = "You need somewhere to pilot the ship."
 mouse_filter = 0
+theme_override_colors/font_shadow_color = Color(0, 0, 0, 1)
+theme_override_fonts/font = ExtResource("5_m6nm5")
 text = "Bridge"
 horizontal_alignment = 1
+vertical_alignment = 2
 
 [node name="ShieldLabel" type="Label" parent="UI/Shop/ShopPrices"]
 layout_mode = 0
 offset_left = 380.0
-offset_top = 10.0
-offset_right = 428.0
-offset_bottom = 33.0
+offset_top = -27.0
+offset_right = 437.0
+offset_bottom = 28.0
 tooltip_text = "Protects parts around it but cannot protect itself!"
 mouse_filter = 0
+theme_override_colors/font_shadow_color = Color(0, 0, 0, 1)
+theme_override_fonts/font = ExtResource("5_m6nm5")
 text = "Shield"
 horizontal_alignment = 1
+vertical_alignment = 2
 
 [node name="HullLabel" type="Label" parent="UI/Shop/ShopPrices"]
 layout_mode = 0
 offset_left = 477.0
-offset_top = 10.0
+offset_top = -24.0
 offset_right = 517.0
-offset_bottom = 33.0
+offset_bottom = 28.0
 tooltip_text = "Bigger ship is better ship!"
 mouse_filter = 0
+theme_override_colors/font_shadow_color = Color(0, 0, 0, 1)
+theme_override_fonts/font = ExtResource("5_m6nm5")
 text = "Hull"
 horizontal_alignment = 1
+vertical_alignment = 2
 
 [node name="PlayerShip" parent="." instance=ExtResource("4_mu5ef")]
 
@@ -308,6 +388,10 @@ autoplay = true
 z_index = -4
 position = Vector2(864, 486)
 texture = ExtResource("5_ivxts")
+
+[node name="ShipBuilderTitleV2" type="Sprite2D" parent="."]
+position = Vector2(871, 56)
+texture = ExtResource("12_gb2qw")
 
 [connection signal="pressed" from="Back" to="." method="_on_back_pressed"]
 [connection signal="timeout" from="Timer" to="." method="_on_timer_timeout"]

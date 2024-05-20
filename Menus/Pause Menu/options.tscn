@@ -1,0 +1,88 @@
+[gd_scene load_steps=4 format=3 uid="uid://d1vvv8dgho67w"]
+
+[ext_resource type="Script" path="res://Menus/Pause Menu/options.gd" id="1_dk3jn"]
+[ext_resource type="Script" path="res://Menus/Pause Menu/VolSlider.gd" id="2_o30wc"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_4t4aj"]
+bg_color = Color(0.133196, 0.133196, 0.133196, 1)
+corner_radius_top_left = 8
+corner_radius_top_right = 8
+corner_radius_bottom_right = 8
+corner_radius_bottom_left = 8
+shadow_size = 5
+shadow_offset = Vector2(10, 10)
+
+[node name="Options" type="Control"]
+process_mode = 3
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_dk3jn")
+
+[node name="Menu" type="Panel" parent="."]
+z_index = 4
+offset_left = -1.0
+offset_right = 214.0
+offset_bottom = 219.0
+theme_override_styles/panel = SubResource("StyleBoxFlat_4t4aj")
+
+[node name="MenuLabel" type="Label" parent="Menu"]
+layout_mode = 0
+offset_left = 81.0
+offset_top = 8.0
+offset_right = 130.0
+offset_bottom = 31.0
+text = "MENU"
+
+[node name="Quit" type="Button" parent="Menu"]
+layout_mode = 0
+offset_left = 49.0
+offset_top = 176.0
+offset_right = 174.0
+offset_bottom = 207.0
+text = "Return to Main"
+
+[node name="MenuBar" type="MenuBar" parent="Menu"]
+layout_mode = 0
+offset_left = -19.0
+offset_top = 247.0
+offset_right = 21.0
+offset_bottom = 287.0
+
+[node name="HBoxContainer" type="HBoxContainer" parent="Menu"]
+layout_mode = 0
+offset_left = 11.0
+offset_top = 65.0
+offset_right = 205.0
+offset_bottom = 115.0
+
+[node name="Label" type="VBoxContainer" parent="Menu/HBoxContainer"]
+layout_mode = 2
+
+[node name="VolLabel" type="Label" parent="Menu/HBoxContainer/Label"]
+layout_mode = 2
+text = "Volume"
+
+[node name="FullScreen" type="Label" parent="Menu/HBoxContainer/Label"]
+layout_mode = 2
+text = "Fullscreen"
+
+[node name="Slider" type="VBoxContainer" parent="Menu/HBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="VolSlider" type="HSlider" parent="Menu/HBoxContainer/Slider"]
+layout_mode = 2
+max_value = 1.0
+step = 0.01
+script = ExtResource("2_o30wc")
+
+[node name="FullScreen" type="CheckButton" parent="Menu/HBoxContainer/Slider"]
+layout_mode = 2
+
+[connection signal="pressed" from="Menu/Quit" to="." method="_on_quit_pressed"]
+[connection signal="value_changed" from="Menu/HBoxContainer/Slider/VolSlider" to="Menu/HBoxContainer/Slider/VolSlider" method="_on_value_changed"]
+[connection signal="toggled" from="Menu/HBoxContainer/Slider/FullScreen" to="." method="_on_full_screen_toggled"]
