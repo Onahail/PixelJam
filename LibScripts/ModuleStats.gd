@@ -64,7 +64,7 @@ var module_data = {
 		"min_allowable": 1,
 		"max_allowable": 4,
 		"misc": {
-				"collection_rate": 0
+				"collection_rate": 100
 		},
 		"assets": {
 			"scene": "res://Menus/ShipBuilder/ShipModules/Scoop/scoop.tscn"

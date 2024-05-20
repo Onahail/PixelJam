@@ -8,7 +8,13 @@ var grabber_area_highlight_stylebox = StyleBoxFlat
 
 func _ready():
 	print(Globals.DEPTH)
-
+	%DepthSlider.add_theme_stylebox_override("grabber", StyleBoxFlat.new())
+	%DepthSlider.add_theme_stylebox_override("grabber_area", StyleBoxFlat.new())
+	$DepthSlider.add_theme_stylebox_override("grabber_area_highlight", StyleBoxFlat.new())
+	slider_stylebox = %DepthSlider.get_theme_stylebox("slider").duplicate()
+	grabber_area_stylebox = %DepthSlider.get_theme_stylebox("grabber_area").duplicate()
+	grabber_area_highlight_stylebox = %DepthSlider.get_theme_stylebox("grabber_area_highlight").duplicate()
+	
 	$PlayerShip.load_ship()
 	$PlayerShip.scale = Vector2(.6,.6)
 	if(Globals.DEPTH > %DepthSlider.min_value and Globals.DEPTH <= %DepthSlider.max_value):
@@ -20,14 +26,6 @@ func _ready():
 	else:
 		Globals.DIFFICULTY = SCALE_START
 		Globals.DEPTH = %DepthSlider.min_value
-		
-	#%DepthSlider.add_theme_stylebox_override("grabber", StyleBoxFlat.new())
-	#%DepthSlider.add_theme_stylebox_override("grabber_area", StyleBoxFlat.new())
-	#$DepthSlider.add_theme_stylebox_override("grabber_area_highlight", StyleBoxFlat.new())
-	slider_stylebox = %DepthSlider.get_theme_stylebox("slider").duplicate()
-	grabber_area_stylebox = %DepthSlider.get_theme_stylebox("grabber_area").duplicate()
-	grabber_area_highlight_stylebox = %DepthSlider.get_theme_stylebox("grabber_area_highlight").duplicate()
-
 		
 func _process(_delta):
 	
@@ -58,7 +56,6 @@ func GetColor(value):
 
 func _on_depth_slider_value_changed(value):
 	var color = GetColor(value)
-	print(slider_stylebox.bg_color)
 	slider_stylebox.bg_color = color
 	grabber_area_stylebox.bg_color = color
 	grabber_area_highlight_stylebox.bg_color = color

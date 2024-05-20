@@ -2,10 +2,18 @@ extends Node2D
 
 func _ready():
 	if Globals.PLAYER_WIN == true:
+		$SuccessBackground.show()
+		$FailBackground.hide()
+		var color = Color(Color.DARK_BLUE)
+		$Stats.set("theme_override_colors/font_color",color)
 		var earnings = ((((Globals.DIFFICULTY - Globals.DIFF_SCALE_START) / (Globals.DIFF_SCALE_START - Globals.DIFF_SCALE_END)) * (Globals.CURRENCY_SCALE_START - Globals.CURRENCY_SCALE_END)) + Globals.CURRENCY_SCALE_START) * Globals.RESOURCES_COLLECTED
 		Globals.PLAYER_CURRENCY += int(earnings)
 		$Stats.text = str("You collected ", int(Globals.RESOURCES_COLLECTED), " resources worth ", int(earnings), "$.")
 	else:
+		$SuccessBackground.hide()
+		$FailBackground.show()
+		var color = Color(Color.WHITE)
+		$Stats.set("theme_override_colors/font_color",color)
 		#TODO Better loss message
 		var required_modules = ["Propeller", "Scoop", "Bridge"]
 		for module in required_modules:
