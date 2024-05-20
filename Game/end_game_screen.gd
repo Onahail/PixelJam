@@ -6,8 +6,8 @@ func _ready():
 	if !MenuMusic.playing:
 		MenuMusic.stream = MUSIC
 	MenuMusic.play()
-	$PlayerShip.load_ship()
-	$PlayerShip.scale = Vector2(.6,.6)
+	#$PlayerShip.load_ship()
+	#$PlayerShip.scale = Vector2(.6,.6)
 	
 	if Globals.PLAYER_WIN == true:
 		$SuccessBackground.show()

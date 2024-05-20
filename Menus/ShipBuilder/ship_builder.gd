@@ -100,7 +100,7 @@ func _on_too_many_modules(module):
 	
 func _on_module_stacked(module):
 	DisplayErrorMessage()
-	$UI/Information/ErrorMessage.text = str("Unable to place ", module, " on top of another module.")
+	$UI/Information/ErrorMessage.text = str("Modules must be placed on empty Hulls.")
 
 func _on_back_pressed():
 	var required_modules = ["Propeller", "Scoop", "Bridge"]
