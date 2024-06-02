@@ -1,5 +1,5 @@
 extends Module
-
+class_name HullTile
 var x = null
 var y = null
 var in_explosion_radius = null

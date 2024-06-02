@@ -96,10 +96,10 @@ func CheckShieldableModules():
 					})
 	for result in results:
 		if result["check"].size() > 0:
-			if(result["check"][0]["collider"].get_parent().module_name == "Hull"):
+			if(result["check"][0]["collider"].get_parent() is HullTile):
 				surrounding_modules.append(result["check"][0]["collider"].get_parent())
 			else:
-				surrounding_modules.append(result["check"][0]["collider"].get_parent().get_parent().get_parent())
+				surrounding_modules.append(result["check"][0]["collider"].get_parent().get_parent())
 				
 			
 			
