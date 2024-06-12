@@ -24,7 +24,7 @@ func _physics_process(delta):
 	
 func _on_apply_explosion_damage():
 	if in_explosion_radius:
-		repairable.applyDamage(Globals.EXPLOSION_DAMAGE, self)
+		applyDamage(Globals.EXPLOSION_DAMAGE, self)
 		in_explosion_radius = null
 
 func LostGame():
