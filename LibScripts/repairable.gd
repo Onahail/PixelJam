@@ -11,7 +11,7 @@ signal repair_cancelled
 	
 func applyDamage(damage, module, ishullcalling:bool = false):
 	#If the damage is to be applied to a hull, check if a module is attached first
-	if(module.module_name == "Hull"):
+	if(module is HullTile):
 		#print("Shield Count is ",module.shieldmod.size())
 		if(module.shieldmod.size() > 0):
 			#print("Shield taking ",damage," damage")
@@ -28,7 +28,7 @@ func applyDamage(damage, module, ishullcalling:bool = false):
 					return 0
 				break
 		var modfound = false
-		for mod in module.get_node("HullTile").get_children():
+		for mod in module.get_children():
 			if (mod is Module):
 				modfound = true
 				#If the module is already dead, damage hull, else damage module

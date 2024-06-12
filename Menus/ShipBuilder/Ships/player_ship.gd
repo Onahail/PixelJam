@@ -53,7 +53,7 @@ func save_ship():
 	for hull in Globals.HULLS:
 		var childfound = false
 		#Check if the hull has a module attached
-		for child in hull.get_node("HullTile").get_children():
+		for child in hull.get_children():
 			if(child is Module):
 				Globals.ship_config[hull.x][hull.y] = child.module_name
 				childfound = true
@@ -118,7 +118,7 @@ func load_ship():
 				var spawnvector = Vector2(xposition,yposition)
 				#Load Hull Module, every tile has a hull underneath
 				var module = load(ModuleStats.module_data["Hull"]["assets"]["scene"])
-				var hullmod = module.instantiate()
+				var hullmod:HullTile = module.instantiate()
 				hullmod.global_position = spawnvector
 				#Save grid position to hull for use in reloads and saving to file
 				hullmod.x = j
@@ -137,7 +137,7 @@ func load_ship():
 					#Spawn Module on hull position, 0,0 is realitve to the hull position
 					shipmod.global_position = Vector2(0,0)
 					#Attach Module to Hull
-					hullmod.get_node("HullTile").add_child(shipmod)
+					hullmod.add_child(shipmod)
 					#Set the purchased flags so the object acts as if it was added from the store
 					shipmod.purchased = true
 					#Add the module to the module limits check

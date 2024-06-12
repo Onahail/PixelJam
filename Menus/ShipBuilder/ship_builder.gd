@@ -113,8 +113,13 @@ func _on_back_pressed():
 			all_required_modules = false
 			break
 	if all_required_modules:
-		get_tree().change_scene_to_file("res://Menus/main_menu.tscn")
 		$PlayerShip.save_ship()
+		var gamesave:SaverLoader = SaverLoader.new()
+		add_child(gamesave)
+		gamesave.save_game()
+		get_tree().change_scene_to_file("res://Menus/main_menu.tscn")
+		
+
 	
 
 func _on_timer_timeout():

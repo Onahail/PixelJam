@@ -21,6 +21,8 @@ Globals="*res://LibScripts/Globals.gd"
 EventBus="*res://LibScripts/EventBus.gd"
 ModuleStats="*res://LibScripts/ModuleStats.gd"
 MenuMusic="*res://Music/menu_music.tscn"
+SaverLoader="res://LibScripts/SavedGame/SaverLoader.gd"
+SaveData="res://LibScripts/SavedGame/SaveData.gd"
 
 [debug]
 

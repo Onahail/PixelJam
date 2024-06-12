@@ -380,7 +380,7 @@ text = "Hull"
 horizontal_alignment = 1
 vertical_alignment = 2
 
-[node name="PlayerShip" parent="." instance=ExtResource("4_mu5ef")]
+[node name="PlayerShip" parent="." groups=["persistant"] instance=ExtResource("4_mu5ef")]
 
 [node name="BackgroundMusic" type="AudioStreamPlayer2D" parent="."]
 stream = ExtResource("2_68q7y")

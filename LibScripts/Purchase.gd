@@ -53,7 +53,7 @@ func _process(_delta):
 	if Input.is_action_just_pressed("rightclick") and !Globals.MOUSE_IN_SHOP and draggable and module_name == "Hull" and !Globals.is_dragging:
 		if global_position != shopPos:
 			var found_child = false
-			for child in self.get_node("HullTile").get_children():
+			for child in self.get_children():
 				if child is Module:
 					found_child = true
 					Globals.PLAYER_CURRENCY += child.price
@@ -143,7 +143,7 @@ func CheckDropPositionEligibility(point: Vector2) -> bool:
 			if(collision_check.size() > 0):
 				for thing in collision_check:
 					if self.module_name == "Hull":
-						if(thing["collider"] == self.get_node("HullTile")):
+						if(thing["collider"] == self):
 							count += 1
 				if(count == 0):
 					results.append({
@@ -165,7 +165,7 @@ func CheckDropPositionEligibility(point: Vector2) -> bool:
 					count += 1
 				if collider.get_parent().name != "PlayerShip":
 					if module_name == "Hull":
-						for child in collider.get_parent().get_node("HullTile").get_children():
+						for child in collider.get_parent().get_children():
 							if child is Module:
 								#Check for propeller or scoops by comparing current offset in the for loop with the offset that determined its placement
 								if child.module_name == "Propeller" and (offset == top_right or offset == bottom_right):
@@ -207,7 +207,8 @@ func ChangeParent():
 		drop_point.get_parent().add_child(self)
 		drop_point.queue_free()
 	else:
-		drop_point.add_child(self)
+		print(drop_point)
+		drop_point.get_parent().add_child(self)
 		global_position = drop_point.global_position
 		if module_name == "Scoop":
 			$".".FlipScoop()
